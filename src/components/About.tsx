@@ -123,33 +123,6 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            {/* Profile Card */}
-            <div className="relative w-full max-w-md mx-auto">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur-lg opacity-30" />
-              
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 text-center"
-              >
-                <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <span className="text-4xl font-bold text-white">PD</span>
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">Palak Desai</h4>
-                <p className="text-purple-300 mb-4">Software Developer & AI Enthusiast</p>
-                <div className="flex justify-center space-x-2">
-                  {['Java', 'React.js', 'AI/ML'].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-white/10 rounded-full text-sm text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
             {/* Education */}
             <div className="space-y-4">
               <h4 className="text-xl font-bold text-white mb-4">Education</h4>
