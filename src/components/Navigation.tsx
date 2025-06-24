@@ -38,18 +38,26 @@ const Navigation = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' 
-          : 'bg-transparent'
+          ? 'backdrop-blur-md shadow-lg' 
+          : ''
       }`}
+      style={{
+        backgroundColor: scrolled ? 'rgba(13, 17, 23, 0.95)' : 'transparent',
+        borderBottom: scrolled ? '1px solid #30363D' : 'none'
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-white"
+            className="text-2xl font-bold cursor-pointer"
+            style={{ color: '#C9D1D9' }}
+            onClick={() => scrollToSection('#home')}
           >
-            PD
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
+              PD
+            </span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -64,9 +72,22 @@ const Navigation = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+                  className="transition-colors duration-200 font-medium px-3 py-2 rounded-lg relative group"
+                  style={{ color: '#8B949E' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#C9D1D9'
+                    e.currentTarget.style.backgroundColor = '#161B22'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#8B949E'
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                  }}
                 >
                   {item.name}
+                  {/* Hover underline effect */}
+                  <span 
+                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] transition-all duration-300 group-hover:w-full"
+                  />
                 </motion.button>
               ))}
             </div>
@@ -77,7 +98,19 @@ const Navigation = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white"
+              className="p-2 rounded-lg transition-colors duration-200"
+              style={{ 
+                color: '#8B949E',
+                backgroundColor: isOpen ? '#161B22' : 'transparent' 
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#C9D1D9'
+                e.currentTarget.style.backgroundColor = '#161B22'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#8B949E'
+                e.currentTarget.style.backgroundColor = isOpen ? '#161B22' : 'transparent'
+              }}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
@@ -91,7 +124,11 @@ const Navigation = () => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-slate-900/95 backdrop-blur-md"
+          className="md:hidden backdrop-blur-md border-t"
+          style={{ 
+            backgroundColor: 'rgba(13, 17, 23, 0.95)',
+            borderColor: '#30363D'
+          }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item, index) => (
@@ -101,7 +138,16 @@ const Navigation = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors duration-200"
+                className="block w-full text-left px-3 py-2 rounded-md transition-colors duration-200 font-medium"
+                style={{ color: '#8B949E' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#C9D1D9'
+                  e.currentTarget.style.backgroundColor = '#161B22'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#8B949E'
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }}
               >
                 {item.name}
               </motion.button>

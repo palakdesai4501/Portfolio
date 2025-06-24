@@ -7,66 +7,64 @@ import Image from 'next/image'
 const Projects = () => {
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with modern UI, secure payments, and admin dashboard. Features include product management, order tracking, and analytics.',
+      title: 'GoTravel France',
+      description: 'A mobile travel companion app offering AI-driven recommendations, interactive scavenger hunts, and real-time itinerary planning for tourists exploring France.',
       image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai',
-      live: 'https://example.com',
-      technologies: ['React', 'Next.js', 'Node.js', 'MongoDB', 'Stripe'],
+      github: 'https://github.com/palakdesai4501/travel-france',
+      technologies: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'Expo'],
       featured: true
     },
     {
-      title: 'Task Management App',
-      description: 'Collaborative task management application with real-time updates, team workspaces, and advanced filtering capabilities.',
+      title: 'Phone Intellect',
+      description: 'A microservices-based platform to compare real-time mobile plans from major telecom providers using automated scraping and optimized data processing.',
       image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai',
-      live: 'https://example.com',
-      technologies: ['React', 'TypeScript', 'Socket.io', 'Express', 'PostgreSQL'],
+      github: 'https://github.com/palakdesai4501/MobilePlanPriceAnalysis',
+      technologies: ['Java', 'Spring Boot', 'React', 'Selenium'],
+      featured: false
+    },
+    {
+      title: 'OptiPrice',
+      description: 'A web application that helps vendors set optimal product prices using machine learning models and sentiment analysis of customer reviews.',
+      image: '/api/placeholder/400/300',
+      github: 'https://github.com/palakdesai4501/optiPrice',
+      technologies: ['Angular', 'Python', 'Flask', 'MongoDB', 'Scikit-learn'],
+      featured: false
+    },
+    {
+      title: 'EcoWave',
+      description: 'A sustainable e-commerce platform with real-time environmental impact tracking and secure Stripe-powered transactions.',
+      image: '/api/placeholder/400/300',
+      github: 'https://github.com/palakdesai4501/EcoWave_Project',
+      technologies: ['Python', 'Django', 'JavaScript', 'SQLite', 'Chart.js'],
+      featured: false
+    },
+    {
+      title: 'Nestlé Chatbot',
+      description: 'An AI-powered chatbot combining vector search and graph databases to provide smart, contextual recipe recommendations from the Nestlé website.',
+      image: '/api/placeholder/400/300',
+      github: 'https://github.com/palakdesai4501/AI-Based-Chatbot',
+      technologies: ['FastAPI', 'Python', 'Chroma DB', 'Neo4j', 'Vertex AI', 'OpenAI'],
       featured: true
     },
     {
-      title: 'Weather Dashboard',
-      description: 'Beautiful weather application with location-based forecasts, interactive maps, and personalized weather alerts.',
+      title: 'ViewTube',
+      description: 'A responsive YouTube clone with real-time video search, playback, and channel browsing using the Rapid API and React.js.',
       image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai',
-      live: 'https://example.com',
-      technologies: ['Vue.js', 'API Integration', 'Chart.js', 'PWA'],
-      featured: false
-    },
-    {
-      title: 'Social Media Analytics',
-      description: 'Analytics platform for social media managers with data visualization, performance tracking, and automated reporting.',
-      image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai',
-      live: 'https://example.com',
-      technologies: ['React', 'D3.js', 'Python', 'Flask', 'Redis'],
-      featured: false
-    },
-    {
-      title: 'Portfolio Website',
-      description: 'Responsive portfolio website with 3D animations, smooth transitions, and modern design principles.',
-      image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai',
-      live: 'https://example.com',
-      technologies: ['Next.js', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
-      featured: false
-    },
-    {
-      title: 'AI Chat Assistant',
-      description: 'Intelligent chat assistant with natural language processing, context awareness, and customizable responses.',
-      image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai4501',
-      live: 'https://example.com',
-      technologies: ['React', 'OpenAI API', 'Node.js', 'WebSocket', 'MongoDB'],
+      github: 'https://github.com/palakdesai4501/ViewTube',
+      technologies: ['React.js', 'Rapid API', 'Axios', 'Vite'],
       featured: false
     }
   ]
 
   return (
-    <section id="projects" className="py-20 px-4 relative overflow-hidden">
+    <section 
+      id="projects" 
+      className="py-24 px-6 relative overflow-hidden"
+      style={{ backgroundColor: '#0D1117' }}
+    >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800" />
-      <div className="absolute inset-0 bg-[url('/dots.svg')] bg-center opacity-10" />
+      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
+      <div className="absolute inset-0 bg-[url('/dots.svg')] bg-center opacity-5" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
@@ -75,29 +73,31 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
+            style={{ color: '#C9D1D9' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             Featured{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
               Projects
             </span>
           </motion.h2>
           <motion.p
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl max-w-4xl mx-auto leading-relaxed"
+            style={{ color: '#8B949E' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
             Here are some of my recent projects that showcase my skills in full-stack development, 
-            UI/UX design, and modern web technologies.
+            AI integration, and modern web technologies.
           </motion.p>
         </motion.div>
 
@@ -115,27 +115,53 @@ const Projects = () => {
             >
               {/* Featured Badge */}
               {project.featured && (
-                <div className="absolute top-4 left-4 z-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                <div 
+                  className="absolute top-4 left-4 z-20 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1"
+                  style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                >
                   <Star size={14} fill="currentColor" />
                   Featured
                 </div>
               )}
 
               {/* Card Background Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
               
-              <div className="relative bg-slate-800/90 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-300">
-                {/* Project Image */}
+              <div 
+                className="relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300"
+                style={{ 
+                  backgroundColor: '#161B22',
+                  borderColor: '#30363D'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#58A6FF'
+                  e.currentTarget.style.backgroundColor = '#1C2128'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#30363D'
+                  e.currentTarget.style.backgroundColor = '#161B22'
+                }}
+              >
+                {/* Project Image Placeholder */}
                 <div className="relative h-48 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20" />
-                  <div className="w-full h-full bg-slate-700 flex items-center justify-center">
+                  <div 
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(31, 111, 235, 0.1))' }}
+                  />
+                  <div 
+                    className="w-full h-full flex items-center justify-center"
+                    style={{ backgroundColor: '#0D1117' }}
+                  >
                     <div className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                      <div 
+                        className="w-16 h-16 mx-auto mb-2 rounded-lg flex items-center justify-center"
+                        style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                      >
                         <span className="text-2xl font-bold text-white">
                           {project.title.charAt(0)}
                         </span>
                       </div>
-                      <p className="text-gray-300 text-sm">Project Preview</p>
+                      <p className="text-sm" style={{ color: '#8B949E' }}>Project Preview</p>
                     </div>
                   </div>
                   
@@ -148,19 +174,19 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all duration-200"
+                        className="p-3 backdrop-blur-sm rounded-full transition-all duration-200"
+                        style={{ 
+                          backgroundColor: 'rgba(22, 27, 34, 0.8)',
+                          color: '#C9D1D9'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(88, 166, 255, 0.2)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(22, 27, 34, 0.8)'
+                        }}
                       >
                         <Github size={20} />
-                      </motion.a>
-                      <motion.a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all duration-200"
-                      >
-                        <ExternalLink size={20} />
                       </motion.a>
                     </div>
                   </div>
@@ -168,11 +194,14 @@ const Projects = () => {
 
                 {/* Project Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-200">
+                  <h3 
+                    className="text-xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#58A6FF] group-hover:to-[#1F6FEB] transition-colors duration-200"
+                    style={{ color: '#C9D1D9' }}
+                  >
                     {project.title}
                   </h3>
                   
-                  <p className="text-gray-300 mb-4 text-sm leading-relaxed line-clamp-3">
+                  <p className="mb-4 text-sm leading-relaxed line-clamp-3" style={{ color: '#8B949E' }}>
                     {project.description}
                   </p>
 
@@ -181,7 +210,12 @@ const Projects = () => {
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 bg-white/10 rounded-md text-xs text-gray-300 border border-white/10"
+                        className="px-2 py-1 rounded-md text-xs border"
+                        style={{ 
+                          backgroundColor: '#0D1117',
+                          borderColor: '#30363D',
+                          color: '#8B949E'
+                        }}
                       >
                         {tech}
                       </span>
@@ -196,21 +230,25 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium"
+                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium border"
+                      style={{ 
+                        backgroundColor: '#161B22',
+                        borderColor: '#30363D',
+                        color: '#C9D1D9'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#21262D'
+                        e.currentTarget.style.borderColor = '#58A6FF'
+                        e.currentTarget.style.color = '#58A6FF'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#161B22'
+                        e.currentTarget.style.borderColor = '#30363D'
+                        e.currentTarget.style.color = '#C9D1D9'
+                      }}
                     >
                       <Github size={16} />
-                      Code
-                    </motion.a>
-                    <motion.a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium"
-                    >
-                      <ExternalLink size={16} />
-                      Live Demo
+                      View Code
                     </motion.a>
                   </div>
                 </div>
@@ -227,17 +265,40 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <motion.a
-            href="https://github.com/palakdesai4501"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 border border-white/20 hover:border-purple-500/50"
+            className="inline-block"
           >
-            <Github size={20} />
-            View All Projects on GitHub
-          </motion.a>
+            <a
+              href="https://github.com/palakdesai4501"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg border"
+              style={{ 
+                backgroundColor: '#161B22',
+                borderColor: '#30363D',
+                color: '#C9D1D9'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#58A6FF'
+                e.currentTarget.style.backgroundColor = '#21262D'
+                e.currentTarget.style.color = '#58A6FF'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(88, 166, 255, 0.2)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#30363D'
+                e.currentTarget.style.backgroundColor = '#161B22'
+                e.currentTarget.style.color = '#C9D1D9'
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              <Github size={20} />
+              View All Projects
+            </a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

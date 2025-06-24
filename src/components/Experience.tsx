@@ -32,9 +32,13 @@ const Experience = () => {
   ]
 
   return (
-    <section id="experience" className="py-20 px-4 relative overflow-hidden">
+    <section 
+      id="experience" 
+      className="py-24 px-6 relative overflow-hidden"
+      style={{ backgroundColor: '#0D1117' }}
+    >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-purple-900" />
+      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
       <div className="absolute inset-0 bg-[url('/circuit.svg')] bg-center opacity-5" />
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -44,22 +48,24 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
+            style={{ color: '#C9D1D9' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             Professional{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
               Experience
             </span>
           </motion.h2>
           <motion.p
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl max-w-4xl mx-auto leading-relaxed"
+            style={{ color: '#8B949E' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -73,10 +79,10 @@ const Experience = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-pink-500" />
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#58A6FF] to-[#1F6FEB]" />
 
           {/* Experience Cards */}
-          <div className="space-y-12">
+          <div className="space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
@@ -89,7 +95,8 @@ const Experience = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-4 border-slate-900 z-10" />
+                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-full border-4 z-10" 
+                     style={{ borderColor: '#0D1117' }} />
 
                 {/* Content */}
                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'} ml-12 md:ml-0`}>
@@ -99,13 +106,29 @@ const Experience = () => {
                     className="group relative"
                   >
                     {/* Card Background Effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                     
-                    <div className="relative bg-slate-800/90 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                    <div 
+                      className="relative backdrop-blur-sm border rounded-2xl p-8 transition-all duration-300"
+                      style={{ 
+                        backgroundColor: '#161B22',
+                        borderColor: '#30363D'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = '#58A6FF'
+                        e.currentTarget.style.backgroundColor = '#1C2128'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = '#30363D'
+                        e.currentTarget.style.backgroundColor = '#161B22'
+                      }}
+                    >
                       {/* Header */}
-                      <div className="mb-4">
-                        <h3 className="text-2xl font-bold text-white mb-2">{exp.role}</h3>
-                        <div className="flex flex-wrap items-center gap-4 text-purple-300 mb-2">
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-bold mb-3" style={{ color: '#C9D1D9' }}>
+                          {exp.role}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-4 mb-2" style={{ color: '#58A6FF' }}>
                           <div className="flex items-center gap-2">
                             <ExternalLink size={16} />
                             <span className="font-semibold">{exp.company}</span>
@@ -122,18 +145,36 @@ const Experience = () => {
                       </div>
 
                       {/* Description */}
-                      <p className="text-gray-300 mb-4 leading-relaxed">
+                      <p className="mb-6 leading-relaxed" style={{ color: '#8B949E' }}>
                         {exp.description}
                       </p>
+
                       {/* Technologies */}
                       <div>
-                        <h4 className="text-white font-semibold mb-2">Technologies Used:</h4>
+                        <h4 className="font-semibold mb-3" style={{ color: '#C9D1D9' }}>
+                          Technologies Used:
+                        </h4>
                         <div className="flex flex-wrap gap-2">
                           {exp.technologies.map((tech) => (
                             <motion.span
                               key={tech}
                               whileHover={{ scale: 1.1 }}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-sm text-purple-300 hover:from-purple-500/30 hover:to-pink-500/30 transition-all duration-200"
+                              className="px-3 py-1 rounded-full text-sm transition-all duration-200 cursor-pointer"
+                              style={{ 
+                                backgroundColor: '#0D1117',
+                                border: '1px solid #30363D',
+                                color: '#58A6FF'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = '#21262D'
+                                e.currentTarget.style.borderColor = '#58A6FF'
+                                e.currentTarget.style.color = '#C9D1D9'
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = '#0D1117'
+                                e.currentTarget.style.borderColor = '#30363D'
+                                e.currentTarget.style.color = '#58A6FF'
+                              }}
                             >
                               {tech}
                             </motion.span>
@@ -157,7 +198,7 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-20"
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -166,7 +207,19 @@ const Experience = () => {
           >
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg"
+              style={{ 
+                background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)',
+                color: 'white'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(88, 166, 255, 0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)'
+              }}
             >
               Let's Work Together
               <ExternalLink size={20} />

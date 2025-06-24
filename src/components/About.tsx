@@ -50,10 +50,14 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="py-24 px-6 relative overflow-hidden">
+    <section 
+      id="about" 
+      className="py-24 px-6 relative overflow-hidden"
+      style={{ backgroundColor: '#0D1117' }}
+    >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-800" />
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
+      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
@@ -65,14 +69,15 @@ const About = () => {
           className="text-center mb-20"
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
+            style={{ color: '#C9D1D9' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             About{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
               Me
             </span>
           </motion.h2>
@@ -88,7 +93,7 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="space-y-6 text-gray-300 leading-relaxed text-lg">
+            <div className="space-y-6 leading-relaxed text-lg" style={{ color: '#8B949E' }}>
               <p>
                 I'm a software developer with a focus on building clean, reliable systems that scale. My background spans full-stack development, cloud infrastructure, 
                 and AI-powered tools, with hands-on experience across web, mobile, and desktop platforms.
@@ -112,17 +117,17 @@ const About = () => {
             viewport={{ once: true }}
           >
             <div className="mb-8">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C9D1D9' }}>
                 Education
               </h3>
-              <p className="text-gray-300 text-lg">
+              <p className="text-lg" style={{ color: '#8B949E' }}>
                 My academic journey in computer science and artificial intelligence
               </p>
             </div>
 
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500"></div>
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#58A6FF] to-[#1F6FEB]"></div>
               
               <div className="space-y-8">
                 {education.map((edu, index) => (
@@ -136,7 +141,10 @@ const About = () => {
                   >
                     {/* Timeline Dot */}
                     <div className="relative flex-shrink-0">
-                      <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                      <div 
+                        className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+                        style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                      >
                         <GraduationCap size={24} className="text-white" />
                       </div>
                     </div>
@@ -146,21 +154,41 @@ const About = () => {
                       whileHover={{ scale: 1.02 }}
                       className="flex-1 group"
                     >
-                      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 hover:bg-white/10">
+                      <div 
+                        className="backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300"
+                        style={{ 
+                          backgroundColor: '#161B22',
+                          borderColor: '#30363D'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = '#58A6FF'
+                          e.currentTarget.style.backgroundColor = '#1C2128'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = '#30363D'
+                          e.currentTarget.style.backgroundColor = '#161B22'
+                        }}
+                      >
                         <div className="mb-4">
-                          <h4 className="text-xl font-bold text-white mb-2">{edu.degree}</h4>
+                          <h4 className="text-xl font-bold mb-2" style={{ color: '#C9D1D9' }}>
+                            {edu.degree}
+                          </h4>
                           {edu.specialization && (
-                            <p className="text-purple-300 text-base font-medium mb-2">{edu.specialization}</p>
+                            <p className="text-base font-medium mb-2" style={{ color: '#58A6FF' }}>
+                              {edu.specialization}
+                            </p>
                           )}
-                          <p className="text-gray-300 text-base">{edu.university}</p>
+                          <p className="text-base" style={{ color: '#8B949E' }}>
+                            {edu.university}
+                          </p>
                         </div>
                         
                         <div className="flex flex-col space-y-2">
-                          <div className="flex items-center space-x-2 text-gray-400">
+                          <div className="flex items-center space-x-2" style={{ color: '#6E7681' }}>
                             <Calendar size={14} />
                             <span className="text-sm">{edu.period}</span>
                           </div>
-                          <div className="flex items-center space-x-2 text-gray-400">
+                          <div className="flex items-center space-x-2" style={{ color: '#6E7681' }}>
                             <MapPin size={14} />
                             <span className="text-sm">{edu.location}</span>
                           </div>
@@ -183,10 +211,10 @@ const About = () => {
           className="mb-20"
         >
           <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C9D1D9' }}>
               Technical Expertise
             </h3>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#8B949E' }}>
               A comprehensive toolkit for building modern applications
             </p>
           </div>
@@ -203,21 +231,57 @@ const About = () => {
                 className="group relative"
               >
                 {/* Card Background */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-300" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                 
-                <div className="relative bg-slate-800/80 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full hover:border-purple-500/50 transition-all duration-300">
-                  <div className="mb-6 p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl w-fit">
+                <div 
+                  className="relative backdrop-blur-sm border rounded-2xl p-8 h-full transition-all duration-300"
+                  style={{ 
+                    backgroundColor: '#161B22',
+                    borderColor: '#30363D'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#58A6FF'
+                    e.currentTarget.style.backgroundColor = '#1C2128'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = '#30363D'
+                    e.currentTarget.style.backgroundColor = '#161B22'
+                  }}
+                >
+                  <div 
+                    className="mb-6 p-4 rounded-2xl w-fit"
+                    style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                  >
                     <skill.icon size={28} className="text-white" />
                   </div>
                   
-                  <h4 className="text-xl font-semibold text-white mb-4">{skill.title}</h4>
-                  <p className="text-gray-300 mb-6 text-sm leading-relaxed">{skill.description}</p>
+                  <h4 className="text-xl font-semibold mb-4" style={{ color: '#C9D1D9' }}>
+                    {skill.title}
+                  </h4>
+                  <p className="mb-6 text-sm leading-relaxed" style={{ color: '#8B949E' }}>
+                    {skill.description}
+                  </p>
                   
                   <div className="flex flex-wrap gap-2">
                     {skill.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-white/10 rounded-lg text-xs text-gray-300 hover:bg-white/20 transition-colors duration-200"
+                        className="px-3 py-1 rounded-lg text-xs transition-colors duration-200 cursor-pointer"
+                        style={{ 
+                          backgroundColor: '#0D1117',
+                          color: '#8B949E',
+                          border: '1px solid #30363D'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#21262D'
+                          e.currentTarget.style.color = '#C9D1D9'
+                          e.currentTarget.style.borderColor = '#58A6FF'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#0D1117'
+                          e.currentTarget.style.color = '#8B949E'
+                          e.currentTarget.style.borderColor = '#30363D'
+                        }}
                       >
                         {tech}
                       </span>
@@ -237,13 +301,30 @@ const About = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h4 className="text-2xl font-bold text-white mb-8">Additional Technologies</h4>
+          <h4 className="text-2xl font-bold mb-8" style={{ color: '#C9D1D9' }}>
+            Additional Technologies
+          </h4>
           <div className="flex flex-wrap justify-center gap-4">
             {['C', 'SQL', 'HTML5', 'CSS3', 'Shell Scripting', 'React Native', 'Flask', 'REST APIs', 'JSON', 'Design Patterns', 'OOP'].map((tech) => (
               <motion.span
                 key={tech}
                 whileHover={{ scale: 1.1 }}
-                className="px-6 py-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-sm text-purple-300 hover:from-purple-500/30 hover:to-pink-500/30 transition-all duration-200"
+                className="px-6 py-3 rounded-full text-sm transition-all duration-200 cursor-pointer border"
+                style={{ 
+                  backgroundColor: '#161B22',
+                  borderColor: '#30363D',
+                  color: '#58A6FF'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#58A6FF'
+                  e.currentTarget.style.backgroundColor = '#21262D'
+                  e.currentTarget.style.color = '#C9D1D9'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#30363D'
+                  e.currentTarget.style.backgroundColor = '#161B22'
+                  e.currentTarget.style.color = '#58A6FF'
+                }}
               >
                 {tech}
               </motion.span>

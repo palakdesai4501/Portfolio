@@ -1,46 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* GitHub Dark Theme Color Palette */
+  --bg-primary: #0D1117;          /* Deep Navy - Main background */
+  --bg-secondary: #161B22;        /* Dark Grayish Blue - Card backgrounds */
+  --bg-tertiary: #21262D;         /* Slightly lighter for hover states */
+  
+  --text-primary: #C9D1D9;        /* Soft White - Primary text */
+  --text-secondary: #8B949E;      /* Cool Gray - Secondary text */
+  --text-muted: #6E7681;          /* Even more muted text */
+  
+  --accent-primary: #58A6FF;      /* Electric Blue - Links, highlights */
+  --accent-hover: #1F6FEB;        /* Bright Blue - Hover states */
+  --accent-gradient-start: #58A6FF;
+  --accent-gradient-end: #1F6FEB;
+  
+  --border-primary: #30363D;      /* Subtle Gray - Borders */
+  --border-hover: #58A6FF;        /* Blue borders on hover */
+  
+  --success: #238636;             /* Green for success states */
+  --warning: #D29922;             /* Yellow for warnings */
+  --error: #F85149;               /* Red for errors */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with GitHub theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #8b5cf6, #ec4899);
+  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-hover));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #7c3aed, #db2777);
+  background: linear-gradient(to bottom, var(--accent-hover), var(--accent-primary));
+}
+
+/* Selection styling */
+::selection {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
 }
 
 /* Smooth scrolling */
@@ -56,7 +80,7 @@ html {
   overflow: hidden;
 }
 
-/* Gradient text animation */
+/* GitHub-style gradient text animation */
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -68,10 +92,10 @@ html {
   animation: gradient 3s ease infinite;
 }
 
-/* Loading spinner */
+/* Loading spinner with GitHub colors */
 .spinner {
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top: 2px solid white;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--accent-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -81,11 +105,12 @@ html {
   100% { transform: rotate(360deg); }
 }
 
-/* Focus styles */
+/* Focus styles with GitHub theme */
 button:focus,
 input:focus,
-textarea:focus {
-  outline: 2px solid #8b5cf6;
+textarea:focus,
+a:focus {
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
@@ -95,16 +120,63 @@ textarea:focus {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* Ensure text is readable on all backgrounds */
+/* GitHub-style card effect */
+.github-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.github-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-tertiary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(88, 166, 255, 0.1);
+}
+
+/* GitHub-style button */
+.github-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.github-btn:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-hover);
+  color: var(--accent-primary);
+}
+
+.github-btn-primary {
+  background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  border: 1px solid var(--accent-primary);
+  color: white;
+}
+
+.github-btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent-primary));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(88, 166, 255, 0.3);
+}
+
+/* Text shadow for better readability */
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Glass effect for cards */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* GitHub-style glow effect */
+.glow {
+  box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(88, 166, 255, 0.4);
 }
 
 /* Hide scroll bar but keep functionality */
@@ -115,4 +187,35 @@ textarea:focus {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(88, 166, 255, 0.4);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
