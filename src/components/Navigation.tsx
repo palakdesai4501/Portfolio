@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import ThemeToggle from './ThemeToggle'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,8 +43,9 @@ const Navigation = () => {
           : ''
       }`}
       style={{
-        backgroundColor: scrolled ? 'rgba(13, 17, 23, 0.95)' : 'transparent',
-        borderBottom: scrolled ? '1px solid #30363D' : 'none'
+        backgroundColor: scrolled ? 'var(--bg-primary)' : 'transparent',
+        borderBottom: scrolled ? '1px solid var(--border-primary)' : 'none',
+        opacity: scrolled ? 0.95 : 1
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,16 +54,16 @@ const Navigation = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold cursor-pointer"
-            style={{ color: '#C9D1D9' }}
+            style={{ color: 'var(--text-primary)' }}
             onClick={() => scrollToSection('#home')}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
+            <span className="gradient-text">
               PD
             </span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-8">
             <div className="flex items-center space-x-8">
               {navItems.map((item, index) => (
                 <motion.button
@@ -72,43 +74,28 @@ const Navigation = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.href)}
-                  className="transition-colors duration-200 font-medium px-4 py-2 rounded-lg"
-                  style={{ color: '#8B949E', cursor: 'pointer' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#C9D1D9'
-                    e.currentTarget.style.backgroundColor = '#161B22'
-                    e.currentTarget.style.cursor = 'pointer'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#8B949E'
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                  }}
+                  className="transition-all duration-200 font-medium px-4 py-2 rounded-lg cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   {item.name}
                 </motion.button>
               ))}
             </div>
+            
+            {/* Theme Toggle */}
+            <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button and Theme Toggle */}
+          <div className="md:hidden flex items-center space-x-3">
+            <ThemeToggle />
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg transition-colors duration-200"
+              className="p-2 rounded-lg transition-all duration-200 cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
               style={{ 
-                color: '#8B949E',
-                backgroundColor: isOpen ? '#161B22' : 'transparent',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#C9D1D9'
-                e.currentTarget.style.backgroundColor = '#161B22'
-                e.currentTarget.style.cursor = 'pointer'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#8B949E'
-                e.currentTarget.style.backgroundColor = isOpen ? '#161B22' : 'transparent'
+                color: 'var(--text-secondary)',
+                backgroundColor: isOpen ? 'var(--bg-secondary)' : 'transparent'
               }}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -125,8 +112,9 @@ const Navigation = () => {
           exit={{ opacity: 0, height: 0 }}
           className="md:hidden backdrop-blur-md border-t"
           style={{ 
-            backgroundColor: 'rgba(13, 17, 23, 0.95)',
-            borderColor: '#30363D'
+            backgroundColor: 'var(--bg-primary)',
+            borderColor: 'var(--border-primary)',
+            opacity: 0.95
           }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
@@ -137,17 +125,8 @@ const Navigation = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-3 py-2 rounded-md transition-colors duration-200 font-medium"
-                style={{ color: '#8B949E', cursor: 'pointer' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#C9D1D9'
-                  e.currentTarget.style.backgroundColor = '#161B22'
-                  e.currentTarget.style.cursor = 'pointer'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#8B949E'
-                  e.currentTarget.style.backgroundColor = 'transparent'
-                }}
+                className="block w-full text-left px-3 py-2 rounded-md transition-all duration-200 font-medium cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
+                style={{ color: 'var(--text-secondary)' }}
               >
                 {item.name}
               </motion.button>

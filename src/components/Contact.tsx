@@ -5,10 +5,12 @@ import { motion } from 'framer-motion'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Sphere, MeshDistortMaterial } from '@react-three/drei'
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
+import { useTheme } from '../app/context/ThemeContext'
 
-// 3D Animated Sphere with GitHub theme
-function AnimatedSphere() {
+// 3D Animated Sphere with theme support
+function AnimatedSphere({ theme }: { theme: string }) {
   const sphereRef = useRef<any>(null)
+  const sphereColor = theme === 'light' ? '#1F6FEB' : '#58A6FF'
 
   useFrame((state) => {
     if (sphereRef.current) {
@@ -20,7 +22,7 @@ function AnimatedSphere() {
   return (
     <Sphere ref={sphereRef} args={[1, 100, 200]} scale={2.5}>
       <MeshDistortMaterial
-        color="#58A6FF"
+        color={sphereColor}
         attach="material"
         distort={0.3}
         speed={2}
@@ -32,6 +34,7 @@ function AnimatedSphere() {
 }
 
 const Contact = () => {
+  const { theme } = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -91,19 +94,19 @@ const Contact = () => {
       icon: Github,
       label: 'GitHub',
       href: 'https://github.com/palakdesai4501',
-      color: '#C9D1D9'
+      color: 'var(--text-primary)'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
       href: 'https://linkedin.com/in/palakdesai4501',
-      color: '#58A6FF'
+      color: 'var(--accent-primary)'
     },
     {
       icon: Mail,
       label: 'Email',
       href: 'mailto:desai1j@uwindsor.ca',
-      color: '#58A6FF'
+      color: 'var(--accent-primary)'
     }
   ]
 
@@ -111,10 +114,10 @@ const Contact = () => {
     <section 
       id="contact" 
       className="py-24 px-6 relative overflow-hidden"
-      style={{ backgroundColor: '#0D1117' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Background */}
-      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
+      <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-primary)' }} />
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
@@ -127,20 +130,20 @@ const Contact = () => {
         >
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
-            style={{ color: '#C9D1D9' }}
+            style={{ color: 'var(--text-primary)' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             Let's{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
+            <span className="gradient-text">
               Connect
             </span>
           </motion.h2>
           <motion.p
             className="text-xl max-w-4xl mx-auto leading-relaxed"
-            style={{ color: '#8B949E' }}
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -161,16 +164,10 @@ const Contact = () => {
             className="relative"
           >
             {/* Form Background Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20" />
             
-            <div 
-              className="relative backdrop-blur-sm border rounded-2xl p-8"
-              style={{ 
-                backgroundColor: '#161B22',
-                borderColor: '#30363D'
-              }}
-            >
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#C9D1D9' }}>
+            <div className="relative backdrop-blur-sm border rounded-2xl p-8 github-card">
+              <h3 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                 Send me a message
               </h3>
               
@@ -182,7 +179,7 @@ const Contact = () => {
                   style={{ 
                     backgroundColor: 'rgba(35, 134, 54, 0.2)',
                     borderColor: 'rgba(35, 134, 54, 0.3)',
-                    color: '#238636'
+                    color: 'var(--success)'
                   }}
                 >
                   Thank you! Your message has been sent successfully. I'll get back to you soon.
@@ -192,7 +189,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block mb-2 font-medium" style={{ color: '#8B949E' }}>
+                    <label htmlFor="name" className="block mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>
                       Name *
                     </label>
                     <input
@@ -202,25 +199,17 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20"
+                      className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20 focus:border-[var(--accent-primary)] focus:shadow-[0_0_0_2px_rgba(31,111,235,0.2)]"
                       style={{ 
-                        backgroundColor: '#0D1117',
-                        borderColor: '#30363D',
-                        color: '#C9D1D9'
-                      }}
-                      onFocus={(e) => {
-                        e.currentTarget.style.borderColor = '#58A6FF'
-                        e.currentTarget.style.boxShadow = '0 0 0 2px rgba(88, 166, 255, 0.2)'
-                      }}
-                      onBlur={(e) => {
-                        e.currentTarget.style.borderColor = '#30363D'
-                        e.currentTarget.style.boxShadow = 'none'
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-primary)',
+                        color: 'var(--text-primary)'
                       }}
                       placeholder="Your Name"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block mb-2 font-medium" style={{ color: '#8B949E' }}>
+                    <label htmlFor="email" className="block mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>
                       Email *
                     </label>
                     <input
@@ -230,19 +219,11 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20"
+                      className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20 focus:border-[var(--accent-primary)] focus:shadow-[0_0_0_2px_rgba(31,111,235,0.2)]"
                       style={{ 
-                        backgroundColor: '#0D1117',
-                        borderColor: '#30363D',
-                        color: '#C9D1D9'
-                      }}
-                      onFocus={(e) => {
-                        e.currentTarget.style.borderColor = '#58A6FF'
-                        e.currentTarget.style.boxShadow = '0 0 0 2px rgba(88, 166, 255, 0.2)'
-                      }}
-                      onBlur={(e) => {
-                        e.currentTarget.style.borderColor = '#30363D'
-                        e.currentTarget.style.boxShadow = 'none'
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-primary)',
+                        color: 'var(--text-primary)'
                       }}
                       placeholder="your.email@example.com"
                     />
@@ -250,7 +231,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block mb-2 font-medium" style={{ color: '#8B949E' }}>
+                  <label htmlFor="subject" className="block mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>
                     Subject *
                   </label>
                   <input
@@ -260,26 +241,18 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20"
+                    className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20 focus:border-[var(--accent-primary)] focus:shadow-[0_0_0_2px_rgba(31,111,235,0.2)]"
                     style={{ 
-                      backgroundColor: '#0D1117',
-                      borderColor: '#30363D',
-                      color: '#C9D1D9'
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = '#58A6FF'
-                      e.currentTarget.style.boxShadow = '0 0 0 2px rgba(88, 166, 255, 0.2)'
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = '#30363D'
-                      e.currentTarget.style.boxShadow = 'none'
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-primary)',
+                      color: 'var(--text-primary)'
                     }}
                     placeholder="What's this about?"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block mb-2 font-medium" style={{ color: '#8B949E' }}>
+                  <label htmlFor="message" className="block mb-2 font-medium" style={{ color: 'var(--text-secondary)' }}>
                     Message *
                   </label>
                   <textarea
@@ -289,19 +262,11 @@ const Contact = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20 resize-none"
+                    className="w-full px-4 py-3 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-20 resize-none focus:border-[var(--accent-primary)] focus:shadow-[0_0_0_2px_rgba(31,111,235,0.2)]"
                     style={{ 
-                      backgroundColor: '#0D1117',
-                      borderColor: '#30363D',
-                      color: '#C9D1D9'
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = '#58A6FF'
-                      e.currentTarget.style.boxShadow = '0 0 0 2px rgba(88, 166, 255, 0.2)'
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = '#30363D'
-                      e.currentTarget.style.boxShadow = 'none'
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-primary)',
+                      color: 'var(--text-primary)'
                     }}
                     placeholder="Tell me about your project or idea..."
                   />
@@ -312,26 +277,14 @@ const Contact = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                    isSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
+                  className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 github-btn-primary ${
+                    isSubmitting ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'
                   }`}
                   style={{ 
                     background: isSubmitting 
-                      ? 'linear-gradient(135deg, #30363D, #21262D)' 
-                      : 'linear-gradient(135deg, #58A6FF, #1F6FEB)',
+                      ? 'var(--border-primary)' 
+                      : 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
                     color: 'white'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isSubmitting) {
-                      e.currentTarget.style.transform = 'translateY(-1px)'
-                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(88, 166, 255, 0.3)'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isSubmitting) {
-                      e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = 'none'
-                    }
                   }}
                 >
                   {isSubmitting ? (
@@ -359,19 +312,19 @@ const Contact = () => {
             className="space-y-8"
           >
             {/* 3D Scene */}
-            <div className="relative h-64 rounded-2xl overflow-hidden" style={{ backgroundColor: '#161B22' }}>
+            <div className="relative h-64 rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
               <Canvas camera={{ position: [0, 0, 5] }}>
                 <ambientLight intensity={0.5} />
                 <pointLight position={[10, 10, 10]} />
                 <Suspense fallback={null}>
-                  <AnimatedSphere />
+                  <AnimatedSphere theme={theme} />
                 </Suspense>
               </Canvas>
             </div>
 
             {/* Contact Information */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#C9D1D9' }}>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                 Contact Information
               </h3>
               {contactInfo.map((info, index) => (
@@ -382,35 +335,19 @@ const Contact = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-all duration-300 group ${
+                  className={`flex items-center gap-4 p-4 rounded-lg transition-all duration-300 group github-card ${
                     info.href === '#' ? 'cursor-default' : 'cursor-pointer'
                   }`}
-                  style={{ 
-                    backgroundColor: '#161B22',
-                    border: '1px solid #30363D'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (info.href !== '#') {
-                      e.currentTarget.style.borderColor = '#58A6FF'
-                      e.currentTarget.style.backgroundColor = '#1C2128'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (info.href !== '#') {
-                      e.currentTarget.style.borderColor = '#30363D'
-                      e.currentTarget.style.backgroundColor = '#161B22'
-                    }
-                  }}
                 >
                   <div 
                     className="p-3 rounded-lg"
-                    style={{ backgroundColor: '#0D1117' }}
+                    style={{ backgroundColor: 'var(--bg-primary)' }}
                   >
-                    <info.icon size={24} style={{ color: '#58A6FF' }} />
+                    <info.icon size={24} style={{ color: 'var(--accent-primary)' }} />
                   </div>
                   <div>
-                    <h4 className="font-semibold" style={{ color: '#C9D1D9' }}>{info.label}</h4>
-                    <p style={{ color: '#8B949E' }}>{info.value}</p>
+                    <h4 className="font-semibold" style={{ color: 'var(--text-primary)' }}>{info.label}</h4>
+                    <p style={{ color: 'var(--text-secondary)' }}>{info.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -418,7 +355,7 @@ const Contact = () => {
 
             {/* Social Links */}
             <div className="space-y-4">
-              <h4 className="text-xl font-bold" style={{ color: '#C9D1D9' }}>Follow Me</h4>
+              <h4 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>Follow Me</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -432,22 +369,8 @@ const Contact = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     viewport={{ once: true }}
-                    className="p-3 rounded-lg transition-all duration-300"
-                    style={{ 
-                      backgroundColor: '#161B22',
-                      border: '1px solid #30363D',
-                      color: social.color
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#58A6FF'
-                      e.currentTarget.style.backgroundColor = '#1C2128'
-                      e.currentTarget.style.boxShadow = '0 0 20px rgba(88, 166, 255, 0.2)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = '#30363D'
-                      e.currentTarget.style.backgroundColor = '#161B22'
-                      e.currentTarget.style.boxShadow = 'none'
-                    }}
+                    className="p-3 rounded-lg transition-all duration-300 github-card glow-hover"
+                    style={{ color: social.color }}
                   >
                     <social.icon size={24} />
                   </motion.a>

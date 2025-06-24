@@ -35,10 +35,10 @@ const Experience = () => {
     <section 
       id="experience" 
       className="py-24 px-6 relative overflow-hidden"
-      style={{ backgroundColor: '#0D1117' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Background */}
-      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
+      <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-primary)' }} />
       <div className="absolute inset-0 bg-[url('/circuit.svg')] bg-center opacity-5" />
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -52,20 +52,20 @@ const Experience = () => {
         >
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
-            style={{ color: '#C9D1D9' }}
+            style={{ color: 'var(--text-primary)' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             Professional{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
+            <span className="gradient-text">
               Experience
             </span>
           </motion.h2>
           <motion.p
             className="text-xl max-w-4xl mx-auto leading-relaxed"
-            style={{ color: '#8B949E' }}
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -79,7 +79,7 @@ const Experience = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#58A6FF] to-[#1F6FEB]" />
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--accent-primary)] to-[var(--accent-hover)]" />
 
           {/* Experience Cards */}
           <div className="space-y-16">
@@ -95,8 +95,8 @@ const Experience = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-full border-4 z-10" 
-                     style={{ borderColor: '#0D1117' }} />
+                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-full border-4 z-10" 
+                     style={{ borderColor: 'var(--bg-primary)' }} />
 
                 {/* Content */}
                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'} ml-12 md:ml-0`}>
@@ -106,29 +106,15 @@ const Experience = () => {
                     className="group relative"
                   >
                     {/* Card Background Effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                     
-                    <div 
-                      className="relative backdrop-blur-sm border rounded-2xl p-8 transition-all duration-300"
-                      style={{ 
-                        backgroundColor: '#161B22',
-                        borderColor: '#30363D'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = '#58A6FF'
-                        e.currentTarget.style.backgroundColor = '#1C2128'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = '#30363D'
-                        e.currentTarget.style.backgroundColor = '#161B22'
-                      }}
-                    >
+                    <div className="relative backdrop-blur-sm border rounded-2xl p-8 transition-all duration-300 github-card">
                       {/* Header */}
                       <div className="mb-6">
-                        <h3 className="text-2xl font-bold mb-3" style={{ color: '#C9D1D9' }}>
+                        <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
                           {exp.role}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-4 mb-2" style={{ color: '#58A6FF' }}>
+                        <div className="flex flex-wrap items-center gap-4 mb-2" style={{ color: 'var(--accent-primary)' }}>
                           <div className="flex items-center gap-2">
                             <ExternalLink size={16} />
                             <span className="font-semibold">{exp.company}</span>
@@ -145,13 +131,13 @@ const Experience = () => {
                       </div>
 
                       {/* Description */}
-                      <p className="mb-6 leading-relaxed" style={{ color: '#8B949E' }}>
+                      <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         {exp.description}
                       </p>
 
                       {/* Technologies */}
                       <div>
-                        <h4 className="font-semibold mb-3" style={{ color: '#C9D1D9' }}>
+                        <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
                           Technologies Used:
                         </h4>
                         <div className="flex flex-wrap gap-2">
@@ -159,21 +145,11 @@ const Experience = () => {
                             <motion.span
                               key={tech}
                               whileHover={{ scale: 1.1 }}
-                              className="px-3 py-1 rounded-full text-sm transition-all duration-200 cursor-pointer"
+                              className="px-3 py-1 rounded-full text-sm transition-all duration-200 cursor-pointer border hover:bg-[var(--bg-tertiary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)]"
                               style={{ 
-                                backgroundColor: '#0D1117',
-                                border: '1px solid #30363D',
-                                color: '#58A6FF'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = '#21262D'
-                                e.currentTarget.style.borderColor = '#58A6FF'
-                                e.currentTarget.style.color = '#C9D1D9'
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = '#0D1117'
-                                e.currentTarget.style.borderColor = '#30363D'
-                                e.currentTarget.style.color = '#58A6FF'
+                                backgroundColor: 'var(--bg-primary)',
+                                borderColor: 'var(--border-primary)',
+                                color: 'var(--accent-primary)'
                               }}
                             >
                               {tech}
@@ -200,31 +176,20 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center mt-20"
         >
-          <motion.div
+          <motion.a
+            href="#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block"
+            className="inline-flex items-center px-8 py-4 rounded-full font-semibold transition-all duration-300 github-btn-primary"
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
+              color: 'white',
+              textDecoration: 'none'
+            }}
           >
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg"
-              style={{ 
-                background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)',
-                color: 'white'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(88, 166, 255, 0.3)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)'
-              }}
-            >
-              Let's Work Together
-              <ExternalLink size={20} />
-            </a>
-          </motion.div>
+            Let's Work Together
+            <ExternalLink size={20} className="ml-2" />
+          </motion.a>
         </motion.div>
       </div>
     </section>

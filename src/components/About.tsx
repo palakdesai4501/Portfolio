@@ -53,10 +53,10 @@ const About = () => {
     <section 
       id="about" 
       className="py-24 px-6 relative overflow-hidden"
-      style={{ backgroundColor: '#0D1117' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Background Elements */}
-      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
+      <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-primary)' }} />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5" />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -70,14 +70,14 @@ const About = () => {
         >
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
-            style={{ color: '#C9D1D9' }}
+            style={{ color: 'var(--text-primary)' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             About{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
+            <span className="gradient-text">
               Me
             </span>
           </motion.h2>
@@ -93,7 +93,7 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="space-y-6 leading-relaxed text-lg" style={{ color: '#8B949E' }}>
+            <div className="space-y-6 leading-relaxed text-lg" style={{ color: 'var(--text-secondary)' }}>
               <p>
                 I'm a software developer with a focus on building clean, reliable systems that scale. My background spans full-stack development, cloud infrastructure, 
                 and AI-powered tools, with hands-on experience across web, mobile, and desktop platforms.
@@ -117,17 +117,17 @@ const About = () => {
             viewport={{ once: true }}
           >
             <div className="mb-8">
-              <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C9D1D9' }}>
+              <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                 Education
               </h3>
-              <p className="text-lg" style={{ color: '#8B949E' }}>
+              <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
                 My academic journey in computer science and artificial intelligence
               </p>
             </div>
 
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#58A6FF] to-[#1F6FEB]"></div>
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent-primary)] to-[var(--accent-hover)]"></div>
               
               <div className="space-y-8">
                 {education.map((edu, index) => (
@@ -143,7 +143,7 @@ const About = () => {
                     <div className="relative flex-shrink-0">
                       <div 
                         className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
-                        style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                        style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
                       >
                         <GraduationCap size={24} className="text-white" />
                       </div>
@@ -152,43 +152,29 @@ const About = () => {
                     {/* Education Card */}
                     <motion.div
                       whileHover={{ scale: 1.02 }}
-                      className="flex-1 group"
+                      className="flex-1 group github-card"
                     >
-                      <div 
-                        className="backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300"
-                        style={{ 
-                          backgroundColor: '#161B22',
-                          borderColor: '#30363D'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = '#58A6FF'
-                          e.currentTarget.style.backgroundColor = '#1C2128'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = '#30363D'
-                          e.currentTarget.style.backgroundColor = '#161B22'
-                        }}
-                      >
+                      <div className="backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 github-card">
                         <div className="mb-4">
-                          <h4 className="text-xl font-bold mb-2" style={{ color: '#C9D1D9' }}>
+                          <h4 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
                             {edu.degree}
                           </h4>
                           {edu.specialization && (
-                            <p className="text-base font-medium mb-2" style={{ color: '#58A6FF' }}>
+                            <p className="text-base font-medium mb-2" style={{ color: 'var(--accent-primary)' }}>
                               {edu.specialization}
                             </p>
                           )}
-                          <p className="text-base" style={{ color: '#8B949E' }}>
+                          <p className="text-base" style={{ color: 'var(--text-secondary)' }}>
                             {edu.university}
                           </p>
                         </div>
                         
                         <div className="flex flex-col space-y-2">
-                          <div className="flex items-center space-x-2" style={{ color: '#6E7681' }}>
+                          <div className="flex items-center space-x-2" style={{ color: 'var(--text-muted)' }}>
                             <Calendar size={14} />
                             <span className="text-sm">{edu.period}</span>
                           </div>
-                          <div className="flex items-center space-x-2" style={{ color: '#6E7681' }}>
+                          <div className="flex items-center space-x-2" style={{ color: 'var(--text-muted)' }}>
                             <MapPin size={14} />
                             <span className="text-sm">{edu.location}</span>
                           </div>
@@ -211,10 +197,10 @@ const About = () => {
           className="mb-20"
         >
           <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#C9D1D9' }}>
+            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
               Technical Expertise
             </h3>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#8B949E' }}>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
               A comprehensive toolkit for building modern applications
             </p>
           </div>
@@ -231,34 +217,20 @@ const About = () => {
                 className="group relative"
               >
                 {/* Card Background */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                 
-                <div 
-                  className="relative backdrop-blur-sm border rounded-2xl p-8 h-full transition-all duration-300"
-                  style={{ 
-                    backgroundColor: '#161B22',
-                    borderColor: '#30363D'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#58A6FF'
-                    e.currentTarget.style.backgroundColor = '#1C2128'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#30363D'
-                    e.currentTarget.style.backgroundColor = '#161B22'
-                  }}
-                >
+                <div className="relative backdrop-blur-sm border rounded-2xl p-8 h-full transition-all duration-300 github-card">
                   <div 
                     className="mb-6 p-4 rounded-2xl w-fit"
-                    style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
                   >
                     <skill.icon size={28} className="text-white" />
                   </div>
                   
-                  <h4 className="text-xl font-semibold mb-4" style={{ color: '#C9D1D9' }}>
+                  <h4 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
                     {skill.title}
                   </h4>
-                  <p className="mb-6 text-sm leading-relaxed" style={{ color: '#8B949E' }}>
+                  <p className="mb-6 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     {skill.description}
                   </p>
                   
@@ -266,21 +238,11 @@ const About = () => {
                     {skill.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 rounded-lg text-xs transition-colors duration-200 cursor-pointer"
+                        className="px-3 py-1 rounded-lg text-xs transition-all duration-200 cursor-pointer border hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-primary)]"
                         style={{ 
-                          backgroundColor: '#0D1117',
-                          color: '#8B949E',
-                          border: '1px solid #30363D'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#21262D'
-                          e.currentTarget.style.color = '#C9D1D9'
-                          e.currentTarget.style.borderColor = '#58A6FF'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#0D1117'
-                          e.currentTarget.style.color = '#8B949E'
-                          e.currentTarget.style.borderColor = '#30363D'
+                          backgroundColor: 'var(--bg-primary)',
+                          color: 'var(--text-secondary)',
+                          borderColor: 'var(--border-primary)'
                         }}
                       >
                         {tech}
@@ -301,7 +263,7 @@ const About = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h4 className="text-2xl font-bold mb-8" style={{ color: '#C9D1D9' }}>
+          <h4 className="text-2xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
             Additional Technologies
           </h4>
           <div className="flex flex-wrap justify-center gap-4">
@@ -309,21 +271,11 @@ const About = () => {
               <motion.span
                 key={tech}
                 whileHover={{ scale: 1.1 }}
-                className="px-6 py-3 rounded-full text-sm transition-all duration-200 cursor-pointer border"
+                className="px-6 py-3 rounded-full text-sm transition-all duration-200 cursor-pointer border hover:border-[var(--accent-primary)] hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)]"
                 style={{ 
-                  backgroundColor: '#161B22',
-                  borderColor: '#30363D',
-                  color: '#58A6FF'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#58A6FF'
-                  e.currentTarget.style.backgroundColor = '#21262D'
-                  e.currentTarget.style.color = '#C9D1D9'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#30363D'
-                  e.currentTarget.style.backgroundColor = '#161B22'
-                  e.currentTarget.style.color = '#58A6FF'
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-primary)',
+                  color: 'var(--accent-primary)'
                 }}
               >
                 {tech}

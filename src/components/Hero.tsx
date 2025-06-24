@@ -6,11 +6,14 @@ import { Points, PointMaterial, Text } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 import { inSphere } from 'maath/random'
+import { useTheme } from '../app/context/ThemeContext'
 
-// 3D Particle Field Component with GitHub theme
-function Stars(props: any) {
+// 3D Particle Field Component with theme support
+function Stars({ theme, ...props }: any) {
   const ref = useRef<any>(null)
   const sphere = inSphere(new Float32Array(5000), { radius: 1.5 })
+
+  const particleColor = theme === 'light' ? '#1F6FEB' : '#58A6FF'
 
   useFrame((state, delta) => {
     if (ref.current) {
@@ -24,7 +27,7 @@ function Stars(props: any) {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
         <PointMaterial
           transparent
-          color="#58A6FF"
+          color={particleColor}
           size={0.002}
           sizeAttenuation={true}
           depthWrite={false}
@@ -34,9 +37,10 @@ function Stars(props: any) {
   )
 }
 
-// Floating 3D Text
-function FloatingText() {
+// Floating 3D Text with theme support
+function FloatingText({ theme }: { theme: string }) {
   const textRef = useRef<any>()
+  const textColor = theme === 'light' ? '#24292E' : '#C9D1D9'
 
   useFrame((state) => {
     if (textRef.current) {
@@ -50,7 +54,7 @@ function FloatingText() {
       ref={textRef}
       position={[0, 0, 0]}
       fontSize={1}
-      color="#C9D1D9"
+      color={textColor}
       anchorX="center"
       anchorY="middle"
     >
@@ -60,6 +64,8 @@ function FloatingText() {
 }
 
 const Hero = () => {
+  const { theme } = useTheme()
+  
   const scrollToAbout = () => {
     if (typeof window !== 'undefined') {
       const element = document.querySelector('#about')
@@ -69,26 +75,34 @@ const Hero = () => {
     }
   }
 
+  // Theme-aware gradient overlay
+  const getGradientOverlay = () => {
+    if (theme === 'light') {
+      return `linear-gradient(to bottom, transparent, rgba(245, 247, 250, 0.8), var(--bg-primary))`
+    }
+    return `linear-gradient(to bottom, transparent, rgba(13, 17, 23, 0.8), var(--bg-primary))`
+  }
+
   return (
     <section 
       id="home" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#0D1117' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* 3D Background */}
       <div className="absolute inset-0">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <Suspense fallback={null}>
-            <Stars />
+            <Stars theme={theme} />
           </Suspense>
         </Canvas>
       </div>
 
-      {/* Gradient Overlay with GitHub theme */}
+      {/* Gradient Overlay with theme support */}
       <div 
         className="absolute inset-0"
         style={{ 
-          background: `linear-gradient(to bottom, transparent, rgba(13, 17, 23, 0.8), #0D1117)`
+          background: getGradientOverlay()
         }}
       />
 
@@ -101,14 +115,14 @@ const Hero = () => {
         >
           <motion.h1
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6"
-            style={{ color: '#C9D1D9' }}
+            style={{ color: 'var(--text-primary)' }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
             Palak{' '}
             <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]"
+              className="gradient-text"
               animate={{ 
                 backgroundPosition: ['0%', '100%', '0%'] 
               }}
@@ -124,7 +138,7 @@ const Hero = () => {
 
           <motion.h2
             className="text-xl md:text-2xl lg:text-3xl mb-8 font-light"
-            style={{ color: '#8B949E' }}
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
@@ -134,7 +148,7 @@ const Hero = () => {
 
           <motion.p
             className="text-lg md:text-xl mb-12 max-w-3xl mx-auto leading-relaxed"
-            style={{ color: '#8B949E' }}
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
@@ -163,21 +177,11 @@ const Hero = () => {
                 rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-4 rounded-full backdrop-blur-sm border transition-all duration-300 group"
+                className="p-4 rounded-full backdrop-blur-sm border transition-all duration-300 group github-card hover:glow"
                 style={{ 
-                  backgroundColor: '#161B22',
-                  borderColor: '#30363D',
-                  color: '#C9D1D9'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#58A6FF'
-                  e.currentTarget.style.backgroundColor = '#21262D'
-                  e.currentTarget.style.boxShadow = '0 0 20px rgba(88, 166, 255, 0.3)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#30363D'
-                  e.currentTarget.style.backgroundColor = '#161B22'
-                  e.currentTarget.style.boxShadow = 'none'
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-primary)',
+                  color: 'var(--text-primary)'
                 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -191,14 +195,8 @@ const Hero = () => {
           {/* Scroll Indicator */}
           <motion.button
             onClick={scrollToAbout}
-            className="transition-colors duration-300 focus:outline-none"
-            style={{ color: '#8B949E' }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#C9D1D9'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#8B949E'
-            }}
+            className="transition-all duration-300 focus:outline-none hover:text-[var(--text-primary)]"
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
@@ -216,13 +214,13 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Floating Elements with GitHub theme */}
+      {/* Floating Elements with theme support */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 rounded-full"
-            style={{ backgroundColor: '#58A6FF' }}
+            style={{ backgroundColor: 'var(--accent-primary)', opacity: 0.6 }}
             initial={{
               x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1000,
               y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1000,
@@ -240,11 +238,11 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Additional background decorative elements */}
+      {/* Additional background decorative elements with theme support */}
       <div className="absolute top-20 left-10 w-32 h-32 rounded-full opacity-10" 
-           style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }} />
+           style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }} />
       <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full opacity-5" 
-           style={{ background: 'linear-gradient(135deg, #1F6FEB, #58A6FF)' }} />
+           style={{ background: 'linear-gradient(135deg, var(--accent-hover), var(--accent-primary))' }} />
     </section>
   )
 }

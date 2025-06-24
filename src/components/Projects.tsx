@@ -12,7 +12,7 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/travel-france',
       technologies: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'Expo'],
-      featured: true
+      featured: false
     },
     {
       title: 'Phone Intellect',
@@ -60,10 +60,10 @@ const Projects = () => {
     <section 
       id="projects" 
       className="py-24 px-6 relative overflow-hidden"
-      style={{ backgroundColor: '#0D1117' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Background */}
-      <div className="absolute inset-0" style={{ backgroundColor: '#0D1117' }} />
+      <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-primary)' }} />
       <div className="absolute inset-0 bg-[url('/dots.svg')] bg-center opacity-5" />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -77,20 +77,20 @@ const Projects = () => {
         >
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8"
-            style={{ color: '#C9D1D9' }}
+            style={{ color: 'var(--text-primary)' }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             Featured{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB]">
+            <span className="gradient-text">
               Projects
             </span>
           </motion.h2>
           <motion.p
             className="text-xl max-w-4xl mx-auto leading-relaxed"
-            style={{ color: '#8B949E' }}
+            style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -117,7 +117,7 @@ const Projects = () => {
               {project.featured && (
                 <div 
                   className="absolute top-4 left-4 z-20 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1"
-                  style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
                 >
                   <Star size={14} fill="currentColor" />
                   Featured
@@ -125,43 +125,29 @@ const Projects = () => {
               )}
 
               {/* Card Background Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
               
-              <div 
-                className="relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300"
-                style={{ 
-                  backgroundColor: '#161B22',
-                  borderColor: '#30363D'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#58A6FF'
-                  e.currentTarget.style.backgroundColor = '#1C2128'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#30363D'
-                  e.currentTarget.style.backgroundColor = '#161B22'
-                }}
-              >
+              <div className="relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 github-card">
                 {/* Project Image Placeholder */}
                 <div className="relative h-48 overflow-hidden">
                   <div 
                     className="absolute inset-0"
-                    style={{ background: 'linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(31, 111, 235, 0.1))' }}
+                    style={{ background: 'linear-gradient(135deg, rgba(31, 111, 235, 0.1), rgba(88, 166, 255, 0.1))' }}
                   />
                   <div 
                     className="w-full h-full flex items-center justify-center"
-                    style={{ backgroundColor: '#0D1117' }}
+                    style={{ backgroundColor: 'var(--bg-primary)' }}
                   >
                     <div className="text-center">
                       <div 
                         className="w-16 h-16 mx-auto mb-2 rounded-lg flex items-center justify-center"
-                        style={{ background: 'linear-gradient(135deg, #58A6FF, #1F6FEB)' }}
+                        style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
                       >
                         <span className="text-2xl font-bold text-white">
                           {project.title.charAt(0)}
                         </span>
                       </div>
-                      <p className="text-sm" style={{ color: '#8B949E' }}>Project Preview</p>
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Project Preview</p>
                     </div>
                   </div>
                   
@@ -174,16 +160,10 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
-                        className="p-3 backdrop-blur-sm rounded-full transition-all duration-200"
+                        className="p-3 backdrop-blur-sm rounded-full transition-all duration-200 hover:bg-[var(--accent-primary)] hover:bg-opacity-20"
                         style={{ 
-                          backgroundColor: 'rgba(22, 27, 34, 0.8)',
-                          color: '#C9D1D9'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(88, 166, 255, 0.2)'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(22, 27, 34, 0.8)'
+                          backgroundColor: 'var(--bg-secondary)',
+                          color: 'var(--text-primary)'
                         }}
                       >
                         <Github size={20} />
@@ -195,13 +175,13 @@ const Projects = () => {
                 {/* Project Content */}
                 <div className="p-6">
                   <h3 
-                    className="text-xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#58A6FF] group-hover:to-[#1F6FEB] transition-colors duration-200"
-                    style={{ color: '#C9D1D9' }}
+                    className="text-xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--accent-primary)] group-hover:to-[var(--accent-hover)] transition-colors duration-200"
+                    style={{ color: 'var(--text-primary)' }}
                   >
                     {project.title}
                   </h3>
                   
-                  <p className="mb-4 text-sm leading-relaxed line-clamp-3" style={{ color: '#8B949E' }}>
+                  <p className="mb-4 text-sm leading-relaxed line-clamp-3" style={{ color: 'var(--text-secondary)' }}>
                     {project.description}
                   </p>
 
@@ -212,9 +192,9 @@ const Projects = () => {
                         key={tech}
                         className="px-2 py-1 rounded-md text-xs border"
                         style={{ 
-                          backgroundColor: '#0D1117',
-                          borderColor: '#30363D',
-                          color: '#8B949E'
+                          backgroundColor: 'var(--bg-primary)',
+                          borderColor: 'var(--border-primary)',
+                          color: 'var(--text-secondary)'
                         }}
                       >
                         {tech}
@@ -230,22 +210,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium border"
-                      style={{ 
-                        backgroundColor: '#161B22',
-                        borderColor: '#30363D',
-                        color: '#C9D1D9'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#21262D'
-                        e.currentTarget.style.borderColor = '#58A6FF'
-                        e.currentTarget.style.color = '#58A6FF'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = '#161B22'
-                        e.currentTarget.style.borderColor = '#30363D'
-                        e.currentTarget.style.color = '#C9D1D9'
-                      }}
+                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium border github-btn"
                     >
                       <Github size={16} />
                       View Code
@@ -265,40 +230,17 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <motion.div
+          <motion.a
+            href="https://github.com/palakdesai4501"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block"
+            className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg border github-btn"
           >
-            <a
-              href="https://github.com/palakdesai4501"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg border"
-              style={{ 
-                backgroundColor: '#161B22',
-                borderColor: '#30363D',
-                color: '#C9D1D9'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#58A6FF'
-                e.currentTarget.style.backgroundColor = '#21262D'
-                e.currentTarget.style.color = '#58A6FF'
-                e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(88, 166, 255, 0.2)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#30363D'
-                e.currentTarget.style.backgroundColor = '#161B22'
-                e.currentTarget.style.color = '#C9D1D9'
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)'
-              }}
-            >
-              <Github size={20} />
-              View All Projects
-            </a>
-          </motion.div>
+            <Github size={20} />
+            View All Projects
+          </motion.a>
         </motion.div>
       </div>
     </section>
