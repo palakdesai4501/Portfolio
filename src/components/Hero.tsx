@@ -167,8 +167,8 @@ const Hero = () => {
           >
             {[
               { icon: Github, href: 'https://github.com/palakdesai4501', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://linkedin.com/in/palakdesai4501', label: 'LinkedIn' },
-              { icon: Mail, href: '#contact', label: 'Email' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/palak-desai4501/', label: 'LinkedIn' },
+              { icon: Mail, href: 'mailto:desai1j@uwindsor.ca', label: 'Email' },
             ].map((social, index) => (
               <motion.a
                 key={social.label}
