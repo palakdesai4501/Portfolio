@@ -94,7 +94,7 @@ const Contact = () => {
       icon: Github,
       label: 'GitHub',
       href: 'https://github.com/palakdesai4501',
-      color: 'var(--text-primary)'
+      color: 'var(--accent-primary)'
     },
     {
       icon: Linkedin,
@@ -312,7 +312,7 @@ const Contact = () => {
             className="space-y-8"
           >
             {/* 3D Scene */}
-            <div className="relative h-64 rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+            {/* <div className="relative h-64 rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
               <Canvas camera={{ position: [0, 0, 5] }}>
                 <ambientLight intensity={0.5} />
                 <pointLight position={[10, 10, 10]} />
@@ -320,7 +320,7 @@ const Contact = () => {
                   <AnimatedSphere theme={theme} />
                 </Suspense>
               </Canvas>
-            </div>
+            </div> */}
 
             {/* Contact Information */}
             <div className="space-y-4">

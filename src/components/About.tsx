@@ -84,7 +84,7 @@ const About = () => {
         </motion.div>
 
         {/* Main Content - Summary and Education */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
+        <div className="grid lg:grid-cols-2 gap-16 mb-24 items-center">
           {/* Personal Summary */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

@@ -10,7 +10,7 @@ const Experience = () => {
       role: 'Software Developer Co-op',
       duration: 'Jan 2025 – Apr 2025',
       location: 'Windsor, Canada',
-      description: 'Currently working on AI-driven desktop applications and optimizing React.js components. Leading development of innovative solutions using cutting-edge technologies and modern development practices.',
+      description: 'Worked on AI-driven desktop applications and optimized React.js components. Led development of innovative solutions using cutting-edge technologies and modern development practices.',
       technologies: ['Electron.js', 'React.js', 'TypeScript', 'NestJS', 'TanStack Query', 'OpenAI API', 'Deepgram', 'Jest', 'AWS', 'Pulumi']
     },
     {

@@ -12,7 +12,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/travel-france',
       technologies: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'Expo'],
-      featured: false
     },
     {
       title: 'Phone Intellect',
@@ -20,7 +19,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/MobilePlanPriceAnalysis',
       technologies: ['Java', 'Spring Boot', 'React', 'Selenium'],
-      featured: false
     },
     {
       title: 'OptiPrice',
@@ -28,7 +26,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/optiPrice',
       technologies: ['Angular', 'Python', 'Flask', 'MongoDB', 'Scikit-learn'],
-      featured: false
     },
     {
       title: 'EcoWave',
@@ -36,7 +33,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/EcoWave_Project',
       technologies: ['Python', 'Django', 'JavaScript', 'SQLite', 'Chart.js'],
-      featured: false
     },
     {
       title: 'Nestlé Chatbot',
@@ -44,7 +40,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/AI-Based-Chatbot',
       technologies: ['FastAPI', 'Python', 'Chroma DB', 'Neo4j', 'Vertex AI', 'OpenAI'],
-      featured: true
     },
     {
       title: 'ViewTube',
@@ -52,7 +47,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/ViewTube',
       technologies: ['React.js', 'Rapid API', 'Axios', 'Vite'],
-      featured: false
     }
   ]
 
@@ -113,16 +107,6 @@ const Projects = () => {
               viewport={{ once: true }}
               className="group relative"
             >
-              {/* Featured Badge */}
-              {project.featured && (
-                <div 
-                  className="absolute top-4 left-4 z-20 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1"
-                  style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
-                >
-                  <Star size={14} fill="currentColor" />
-                  Featured
-                </div>
-              )}
 
               {/* Card Background Effect */}
               <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
@@ -200,21 +184,6 @@ const Projects = () => {
                         {tech}
                       </span>
                     ))}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex space-x-3">
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium border github-btn"
-                    >
-                      <Github size={16} />
-                      View Code
-                    </motion.a>
                   </div>
                 </div>
               </div>
