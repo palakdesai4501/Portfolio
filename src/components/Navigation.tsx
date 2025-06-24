@@ -69,14 +69,15 @@ const Navigation = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.href)}
-                  className="transition-colors duration-200 font-medium px-3 py-2 rounded-lg relative group"
-                  style={{ color: '#8B949E' }}
+                  className="transition-colors duration-200 font-medium px-4 py-2 rounded-lg"
+                  style={{ color: '#8B949E', cursor: 'pointer' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = '#C9D1D9'
                     e.currentTarget.style.backgroundColor = '#161B22'
+                    e.currentTarget.style.cursor = 'pointer'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = '#8B949E'
@@ -84,10 +85,6 @@ const Navigation = () => {
                   }}
                 >
                   {item.name}
-                  {/* Hover underline effect */}
-                  <span 
-                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#58A6FF] to-[#1F6FEB] transition-all duration-300 group-hover:w-full"
-                  />
                 </motion.button>
               ))}
             </div>
@@ -101,11 +98,13 @@ const Navigation = () => {
               className="p-2 rounded-lg transition-colors duration-200"
               style={{ 
                 color: '#8B949E',
-                backgroundColor: isOpen ? '#161B22' : 'transparent' 
+                backgroundColor: isOpen ? '#161B22' : 'transparent',
+                cursor: 'pointer'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = '#C9D1D9'
                 e.currentTarget.style.backgroundColor = '#161B22'
+                e.currentTarget.style.cursor = 'pointer'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = '#8B949E'
@@ -139,10 +138,11 @@ const Navigation = () => {
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
                 className="block w-full text-left px-3 py-2 rounded-md transition-colors duration-200 font-medium"
-                style={{ color: '#8B949E' }}
+                style={{ color: '#8B949E', cursor: 'pointer' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = '#C9D1D9'
                   e.currentTarget.style.backgroundColor = '#161B22'
+                  e.currentTarget.style.cursor = 'pointer'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = '#8B949E'
