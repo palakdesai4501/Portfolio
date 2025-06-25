@@ -69,9 +69,9 @@ Fully optimized for desktop, tablet, and mobile with adaptive layouts and touch-
 
 ## 📞 Contact
 
-- **Email**: palak.desai@email.com
-- **LinkedIn**: [linkedin.com/in/palakdesai](https://linkedin.com/in/palakdesai)
-- **GitHub**: [github.com/palakdesai](https://github.com/palakdesai)
+- **Email**: desai1j@uwindsor.ca
+- **LinkedIn**: [linkedin.com/in/palakdesai](https://www.linkedin.com/in/palak-desai4501/)
+- **GitHub**: [github.com/palakdesai](https://github.com/palakdesai4501)
 
 ---
 
