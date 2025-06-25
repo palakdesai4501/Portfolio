@@ -5,6 +5,7 @@ import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import Chatbot from '@/components/Chatbot'
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Projects />
       <Contact />
       <Footer />
+      <Chatbot />
     </main>
   )
 }
