@@ -66,9 +66,9 @@ function FloatingText({ theme }: { theme: string }) {
 const Hero = () => {
   const { theme } = useTheme()
   
-  const scrollToAbout = () => {
+  const scrollToExperince = () => {
     if (typeof window !== 'undefined') {
-      const element = document.querySelector('#about')
+      const element = document.querySelector('#experience')
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
@@ -194,9 +194,9 @@ const Hero = () => {
 
           {/* Scroll Indicator */}
           <motion.button
-            onClick={scrollToAbout}
-            className="transition-all duration-300 focus:outline-none hover:text-[var(--text-primary)]"
-            style={{ color: 'var(--text-secondary)' }}
+            onClick={scrollToExperince}
+            className="cursor-pointer transition-all duration-300 focus:outline-none focus:ring-0 hover:text-[var(--text-primary)] border-none bg-transparent"
+            style={{ color: 'var(--text-secondary)', outline: 'none', border: 'none' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
