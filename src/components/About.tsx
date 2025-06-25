@@ -136,7 +136,7 @@ const About = () => {
   return (
     <section
       id='about'
-      className='py-24 px-6 relative overflow-hidden'
+      className='py-16 px-6 relative overflow-hidden'
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Background Elements */}
@@ -330,7 +330,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className='mb-20'
+          className='mb-20 mt-48'
         >
           <div className='text-center mb-16'>
             <h3
