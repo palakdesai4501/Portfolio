@@ -452,14 +452,14 @@ const About = () => {
           </div>
 
           {/* Skills Layout with Chart in Center */}
-          <div className='relative w-full h-[1000px] lg:h-[1100px] max-w-7xl mx-auto'>
-            {/* Central Radar Chart */}
+          <div className='relative w-full min-h-[1000px] lg:h-[1100px] max-w-7xl mx-auto'>
+            {/* Central Radar Chart - Desktop Only */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2 }}
               viewport={{ once: true }}
-              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 lg:w-96 lg:h-96'
+              className='hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 lg:w-96 lg:h-96'
             >
               <Radar data={skillsData} options={chartOptions} />
             </motion.div>
@@ -544,16 +544,29 @@ const About = () => {
               </motion.div>
             </div>
 
-            {/* Mobile/Tablet Grid Layout */}
-            <div className='lg:hidden absolute inset-0 flex flex-col justify-center'>
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto px-4'>
+            {/* Mobile/Tablet Layout */}
+            <div className='lg:hidden flex flex-col items-center'>
+              {/* Chart First on Mobile */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                viewport={{ once: true }}
+                className='w-80 h-80 sm:w-96 sm:h-96 mb-8'
+              >
+                <Radar data={skillsData} options={chartOptions} />
+              </motion.div>
+
+              {/* Skill Cards Grid Below Chart */}
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto px-4'>
                 {skillCategories.map((category, index) => (
                   <motion.div
                     key={category.category}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                     viewport={{ once: true }}
+                    className='flex justify-center'
                   >
                     <SkillCard category={category} theme={theme} />
                   </motion.div>
