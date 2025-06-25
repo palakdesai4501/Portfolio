@@ -51,8 +51,12 @@ const Navigation = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className='text-2xl font-bold cursor-pointer'
-            style={{ color: 'var(--text-primary)' }}
+            className='w-12 h-12 rounded-md flex items-center justify-center text-xl font-bold cursor-pointer backdrop-blur-sm transition-all duration-300'
+            style={{ 
+              backgroundColor: 'var(--bg-secondary)',
+              border: '3px solid #1F6FEB',
+              color: 'var(--text-primary)'
+            }}
             onClick={() => scrollToSection('#home')}
           >
             <span className='gradient-text'>PD</span>
