@@ -26,20 +26,21 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>('light')
-  const [isHydrated, setIsHydrated] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
-  // Always initialize with light theme - ignore localStorage
+  // Set mounted to true after component mounts (client-side only)
   useEffect(() => {
-    setThemeState('light')
-    setIsHydrated(true)
+    setMounted(true)
+    // Set the initial theme attribute
+    document.documentElement.setAttribute('data-theme', 'light')
   }, [])
 
-  // Update document when theme changes (but don't save to localStorage)
+  // Update document when theme changes
   useEffect(() => {
-    if (isHydrated) {
+    if (mounted) {
       document.documentElement.setAttribute('data-theme', theme)
     }
-  }, [theme, isHydrated])
+  }, [theme, mounted])
 
   const toggleTheme = () => {
     setThemeState((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
@@ -49,18 +50,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setThemeState(newTheme)
   }
 
-  // Prevent hydration mismatch by not rendering until theme is determined
-  if (!isHydrated) {
-    return (
-      <div
-        className='flex items-center justify-center min-h-screen'
-        style={{ backgroundColor: '#F5F7FA' }}
-      >
-        <div className='spinner w-8 h-8'></div>
-      </div>
-    )
-  }
-
+  // Always render the same content on server and client to avoid hydration mismatch
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}

@@ -3,7 +3,11 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './context/ThemeContext'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Palak Desai',
@@ -16,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
+    <html lang='en' className={inter.variable}>
+      <body className="font-inter" suppressHydrationWarning={true}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

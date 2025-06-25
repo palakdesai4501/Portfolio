@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useRef, useMemo } from 'react'
+import { Suspense, useRef, useMemo, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import { motion } from 'framer-motion'
@@ -61,6 +61,11 @@ function Stars({ theme, ...props }: { theme: string; [key: string]: any }) {
 
 const Hero = () => {
   const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const scrollToExperince = () => {
     if (typeof window !== 'undefined') {
@@ -226,41 +231,39 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Floating Elements with theme support */}
-      <div className='absolute inset-0 pointer-events-none'>
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className='absolute w-2 h-2 rounded-full'
-            style={{ backgroundColor: 'var(--accent-primary)', opacity: 0.6 }}
-            initial={{
-              x:
-                typeof window !== 'undefined'
-                  ? Math.random() * window.innerWidth
-                  : Math.random() * 1000,
-              y:
-                typeof window !== 'undefined'
-                  ? Math.random() * window.innerHeight
-                  : Math.random() * 1000,
-            }}
-            animate={{
-              x:
-                typeof window !== 'undefined'
-                  ? Math.random() * window.innerWidth
-                  : Math.random() * 1000,
-              y:
-                typeof window !== 'undefined'
-                  ? Math.random() * window.innerHeight
-                  : Math.random() * 1000,
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating Elements with theme support - only render after mount */}
+      {mounted && (
+        <div className='absolute inset-0 pointer-events-none'>
+          {[...Array(6)].map((_, i) => {
+            const initialX = Math.random() * window.innerWidth
+            const initialY = Math.random() * window.innerHeight
+            const animateX = Math.random() * window.innerWidth
+            const animateY = Math.random() * window.innerHeight
+            const duration = 20 + Math.random() * 10
+            
+            return (
+              <motion.div
+                key={i}
+                className='absolute w-2 h-2 rounded-full'
+                style={{ backgroundColor: 'var(--accent-primary)', opacity: 0.6 }}
+                initial={{
+                  x: initialX,
+                  y: initialY,
+                }}
+                animate={{
+                  x: animateX,
+                  y: animateY,
+                }}
+                transition={{
+                  duration,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              />
+            )
+          })}
+        </div>
+      )}
 
       {/* Additional background decorative elements with theme support */}
       <div

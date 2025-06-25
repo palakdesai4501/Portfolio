@@ -38,7 +38,7 @@ const Chatbot = () => {
     if (!inputValue.trim() || isLoading) return
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       text: inputValue,
       isUser: true,
       timestamp: new Date(),
@@ -64,7 +64,7 @@ const Chatbot = () => {
 
       if (response.ok) {
         const botMessage: Message = {
-          id: (Date.now() + 1).toString(),
+          id: `bot-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           text: data.response,
           isUser: false,
           timestamp: new Date(),
@@ -75,7 +75,7 @@ const Chatbot = () => {
       }
     } catch {
       const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         text: 'Sorry, I encountered an error. Please try again later.',
         isUser: false,
         timestamp: new Date(),
