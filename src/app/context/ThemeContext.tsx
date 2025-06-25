@@ -25,29 +25,24 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>('dark');
+  const [theme, setThemeState] = useState<Theme>('light');
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Initialize theme from localStorage or system preference
+  // Always initialize with light theme - ignore localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const initialTheme = savedTheme || systemTheme;
-    
-    setThemeState(initialTheme);
+    setThemeState('light');
     setIsHydrated(true);
   }, []);
 
-  // Update document and localStorage when theme changes
+  // Update document when theme changes (but don't save to localStorage)
   useEffect(() => {
     if (isHydrated) {
       document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
     }
   }, [theme, isHydrated]);
 
   const toggleTheme = () => {
-    setThemeState(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    setThemeState(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
   const setTheme = (newTheme: Theme) => {
@@ -57,7 +52,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Prevent hydration mismatch by not rendering until theme is determined
   if (!isHydrated) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900">
+      <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: '#F5F7FA' }}>
         <div className="spinner w-8 h-8"></div>
       </div>
     );

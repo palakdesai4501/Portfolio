@@ -10,8 +10,8 @@ const ThemeToggle: React.FC = () => {
     <button
       onClick={toggleTheme}
       className="theme-toggle relative overflow-hidden"
-      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-      title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
     >
       <div className="relative w-6 h-6">
         {/* Sun Icon */}

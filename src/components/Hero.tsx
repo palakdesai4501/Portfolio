@@ -39,7 +39,7 @@ function Stars({ theme, ...props }: any) {
 
 // Floating 3D Text with theme support
 function FloatingText({ theme }: { theme: string }) {
-  const textRef = useRef<any>()
+  const textRef = useRef<any>(null)
   const textColor = theme === 'light' ? '#24292E' : '#C9D1D9'
 
   useFrame((state) => {
