@@ -10,8 +10,8 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <Navigation />
       <Hero />
-      <About />
       <Experience />
+      <About />
       <Projects />
       <Contact />
     </main>
