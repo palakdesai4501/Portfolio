@@ -3,12 +3,126 @@
 import { motion } from 'framer-motion'
 import { Code, Database, Cloud, TestTube, GraduationCap, MapPin, Calendar } from 'lucide-react'
 import { useTheme } from '../app/context/ThemeContext'
+import { Radar } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from 'chart.js'
+
+// Register Chart.js components
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+)
 
 const About = () => {
   const { theme } = useTheme()
   
   // Theme-aware particle colors
   const getParticleColor = () => theme === 'light' ? '#1F6FEB' : '#58A6FF'
+  
+  // Technical skills radar chart data
+  const skillsData = {
+    labels: [
+      'JavaScript',
+      'TypeScript',
+      'Java',
+      'C',
+      'Python',
+      'SQL',
+      'HTML5',
+      'CSS3/Tailwind CSS',
+      'Spring Boot',
+      'React.js',
+      'React Native',
+      'Angular',
+      'Node.js',
+      'NestJS',
+      'Flask',
+      'MongoDB/MySQL/PostgreSQL',
+      'Selenium/JUnit/Jest/Postman',
+      'Docker/Kubernetes/AWS',
+      'Git/CI-CD/Agile/Design Patterns'
+    ],
+    datasets: [
+      {
+        label: 'Technical Proficiency',
+        data: [90, 80, 70, 60, 70, 85, 95, 95, 75, 95, 75, 50, 90, 65, 60, 85, 75, 70, 70],
+        backgroundColor: theme === 'light' ? 'rgba(31, 111, 235, 0.15)' : 'rgba(88, 166, 255, 0.15)',
+        borderColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+        borderWidth: 3,
+        pointBackgroundColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 6,
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+        pointHoverRadius: 8,
+      },
+    ],
+  }
+
+  const chartOptions: any = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: theme === 'light' ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+        titleColor: theme === 'light' ? '#fff' : '#000',
+        bodyColor: theme === 'light' ? '#fff' : '#000',
+        borderColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+        borderWidth: 2,
+        padding: 12,
+        titleFont: { size: 14, weight: 'bold' },
+        bodyFont: { size: 13 },
+        callbacks: {
+          title: function(context: any) {
+            return context[0].label
+          },
+          label: function(context: any) {
+            return `Proficiency: ${context.parsed.r}%`
+          }
+        }
+      }
+    },
+    scales: {
+      r: {
+        angleLines: { 
+          color: theme === 'light' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+          lineWidth: 1
+        },
+        grid: { 
+          color: theme === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+          lineWidth: 1
+        },
+        pointLabels: {
+          color: theme === 'light' ? '#24292E' : '#C9D1D9',
+          font: { size: 13, weight: 600 },
+          padding: 20
+        },
+        ticks: { 
+          display: true,
+          stepSize: 25,
+          color: theme === 'light' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.4)',
+          font: { size: 10 },
+          backdropColor: 'transparent'
+        },
+        suggestedMin: 0,
+        suggestedMax: 100,
+      },
+    },
+  }
+
   const skills = [
     {
       icon: Code,
@@ -42,15 +156,13 @@ const About = () => {
       specialization: 'Artificial Intelligence Stream',
       university: 'University of Windsor',
       period: 'Jan 2024 - Apr 2025',
-      location: 'Windsor, Canada',
-      isOngoing: false
+      location: 'Windsor, Canada'
     },
     {
       degree: 'Bachelor of Computer Science and Engineering',
       university: 'Gujarat Technological University',
       period: 'Jul 2019 - Jun 2023',
-      location: 'Gujarat, India',
-      isOngoing: false
+      location: 'Gujarat, India'
     }
   ]
 
@@ -66,7 +178,6 @@ const About = () => {
       
       {/* Enhanced floating particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Large particles */}
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={`large-${i}`}
@@ -77,76 +188,12 @@ const About = () => {
               backgroundColor: getParticleColor(), 
               opacity: 0.15
             }}
-            initial={{
-              x: `${15 + i * 35}vw`,
-              y: `${20 + i * 25}vh`,
-            }}
+            initial={{ x: `${15 + i * 35}vw`, y: `${20 + i * 25}vh` }}
             animate={{
               x: [`${15 + i * 35}vw`, `${25 + i * 35}vw`, `${15 + i * 35}vw`],
-              y: [`${20 + i * 25}vh`, `${30 + i * 25}vh`, `${20 + i * 25}vh`],
+              y: [`${20 + i * 25}vh`, `${30 + i * 25}vh`, `${20 + i * 25}vh`]
             }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 1
-            }}
-          />
-        ))}
-        
-        {/* Medium particles */}
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={`medium-${i}`}
-            className="absolute rounded-full"
-            style={{ 
-              width: '6px',
-              height: '6px',
-              backgroundColor: getParticleColor(), 
-              opacity: 0.25
-            }}
-            initial={{
-              x: `${25 + i * 20}vw`,
-              y: `${35 + i * 15}vh`,
-            }}
-            animate={{
-              x: [`${25 + i * 20}vw`, `${35 + i * 20}vw`, `${25 + i * 20}vw`],
-              y: [`${35 + i * 15}vh`, `${25 + i * 15}vh`, `${35 + i * 15}vh`],
-            }}
-            transition={{
-              duration: 6 + i * 1.5,
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 0.7
-            }}
-          />
-        ))}
-        
-        {/* Small particles */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={`small-${i}`}
-            className="absolute rounded-full"
-            style={{ 
-              width: '3px',
-              height: '3px',
-              backgroundColor: getParticleColor(), 
-              opacity: 0.4
-            }}
-            initial={{
-              x: `${10 + i * 15}vw`,
-              y: `${45 + (i % 3) * 10}vh`,
-            }}
-            animate={{
-              x: [`${10 + i * 15}vw`, `${20 + i * 15}vw`, `${10 + i * 15}vw`],
-              y: [`${45 + (i % 3) * 10}vh`, `${55 + (i % 3) * 10}vh`, `${45 + (i % 3) * 10}vh`],
-            }}
-            transition={{
-              duration: 4 + i * 0.8,
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 0.5
-            }}
+            transition={{ duration: 8 + i * 2, repeat: Infinity, ease: "linear", delay: i * 1 }}
           />
         ))}
       </div>
@@ -168,10 +215,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            About{' '}
-            <span className="gradient-text">
-              Me
-            </span>
+            About <span className="gradient-text">Me</span>
           </motion.h2>
         </motion.div>
 
@@ -202,22 +246,13 @@ const About = () => {
                 viewport={{ once: true }}
                 className="group h-full"
               >
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  className="relative h-full"
-                >
-                  {/* Gradient Background */}
+                <motion.div whileHover={{ y: -8 }} className="relative h-full">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-3xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                   
-                  {/* Main Card */}
                   <div className="relative backdrop-blur-sm border rounded-3xl p-8 h-full transition-all duration-300 overflow-hidden" style={{ 
                     backgroundColor: 'var(--bg-secondary)',
                     borderColor: 'var(--border-primary)'
                   }}>
-                    {/* Decorative Element */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--accent-primary)] to-transparent opacity-5 rounded-full -translate-y-16 translate-x-16" />
-                    
-                    {/* Header with Icon and Badge */}
                     <div className="flex items-start justify-between mb-6">
                       <div 
                         className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg shrink-0"
@@ -226,7 +261,6 @@ const About = () => {
                         <GraduationCap size={20} className="text-white" />
                       </div>
                       
-                      {/* Level Badge */}
                       <div 
                         className="px-3 py-1 rounded-full text-xs font-medium border"
                         style={{ 
@@ -239,7 +273,6 @@ const About = () => {
                       </div>
                     </div>
 
-                    {/* Content */}
                     <div className="space-y-4">
                       <div>
                         <h4 className="text-xl font-bold leading-tight mb-2" style={{ color: 'var(--text-primary)' }}>
@@ -248,23 +281,17 @@ const About = () => {
                         {edu.specialization && (
                           <div 
                             className="inline-block px-3 py-1 rounded-lg text-sm font-medium mb-3"
-                            style={{ 
-                              backgroundColor: 'var(--accent-primary)', 
-                              color: 'white'
-                            }}
+                            style={{ backgroundColor: 'var(--accent-primary)', color: 'white' }}
                           >
                             {edu.specialization}
                           </div>
                         )}
                       </div>
                       
-                      <div>
-                        <p className="text-lg font-semibold mb-3 " style={{ color: 'var(--text-secondary)' }}>
-                          {edu.university}
-                        </p>
-                      </div>
+                      <p className="text-lg font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>
+                        {edu.university}
+                      </p>
                       
-                      {/* Info Grid */}
                       <div className="space-y-4 pt-4 border-t" style={{ borderColor: 'var(--border-primary)' }}>
                         <div className="flex items-center space-x-3">
                           <div 
@@ -298,7 +325,7 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Technical Skills Grid */}
+        {/* Technical Skills Radar Chart */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -311,88 +338,25 @@ const About = () => {
               Technical Expertise
             </h3>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-              A comprehensive toolkit for building modern applications
+              Interactive visualization of my technical skills and proficiency levels
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                viewport={{ once: true }}
-                className="group relative"
-              >
-                {/* Card Background */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
-                
-                <div className="relative backdrop-blur-sm border rounded-2xl p-8 h-full transition-all duration-300 github-card">
-                  <div 
-                    className="mb-6 p-4 rounded-2xl w-fit"
-                    style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
-                  >
-                    <skill.icon size={28} className="text-white" />
-                  </div>
-                  
-                  <h4 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
-                    {skill.title}
-                  </h4>
-                  <p className="mb-6 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {skill.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {skill.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 rounded-lg text-xs transition-all duration-200 cursor-pointer border hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-primary)]"
-                        style={{ 
-                          backgroundColor: 'var(--bg-primary)',
-                          color: 'var(--text-secondary)',
-                          borderColor: 'var(--border-primary)'
-                        }}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {/* Large Comprehensive Radar Chart */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative max-w-4xl mx-auto"
+          >
+            <div className="h-[600px] w-full">
+              <Radar data={skillsData} options={chartOptions} />
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Additional Technical Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h4 className="text-2xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-            Additional Technologies
-          </h4>
-          <div className="flex flex-wrap justify-center gap-4">
-            {['C', 'SQL', 'HTML5', 'CSS3', 'React Native', 'Flask', 'REST APIs', 'JSON', 'Design Patterns', 'OOP'].map((tech) => (
-              <motion.span
-                key={tech}
-                whileHover={{ scale: 1.1 }}
-                className="px-6 py-3 rounded-full text-sm transition-all duration-200 cursor-pointer border hover:border-[var(--accent-primary)] hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)]"
-                style={{ 
-                  backgroundColor: 'var(--bg-secondary)',
-                  borderColor: 'var(--border-primary)',
-                  color: 'var(--accent-primary)'
-                }}
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
+
       </div>
     </section>
   )

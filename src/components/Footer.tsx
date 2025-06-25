@@ -69,19 +69,7 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Copyright */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="pt-4 border-t"
-            style={{ borderColor: 'var(--border-primary)' }}
-          >
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-              © {currentYear} Palak Desai. All rights reserved.
-            </p>
-          </motion.div>
+          
         </div>
       </div>
     </footer>

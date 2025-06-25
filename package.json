@@ -13,11 +13,13 @@
     "@react-three/drei": "^10.3.0",
     "@react-three/fiber": "^9.1.2",
     "@types/three": "^0.177.0",
+    "chart.js": "^4.5.0",
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.522.0",
     "maath": "^0.10.8",
     "next": "15.3.4",
     "react": "^19.0.0",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
     "three": "^0.177.0"
   },
