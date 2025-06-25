@@ -17,39 +17,138 @@ import {
 // Register Chart.js components
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
+// Skill Card Component
+const SkillCard = ({ category, theme }: { category: any; theme: string }) => (
+  <motion.div 
+    whileHover={{ y: -5, scale: 1.02 }}
+    className='relative backdrop-blur-sm border rounded-xl p-4 w-56 shadow-lg transition-all duration-300'
+    style={{
+      backgroundColor: 'var(--bg-secondary)',
+      borderColor: 'var(--border-primary)',
+    }}
+  >
+    {/* Header */}
+    <div className='flex items-center justify-between mb-3'>
+      <div
+        className='w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md'
+        style={{ backgroundColor: category.color }}
+      >
+        {category.category.charAt(0)}
+      </div>
+      <div
+        className='px-2 py-1 rounded-full text-xs font-bold'
+        style={{ 
+          backgroundColor: `${category.color}15`,
+          color: category.color 
+        }}
+      >
+        {category.percentage}%
+      </div>
+    </div>
+
+    {/* Title */}
+    <h4
+      className='text-base font-bold mb-2'
+      style={{ color: 'var(--text-primary)' }}
+    >
+      {category.category}
+    </h4>
+
+    {/* Progress Bar */}
+    <div className='mb-3'>
+      <div 
+        className='w-full rounded-full h-1.5'
+        style={{ backgroundColor: 'var(--bg-tertiary)' }}
+      >
+        <motion.div
+          className='h-1.5 rounded-full'
+          style={{ backgroundColor: category.color }}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${category.percentage}%` }}
+          transition={{ duration: 1.2, delay: 0.5 }}
+          viewport={{ once: true }}
+        />
+      </div>
+    </div>
+
+    {/* Skills List - Display ALL skills */}
+    <div className='flex flex-wrap gap-1.5'>
+      {category.skills.map((skill: string) => (
+        <span
+          key={skill}
+          className='px-2 py-1 rounded-md text-xs font-medium border'
+          style={{
+            backgroundColor: 'var(--bg-primary)',
+            borderColor: 'var(--border-primary)',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
+  </motion.div>
+)
+
 const About = () => {
   const { theme } = useTheme()
 
   // Theme-aware particle colors
   const getParticleColor = () => (theme === 'light' ? '#1F6FEB' : '#58A6FF')
 
-  // Technical skills radar chart data
+  // Skill categories with individual skills
+  const skillCategories = [
+    {
+      category: 'Languages',
+      percentage: 85,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['JavaScript', 'TypeScript', 'Java', 'Python', 'C'],
+    },
+    {
+      category: 'Frameworks',
+      percentage: 90,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['React.js', 'Angular', 'Node.js', 'Spring Boot', 'NestJS', 'Flask'],
+    },
+    {
+      category: 'Databases',
+      percentage: 80,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL'],
+    },
+    {
+      category: 'Testing',
+      percentage: 75,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['JUnit', 'Jest', 'Selenium', 'Postman'],
+    },
+    {
+      category: 'DevOps & Cloud',
+      percentage: 70,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
+    },
+    {
+      category: 'AI Tools',
+      percentage: 90,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['ChatGPT', 'Claude', 'Gemini', 'Cursor', 'Perplexity'],
+    },
+    {
+      category: 'Others',
+      percentage: 85,
+      color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
+      skills: ['Git', 'HTML5', 'CSS3', 'Tailwind CSS', 'Design Patterns', 'Agile'],
+    },
+  ]
+
+  // Radar chart data for skill categories
   const skillsData = {
-    labels: [
-      'JavaScript',
-      'TypeScript',
-      'Java',
-      'C',
-      'Python',
-      'SQL',
-      'HTML5',
-      'CSS3/Tailwind CSS',
-      'Spring Boot',
-      'React.js',
-      'React Native',
-      'Angular',
-      'Node.js',
-      'NestJS',
-      'Flask',
-      'MongoDB/MySQL/PostgreSQL',
-      'Selenium/JUnit/Jest/Postman',
-      'Docker/Kubernetes/AWS',
-      'Git/CI-CD/Agile/Design Patterns',
-    ],
+    labels: skillCategories.map(cat => cat.category),
     datasets: [
       {
         label: 'Technical Proficiency',
-        data: [90, 80, 70, 60, 70, 85, 95, 95, 75, 95, 75, 50, 90, 65, 60, 85, 75, 70, 70],
+        data: skillCategories.map(cat => cat.percentage),
         backgroundColor:
           theme === 'light' ? 'rgba(31, 111, 235, 0.15)' : 'rgba(88, 166, 255, 0.15)',
         borderColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
@@ -67,7 +166,15 @@ const About = () => {
 
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
+    layout: {
+      padding: {
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+      },
+    },
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -92,23 +199,23 @@ const About = () => {
     scales: {
       r: {
         angleLines: {
-          color: theme === 'light' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+          color: theme === 'light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)',
           lineWidth: 1,
         },
         grid: {
-          color: theme === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+          color: theme === 'light' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)',
           lineWidth: 1,
         },
         pointLabels: {
           color: theme === 'light' ? '#24292E' : '#C9D1D9',
-          font: { size: 13, weight: 600 },
-          padding: 20,
+          font: { size: 10, weight: 600 },
+          padding: 15,
         },
         ticks: {
           display: true,
           stepSize: 25,
-          color: theme === 'light' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.4)',
-          font: { size: 10 },
+          color: theme === 'light' ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.3)',
+          font: { size: 8 },
           backdropColor: 'transparent',
         },
         suggestedMin: 0,
@@ -324,7 +431,7 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Technical Skills Radar Chart */}
+        {/* Technical Skills Section */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -340,22 +447,120 @@ const About = () => {
               Technical Expertise
             </h3>
             <p className='text-lg max-w-2xl mx-auto' style={{ color: 'var(--text-secondary)' }}>
-              Interactive visualization of my technical skills and proficiency levels
+              Comprehensive overview of my technical skills across different technology areas
             </p>
           </div>
 
-          {/* Large Comprehensive Radar Chart */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-            className='relative max-w-4xl mx-auto'
-          >
-            <div className='h-[600px] w-full'>
+          {/* Skills Layout with Chart in Center */}
+          <div className='relative w-full h-[1000px] lg:h-[1100px] max-w-7xl mx-auto'>
+            {/* Central Radar Chart */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              viewport={{ once: true }}
+              className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 lg:w-96 lg:h-96'
+            >
               <Radar data={skillsData} options={chartOptions} />
+            </motion.div>
+
+            {/* Skill Cards Positioned Around Chart in All Directions (Desktop) */}
+            <div className='hidden lg:block absolute inset-0'>
+              {/* Top - Languages */}
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className='absolute top-4 left-1/2 transform -translate-x-1/2'
+              >
+                <SkillCard category={skillCategories[0]} theme={theme} />
+              </motion.div>
+
+              {/* Top Right - Frameworks */}
+              <motion.div
+                initial={{ opacity: 0, x: 50, y: -50 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className='absolute top-16 right-4'
+              >
+                <SkillCard category={skillCategories[1]} theme={theme} />
+              </motion.div>
+
+              {/* Right - Databases */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+                className='absolute top-1/2 right-4 transform -translate-y-1/2'
+              >
+                <SkillCard category={skillCategories[2]} theme={theme} />
+              </motion.div>
+
+              {/* Bottom Right - Testing */}
+              <motion.div
+                initial={{ opacity: 0, x: 50, y: 50 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+                className='absolute bottom-16 right-4'
+              >
+                <SkillCard category={skillCategories[3]} theme={theme} />
+              </motion.div>
+
+              {/* Bottom - DevOps & Cloud */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                viewport={{ once: true }}
+                className='absolute bottom-4 left-1/2 transform -translate-x-1/2'
+              >
+                <SkillCard category={skillCategories[4]} theme={theme} />
+              </motion.div>
+
+              {/* Left - AI Tools */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                viewport={{ once: true }}
+                className='absolute top-1/2 left-4 transform -translate-y-1/2'
+              >
+                <SkillCard category={skillCategories[5]} theme={theme} />
+              </motion.div>
+
+              {/* Bottom Left - Others */}
+              <motion.div
+                initial={{ opacity: 0, x: -50, y: 50 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                viewport={{ once: true }}
+                className='absolute bottom-16 left-4'
+              >
+                <SkillCard category={skillCategories[6]} theme={theme} />
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Mobile/Tablet Grid Layout */}
+            <div className='lg:hidden absolute inset-0 flex flex-col justify-center'>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto px-4'>
+                {skillCategories.map((category, index) => (
+                  <motion.div
+                    key={category.category}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <SkillCard category={category} theme={theme} />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
