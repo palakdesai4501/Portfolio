@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial, Text } from '@react-three/drei'
 import { motion } from 'framer-motion'
@@ -11,12 +11,31 @@ import { useTheme } from '../app/context/ThemeContext'
 // 3D Particle Field Component with theme support
 function Stars({ theme, ...props }: any) {
   const ref = useRef<any>(null)
-  const sphere = inSphere(new Float32Array(5000), { radius: 1.5 })
+  
+  // Create sphere with better error handling
+  const sphere = useMemo(() => {
+    const positions = new Float32Array(5000 * 3)
+    try {
+      return inSphere(positions, { radius: 1.5 })
+    } catch (error) {
+      // Fallback: create a simple random distribution
+      for (let i = 0; i < positions.length; i += 3) {
+        const radius = Math.random() * 1.5
+        const theta = Math.random() * Math.PI * 2
+        const phi = Math.acos(2 * Math.random() - 1)
+        
+        positions[i] = radius * Math.sin(phi) * Math.cos(theta)
+        positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta)
+        positions[i + 2] = radius * Math.cos(phi)
+      }
+      return positions
+    }
+  }, [])
 
   const particleColor = theme === 'light' ? '#1F6FEB' : '#58A6FF'
 
   useFrame((state, delta) => {
-    if (ref.current) {
+    if (ref.current && !isNaN(delta)) {
       ref.current.rotation.x -= delta / 10
       ref.current.rotation.y -= delta / 15
     }
