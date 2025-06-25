@@ -6,6 +6,9 @@ import { useTheme } from '../app/context/ThemeContext'
 
 const Contact = () => {
   const { theme } = useTheme()
+  
+  // Theme-aware particle colors
+  const getParticleColor = () => theme === 'light' ? '#1F6FEB' : '#58A6FF'
 
   const contactInfo = [
     {
@@ -25,10 +28,101 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="py-24 px-6"
+      className="py-24 px-6 relative overflow-hidden"
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
-      <div className="max-w-4xl mx-auto">
+      {/* Background */}
+      <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-primary)' }} />
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5" />
+      
+      {/* Enhanced floating particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Large particles */}
+        {[...Array(2)].map((_, i) => (
+          <motion.div
+            key={`large-${i}`}
+            className="absolute rounded-full"
+            style={{ 
+              width: '8px',
+              height: '8px',
+              backgroundColor: getParticleColor(), 
+              opacity: 0.2
+            }}
+            initial={{
+              x: `${20 + i * 55}vw`,
+              y: `${25 + i * 35}vh`,
+            }}
+            animate={{
+              x: [`${20 + i * 55}vw`, `${30 + i * 55}vw`, `${20 + i * 55}vw`],
+              y: [`${25 + i * 35}vh`, `${35 + i * 35}vh`, `${25 + i * 35}vh`],
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 1.3
+            }}
+          />
+        ))}
+        
+        {/* Medium particles */}
+        {[...Array(2)].map((_, i) => (
+          <motion.div
+            key={`medium-${i}`}
+            className="absolute rounded-full"
+            style={{ 
+              width: '5px',
+              height: '5px',
+              backgroundColor: getParticleColor(), 
+              opacity: 0.3
+            }}
+            initial={{
+              x: `${35 + i * 30}vw`,
+              y: `${45 + i * 20}vh`,
+            }}
+            animate={{
+              x: [`${35 + i * 30}vw`, `${45 + i * 30}vw`, `${35 + i * 30}vw`],
+              y: [`${45 + i * 20}vh`, `${55 + i * 20}vh`, `${45 + i * 20}vh`],
+            }}
+            transition={{
+              duration: 6 + i * 1.5,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.8
+            }}
+          />
+        ))}
+        
+        {/* Small particles */}
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={`small-${i}`}
+            className="absolute rounded-full"
+            style={{ 
+              width: '3px',
+              height: '3px',
+              backgroundColor: getParticleColor(), 
+              opacity: 0.5
+            }}
+            initial={{
+              x: `${25 + i * 25}vw`,
+              y: `${55 + i * 15}vh`,
+            }}
+            animate={{
+              x: [`${25 + i * 25}vw`, `${35 + i * 25}vw`, `${25 + i * 25}vw`],
+              y: [`${55 + i * 15}vh`, `${65 + i * 15}vh`, `${55 + i * 15}vh`],
+            }}
+            transition={{
+              duration: 5 + i * 0.8,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.5
+            }}
+          />
+        ))}
+      </div>
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}

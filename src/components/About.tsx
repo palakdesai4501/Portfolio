@@ -2,8 +2,13 @@
 
 import { motion } from 'framer-motion'
 import { Code, Database, Cloud, TestTube, GraduationCap, MapPin, Calendar } from 'lucide-react'
+import { useTheme } from '../app/context/ThemeContext'
 
 const About = () => {
+  const { theme } = useTheme()
+  
+  // Theme-aware particle colors
+  const getParticleColor = () => theme === 'light' ? '#1F6FEB' : '#58A6FF'
   const skills = [
     {
       icon: Code,
@@ -58,6 +63,93 @@ const About = () => {
       {/* Background Elements */}
       <div className="absolute inset-0" style={{ backgroundColor: 'var(--bg-primary)' }} />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5" />
+      
+      {/* Enhanced floating particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Large particles */}
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={`large-${i}`}
+            className="absolute rounded-full"
+            style={{ 
+              width: '12px',
+              height: '12px',
+              backgroundColor: getParticleColor(), 
+              opacity: 0.15
+            }}
+            initial={{
+              x: `${15 + i * 35}vw`,
+              y: `${20 + i * 25}vh`,
+            }}
+            animate={{
+              x: [`${15 + i * 35}vw`, `${25 + i * 35}vw`, `${15 + i * 35}vw`],
+              y: [`${20 + i * 25}vh`, `${30 + i * 25}vh`, `${20 + i * 25}vh`],
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 1
+            }}
+          />
+        ))}
+        
+        {/* Medium particles */}
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={`medium-${i}`}
+            className="absolute rounded-full"
+            style={{ 
+              width: '6px',
+              height: '6px',
+              backgroundColor: getParticleColor(), 
+              opacity: 0.25
+            }}
+            initial={{
+              x: `${25 + i * 20}vw`,
+              y: `${35 + i * 15}vh`,
+            }}
+            animate={{
+              x: [`${25 + i * 20}vw`, `${35 + i * 20}vw`, `${25 + i * 20}vw`],
+              y: [`${35 + i * 15}vh`, `${25 + i * 15}vh`, `${35 + i * 15}vh`],
+            }}
+            transition={{
+              duration: 6 + i * 1.5,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.7
+            }}
+          />
+        ))}
+        
+        {/* Small particles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`small-${i}`}
+            className="absolute rounded-full"
+            style={{ 
+              width: '3px',
+              height: '3px',
+              backgroundColor: getParticleColor(), 
+              opacity: 0.4
+            }}
+            initial={{
+              x: `${10 + i * 15}vw`,
+              y: `${45 + (i % 3) * 10}vh`,
+            }}
+            animate={{
+              x: [`${10 + i * 15}vw`, `${20 + i * 15}vw`, `${10 + i * 15}vw`],
+              y: [`${45 + (i % 3) * 10}vh`, `${55 + (i % 3) * 10}vh`, `${45 + (i % 3) * 10}vh`],
+            }}
+            transition={{
+              duration: 4 + i * 0.8,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.5
+            }}
+          />
+        ))}
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
