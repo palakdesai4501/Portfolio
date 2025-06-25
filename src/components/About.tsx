@@ -83,110 +83,128 @@ const About = () => {
           </motion.h2>
         </motion.div>
 
-        {/* Main Content - Summary and Education */}
-        <div className="grid lg:grid-cols-2 gap-16 mb-24 items-center">
-          {/* Personal Summary */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div className="space-y-6 leading-relaxed text-lg" style={{ color: 'var(--text-secondary)' }}>
-              <p>
-                I'm a software developer with a focus on building clean, reliable systems that scale. My background spans full-stack development, cloud infrastructure, 
-                and AI-powered tools, with hands-on experience across web, mobile, and desktop platforms.
-              </p>
-              <p>
-                I've worked on everything from live transcription apps using OpenAI and Electron to cross-platform mobile projects that shipped to real users. 
-                I like working close to the product, collaborating with teams, and writing code that's easy to reason about six months down the line.
-              </p>
-              <p>
-                I care about the details—how an interface feels, how an API responds, how a system holds up under real-world load. 
-                My goal isn't just to ship features; it's to build tools that people trust and enjoy using.
-              </p>
-            </div>
-          </motion.div>
+        {/* Education Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-24"
+        >
+          <div className="text-center mb-16">
+            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+              Education
+            </h3>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+              My academic journey in computer science and artificial intelligence
+            </p>
+          </div>
 
-          {/* Education Timeline */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="mb-8">
-              <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-                Education
-              </h3>
-              <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
-                My academic journey in computer science and artificial intelligence
-              </p>
-            </div>
-
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent-primary)] to-[var(--accent-hover)]"></div>
-              
-              <div className="space-y-8">
-                {education.map((edu, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                    viewport={{ once: true }}
-                    className="relative flex items-start space-x-6"
-                  >
-                    {/* Timeline Dot */}
-                    <div className="relative flex-shrink-0">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                viewport={{ once: true }}
+                className="group h-full"
+              >
+                <motion.div
+                  whileHover={{ y: -8 }}
+                  className="relative h-full"
+                >
+                  {/* Gradient Background */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-3xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                  
+                  {/* Main Card */}
+                  <div className="relative backdrop-blur-sm border rounded-3xl p-8 h-full transition-all duration-300 overflow-hidden" style={{ 
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderColor: 'var(--border-primary)'
+                  }}>
+                    {/* Decorative Element */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--accent-primary)] to-transparent opacity-5 rounded-full -translate-y-16 translate-x-16" />
+                    
+                    {/* Header with Icon and Badge */}
+                    <div className="flex items-start justify-between mb-6">
                       <div 
-                        className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg shrink-0"
                         style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }}
                       >
-                        <GraduationCap size={24} className="text-white" />
+                        <GraduationCap size={20} className="text-white" />
+                      </div>
+                      
+                      {/* Level Badge */}
+                      <div 
+                        className="px-3 py-1 rounded-full text-xs font-medium border"
+                        style={{ 
+                          backgroundColor: 'var(--bg-primary)',
+                          borderColor: 'var(--accent-primary)',
+                          color: 'var(--accent-primary)'
+                        }}
+                      >
+                        {index === 0 ? 'Graduate' : 'Undergraduate'}
                       </div>
                     </div>
 
-                    {/* Education Card */}
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      className="flex-1 group github-card"
-                    >
-                      <div className="backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 github-card">
-                        <div className="mb-4">
-                          <h4 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-                            {edu.degree}
-                          </h4>
-                          {edu.specialization && (
-                            <p className="text-base font-medium mb-2" style={{ color: 'var(--accent-primary)' }}>
-                              {edu.specialization}
-                            </p>
-                          )}
-                          <p className="text-base" style={{ color: 'var(--text-secondary)' }}>
-                            {edu.university}
-                          </p>
+                    {/* Content */}
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="text-xl font-bold leading-tight mb-2" style={{ color: 'var(--text-primary)' }}>
+                          {edu.degree}
+                        </h4>
+                        {edu.specialization && (
+                          <div 
+                            className="inline-block px-3 py-1 rounded-lg text-sm font-medium mb-3"
+                            style={{ 
+                              backgroundColor: 'var(--accent-primary)', 
+                              color: 'white'
+                            }}
+                          >
+                            {edu.specialization}
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div>
+                        <p className="text-lg font-semibold mb-3" style={{ color: 'var(--text-secondary)' }}>
+                          {edu.university}
+                        </p>
+                      </div>
+                      
+                      {/* Info Grid */}
+                      <div className="space-y-3 pt-4 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+                        <div className="flex items-center space-x-3">
+                          <div 
+                            className="w-8 h-8 rounded-lg flex items-center justify-center"
+                            style={{ backgroundColor: 'var(--bg-primary)' }}
+                          >
+                            <Calendar size={14} style={{ color: 'var(--accent-primary)' }} />
+                          </div>
+                          <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                            {edu.period}
+                          </span>
                         </div>
                         
-                        <div className="flex flex-col space-y-2">
-                          <div className="flex items-center space-x-2" style={{ color: 'var(--text-muted)' }}>
-                            <Calendar size={14} />
-                            <span className="text-sm">{edu.period}</span>
+                        <div className="flex items-center space-x-3">
+                          <div 
+                            className="w-8 h-8 rounded-lg flex items-center justify-center"
+                            style={{ backgroundColor: 'var(--bg-primary)' }}
+                          >
+                            <MapPin size={14} style={{ color: 'var(--accent-primary)' }} />
                           </div>
-                          <div className="flex items-center space-x-2" style={{ color: 'var(--text-muted)' }}>
-                            <MapPin size={14} />
-                            <span className="text-sm">{edu.location}</span>
-                          </div>
+                          <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                            {edu.location}
+                          </span>
                         </div>
                       </div>
-                    </motion.div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Technical Skills Grid */}
         <motion.div
@@ -267,7 +285,7 @@ const About = () => {
             Additional Technologies
           </h4>
           <div className="flex flex-wrap justify-center gap-4">
-            {['C', 'SQL', 'HTML5', 'CSS3', 'Shell Scripting', 'React Native', 'Flask', 'REST APIs', 'JSON', 'Design Patterns', 'OOP'].map((tech) => (
+            {['C', 'SQL', 'HTML5', 'CSS3', 'React Native', 'Flask', 'REST APIs', 'JSON', 'Design Patterns', 'OOP'].map((tech) => (
               <motion.span
                 key={tech}
                 whileHover={{ scale: 1.1 }}
