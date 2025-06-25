@@ -478,35 +478,57 @@ const About = () => {
                 <SkillCard category={skillCategories[0]} />
               </motion.div>
 
+              {/* Top Left - AI Tools */}
+              <motion.div
+                initial={{ opacity: 0, x: -50, y: -50 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className='absolute top-16 left-4'
+              >
+                <SkillCard category={skillCategories[5]} />
+              </motion.div>
+
               {/* Top Right - Frameworks */}
               <motion.div
                 initial={{ opacity: 0, x: 50, y: -50 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
                 className='absolute top-16 right-4'
               >
                 <SkillCard category={skillCategories[1]} />
               </motion.div>
 
+              {/* Left - Others */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+                className='absolute top-1/2 left-4 transform -translate-y-1/2'
+              >
+                <SkillCard category={skillCategories[6]} />
+              </motion.div>
+
               {/* Right - Databases */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
                 viewport={{ once: true }}
                 className='absolute top-1/2 right-4 transform -translate-y-1/2'
               >
                 <SkillCard category={skillCategories[2]} />
               </motion.div>
 
-              {/* Bottom Right - Testing */}
+              {/* Bottom Left - Testing */}
               <motion.div
-                initial={{ opacity: 0, x: 50, y: 50 }}
+                initial={{ opacity: 0, x: -50, y: 50 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
                 viewport={{ once: true }}
-                className='absolute bottom-16 right-4'
+                className='absolute bottom-16 left-4'
               >
                 <SkillCard category={skillCategories[3]} />
               </motion.div>
@@ -515,33 +537,11 @@ const About = () => {
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
                 viewport={{ once: true }}
                 className='absolute bottom-4 left-1/2 transform -translate-x-1/2'
               >
                 <SkillCard category={skillCategories[4]} />
-              </motion.div>
-
-              {/* Left - AI Tools */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                viewport={{ once: true }}
-                className='absolute top-1/2 left-4 transform -translate-y-1/2'
-              >
-                <SkillCard category={skillCategories[5]} />
-              </motion.div>
-
-              {/* Bottom Left - Others */}
-              <motion.div
-                initial={{ opacity: 0, x: -50, y: 50 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                viewport={{ once: true }}
-                className='absolute bottom-16 left-4'
-              >
-                <SkillCard category={skillCategories[6]} />
               </motion.div>
             </div>
 
