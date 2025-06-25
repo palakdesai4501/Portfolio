@@ -8,7 +8,7 @@ const Footer = () => {
     'Next.js', 'React', 'TypeScript', 'Three.js', 'Framer Motion'
   ]
 
-  const currentYear = new Date().getFullYear()
+
 
   return (
     <footer 
@@ -53,7 +53,7 @@ const Footer = () => {
               Built with Modern Technologies
             </h3>
             <div className="flex flex-wrap justify-center gap-2">
-              {technologies.map((tech, index) => (
+                                  {technologies.map((tech) => (
                 <span
                   key={tech}
                   className="px-3 py-1 rounded-full text-xs font-medium border"
@@ -68,8 +68,6 @@ const Footer = () => {
               ))}
             </div>
           </motion.div>
-
-          
         </div>
       </div>
     </footer>

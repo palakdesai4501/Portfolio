@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Code, Database, Cloud, TestTube, GraduationCap, MapPin, Calendar } from 'lucide-react'
+import { GraduationCap, MapPin, Calendar } from 'lucide-react'
 import { useTheme } from '../app/context/ThemeContext'
 import { Radar } from 'react-chartjs-2'
 import {
@@ -71,7 +71,7 @@ const About = () => {
     ],
   }
 
-  const chartOptions: any = {
+  const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -83,13 +83,13 @@ const About = () => {
         borderColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
         borderWidth: 2,
         padding: 12,
-        titleFont: { size: 14, weight: 'bold' },
+        titleFont: { size: 14, weight: 'bold' as const },
         bodyFont: { size: 13 },
         callbacks: {
-          title: function(context: any) {
-            return context[0].label
+          title: function(context: unknown[]) {
+            return (context[0] as { label: string }).label
           },
-          label: function(context: any) {
+          label: function(context: { parsed: { r: number } }) {
             return `Proficiency: ${context.parsed.r}%`
           }
         }
@@ -121,34 +121,9 @@ const About = () => {
         suggestedMax: 100,
       },
     },
-  }
+  } as const
 
-  const skills = [
-    {
-      icon: Code,
-      title: 'Programming & Frameworks',
-      description: 'Full-stack development with modern languages and frameworks',
-      technologies: ['Java', 'JavaScript', 'Python', 'TypeScript', 'React.js', 'Spring Boot', 'Node.js', 'Angular']
-    },
-    {
-      icon: Database,
-      title: 'Databases & Backend',
-      description: 'Database design and backend architecture expertise',
-      technologies: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Firebase', 'Express.js', 'NestJS']
-    },
-    {
-      icon: Cloud,
-      title: 'DevOps & Cloud',
-      description: 'Cloud deployment and CI/CD pipeline management',
-      technologies: ['AWS', 'Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'CI/CD', 'Maven']
-    },
-    {
-      icon: TestTube,
-      title: 'Testing & Tools',
-      description: 'Comprehensive testing and development tools',
-      technologies: ['Jest', 'JUnit', 'Selenium', 'Mockito', 'Postman', 'JIRA', 'Git', 'Agile/Scrum']
-    }
-  ]
+
 
   const education = [
     {

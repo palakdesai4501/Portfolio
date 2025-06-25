@@ -279,7 +279,7 @@ const Experience = () => {
               textDecoration: 'none'
             }}
           >
-            Let's Work Together
+            Let&apos;s Work Together
             <ExternalLink size={20} className="ml-2" />
           </motion.a>
         </motion.div>

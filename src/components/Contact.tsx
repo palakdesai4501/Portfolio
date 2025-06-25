@@ -139,7 +139,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Let's{' '}
+            Let&apos;s{' '}
             <span className="gradient-text">
               Connect
             </span>
@@ -152,7 +152,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Have a project in mind? I'd love to hear from you and discuss how we can work together.
+            Have a project in mind? I&apos;d love to hear from you and discuss how we can work together.
           </motion.p>
         </motion.div>
 

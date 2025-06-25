@@ -2,22 +2,25 @@
 
 import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Points, PointMaterial, Text } from '@react-three/drei'
+import { Points, PointMaterial } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 import { inSphere } from 'maath/random'
 import { useTheme } from '../app/context/ThemeContext'
 
 // 3D Particle Field Component with theme support
-function Stars({ theme, ...props }: any) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function Stars({ theme, ...props }: { theme: string; [key: string]: any }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null)
   
   // Create sphere with better error handling
   const sphere = useMemo(() => {
     const positions = new Float32Array(5000 * 3)
     try {
-      return inSphere(positions, { radius: 1.5 })
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return inSphere(positions, { radius: 1.5 }) as any
+    } catch {
       // Fallback: create a simple random distribution
       for (let i = 0; i < positions.length; i += 3) {
         const radius = Math.random() * 1.5
@@ -56,31 +59,7 @@ function Stars({ theme, ...props }: any) {
   )
 }
 
-// Floating 3D Text with theme support
-function FloatingText({ theme }: { theme: string }) {
-  const textRef = useRef<any>(null)
-  const textColor = theme === 'light' ? '#24292E' : '#C9D1D9'
 
-  useFrame((state) => {
-    if (textRef.current) {
-      textRef.current.rotation.y = Math.sin(state.clock.elapsedTime) * 0.1
-      textRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1
-    }
-  })
-
-  return (
-    <Text
-      ref={textRef}
-      position={[0, 0, 0]}
-      fontSize={1}
-      color={textColor}
-      anchorX="center"
-      anchorY="middle"
-    >
-      PD
-    </Text>
-  )
-}
 
 const Hero = () => {
   const { theme } = useTheme()
@@ -172,7 +151,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            Master's graduate in Applied Computing with AI specialization. 
+            Master&apos;s graduate in Applied Computing with AI specialization. 
             Full-stack developer passionate about building scalable applications with modern technologies 
             and integrating AI-driven solutions.
           </motion.p>

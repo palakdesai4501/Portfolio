@@ -1,8 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, ExternalLink, Star } from 'lucide-react'
-import Image from 'next/image'
+import { Github } from 'lucide-react'
 import { useTheme } from '../app/context/ThemeContext'
 
 const Projects = () => {
