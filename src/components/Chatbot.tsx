@@ -16,7 +16,8 @@ const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hi! I&apos;m Palak&apos;s AI assistant 🤖 Ask me about her experience, skills, projects, or anything else you&apos;d like to know about her!',
+      // eslint-disable-next-line react/no-unescaped-entities
+      text: "Hi! I'm Palak's AI assistant 🤖 Ask me about her experience, skills, projects, or anything else you'd like to know about her!",
       isUser: false,
       timestamp: new Date(),
     },
@@ -101,7 +102,7 @@ const Chatbot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-lg z-40 flex items-center justify-center transition-all duration-300 ${
+        className={`fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-lg z-40 flex items-center justify-center transition-all duration-300 cursor-pointer ${
           isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
         style={{
@@ -138,7 +139,8 @@ const Chatbot = () => {
                   <Bot size={18} className='text-white' />
                 </div>
                 <div>
-                  <h3 className='font-semibold text-white'>Palak&apos;s AI Assistant</h3>
+                  {/* eslint-disable-next-line react/no-unescaped-entities */}
+                  <h3 className='font-semibold text-white'>Palak's AI Assistant</h3>
                   <p className='text-xs text-white/80'>Ask me about Palak!</p>
                 </div>
               </div>
@@ -223,14 +225,14 @@ const Chatbot = () => {
 
             {/* Input */}
             <div className='p-4 border-t' style={{ borderColor: 'var(--border-primary)' }}>
-              <div className='flex items-end space-x-2'>
+              <div className='flex items-center space-x-2'>
                 <div className='flex-1'>
                   <textarea
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder='Ask me about Palak'
-                    className='w-full p-3 rounded-xl border resize-none focus:outline-none focus:ring-2 transition-all'
+                    className='w-full p-3 rounded-xl items-center border resize-none focus:outline-none focus:ring-2 transition-all'
                     style={{
                       backgroundColor: 'var(--bg-secondary)',
                       borderColor: 'var(--border-primary)',
@@ -245,7 +247,7 @@ const Chatbot = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={sendMessage}
                   disabled={!inputValue.trim() || isLoading}
-                  className='p-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed'
+                  className='p-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed h-12 flex items-center justify-center cursor-pointer'
                   style={{
                     background:
                       inputValue.trim() && !isLoading
