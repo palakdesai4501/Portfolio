@@ -4,8 +4,52 @@ import { personalKnowledgeBase } from '../../../data/personalKnowledge'
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 
+// Simple in-memory rate limiting (for production, use Redis or database)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
+
+const RATE_LIMIT = {
+  MAX_REQUESTS: 5, // 5 messages per IP per hour
+  WINDOW_MS: 60 * 60 * 1000, // 1 hour
+}
+
+function getRateLimitKey(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for')
+  const ip = forwarded ? forwarded.split(',')[0] : 'unknown'
+  return ip
+}
+
+function checkRateLimit(key: string): boolean {
+  const now = Date.now()
+  const userLimit = rateLimitMap.get(key)
+
+  if (!userLimit || now > userLimit.resetTime) {
+    // Reset or create new limit
+    rateLimitMap.set(key, {
+      count: 1,
+      resetTime: now + RATE_LIMIT.WINDOW_MS,
+    })
+    return true
+  }
+
+  if (userLimit.count >= RATE_LIMIT.MAX_REQUESTS) {
+    return false // Rate limit exceeded
+  }
+
+  userLimit.count++
+  return true
+}
+
 export async function POST(request: NextRequest) {
   try {
+    // Check rate limit
+    const rateLimitKey = getRateLimitKey(request)
+    if (!checkRateLimit(rateLimitKey)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      )
+    }
+
     const { message, conversationHistory } = await request.json()
 
     if (!message) {
@@ -16,13 +60,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
     }
 
+    // Limit conversation history to save tokens
+    const limitedHistory = conversationHistory ? conversationHistory.slice(-6) : []
+
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
     // Build conversation context
     let conversationContext = ''
-    if (conversationHistory && conversationHistory.length > 0) {
+    if (limitedHistory && limitedHistory.length > 0) {
       conversationContext = '\n\nConversation History:\n'
-      conversationHistory.slice(-4).forEach((msg: { isUser: boolean; text: string }) => {
+      limitedHistory.forEach((msg: { isUser: boolean; text: string }) => {
         conversationContext += `${msg.isUser ? 'User' : 'Assistant'}: ${msg.text}\n`
       })
     }

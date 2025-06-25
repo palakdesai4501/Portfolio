@@ -88,15 +88,36 @@ The chatbot automatically adapts to your portfolio's theme using CSS custom prop
 
 ### Free Tier Limits
 
-- Gemini API provides generous free usage
-- Rate limiting is handled automatically
-- Error handling for quota exceeded
+- **15 requests per minute**
+- **1,500 requests per day**
+- **1 million tokens per month**
 
-### Cost-Effective Features
+### Cost Protection Features
 
-- Focused knowledge base reduces token usage
-- Short, relevant prompts
-- Client-side caching of conversation history
+- **Rate limiting**: 5 messages per IP per hour
+- **Token optimization**: Limited conversation history (6 messages max)
+- **Focused responses**: Short initial answers, detailed only when requested
+- **Error handling**: Graceful handling of quota exceeded
+
+### Production Cost Considerations
+
+- Each user message = 1 API request
+- Popular portfolios may exceed free tier
+- Monitor usage in Google AI Studio
+- Consider upgrading if needed (very affordable)
+
+### Real-World Usage Estimates
+
+- **Small portfolio**: 10-50 visitors/day = FREE ✅
+- **Popular portfolio**: 100-200 visitors/day = Still likely FREE ✅  
+- **Viral portfolio**: 500+ visitors/day = May need paid plan (~$0.50/day) 💰
+
+### Protection Safeguards
+
+- **Rate limiting** prevents abuse (5 messages per visitor per hour)
+- **Token optimization** reduces costs per request
+- **Conversation limits** prevent runaway token usage
+- **IP tracking** prevents spam and excessive usage
 
 ## Security
 
