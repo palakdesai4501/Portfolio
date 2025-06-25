@@ -101,7 +101,7 @@ const Chatbot = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-lg z-40 flex items-center justify-center transition-all duration-300 cursor-pointer ${
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-lg z-40 flex items-center justify-center transition-all duration-300 cursor-pointer ${
           isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
         style={{
@@ -109,7 +109,7 @@ const Chatbot = () => {
           boxShadow: '0 8px 32px rgba(31, 111, 235, 0.3)',
         }}
       >
-        <MessageCircle size={24} className='text-white' />
+        <MessageCircle size={20} className='text-white sm:w-6 sm:h-6' />
       </motion.button>
 
       {/* Chat Interface */}
@@ -119,7 +119,7 @@ const Chatbot = () => {
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className='fixed bottom-6 right-6 w-96 h-[500px] rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden backdrop-blur-sm'
+            className='fixed inset-4 sm:bottom-6 sm:right-6 sm:inset-auto sm:w-96 sm:h-[500px] w-auto h-auto max-h-[calc(100vh-2rem)] rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden backdrop-blur-sm'
             style={{
               backgroundColor: 'var(--bg-primary)',
               border: '1px solid var(--border-primary)',
@@ -127,18 +127,20 @@ const Chatbot = () => {
           >
             {/* Header */}
             <div
-              className='p-4 flex items-center justify-between border-b'
+              className='p-3 sm:p-4 flex items-center justify-between border-b'
               style={{
                 background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
                 borderColor: 'var(--border-primary)',
               }}
             >
-              <div className='flex items-center space-x-3'>
-                <div className='w-8 h-8 rounded-full bg-white/20 flex items-center justify-center'>
-                  <Bot size={18} className='text-white' />
+              <div className='flex items-center space-x-2 sm:space-x-3'>
+                <div className='w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center'>
+                  <Bot size={16} className='text-white sm:w-[18px] sm:h-[18px]' />
                 </div>
                 <div>
-                  <h3 className='font-semibold text-white'>Palak&apos;s AI Assistant</h3>
+                  <h3 className='text-sm sm:text-base font-semibold text-white'>
+                    Palak&apos;s AI Assistant
+                  </h3>
                   <p className='text-xs text-white/80'>Ask me about Palak!</p>
                 </div>
               </div>
@@ -148,12 +150,12 @@ const Chatbot = () => {
                 onClick={() => setIsOpen(false)}
                 className='p-1 rounded-full hover:bg-white/20 transition-colors'
               >
-                <X size={20} className='text-white' />
+                <X size={18} className='text-white sm:w-5 sm:h-5' />
               </motion.button>
             </div>
 
             {/* Messages */}
-            <div className='flex-1 overflow-y-auto p-4 space-y-4'>
+            <div className='flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4'>
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
@@ -162,7 +164,7 @@ const Chatbot = () => {
                   className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-2xl ${
+                    className={`max-w-[85%] sm:max-w-[80%] p-2.5 sm:p-3 rounded-2xl ${
                       message.isUser
                         ? 'bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] text-white'
                         : 'border'
@@ -173,18 +175,18 @@ const Chatbot = () => {
                       color: message.isUser ? undefined : 'var(--text-primary)',
                     }}
                   >
-                    <div className='flex items-start space-x-2'>
+                    <div className='flex items-start space-x-1.5 sm:space-x-2'>
                       {!message.isUser && (
                         <Bot
-                          size={16}
-                          className='mt-1 flex-shrink-0'
+                          size={14}
+                          className='mt-1 flex-shrink-0 sm:w-4 sm:h-4'
                           style={{ color: 'var(--accent-primary)' }}
                         />
                       )}
                       {message.isUser && (
-                        <User size={16} className='mt-1 flex-shrink-0 text-white' />
+                        <User size={14} className='mt-1 flex-shrink-0 text-white sm:w-4 sm:h-4' />
                       )}
-                      <p className='text-sm leading-relaxed'>{message.text}</p>
+                      <p className='text-xs sm:text-sm leading-relaxed'>{message.text}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -197,21 +199,25 @@ const Chatbot = () => {
                   className='flex justify-start'
                 >
                   <div
-                    className='p-3 rounded-2xl border flex items-center space-x-2'
+                    className='p-2.5 sm:p-3 rounded-2xl border flex items-center space-x-1.5 sm:space-x-2'
                     style={{
                       backgroundColor: 'var(--bg-secondary)',
                       borderColor: 'var(--border-primary)',
                     }}
                   >
-                    <Bot size={16} style={{ color: 'var(--accent-primary)' }} />
+                    <Bot
+                      size={14}
+                      className='sm:w-4 sm:h-4'
+                      style={{ color: 'var(--accent-primary)' }}
+                    />
                     <div className='flex space-x-1'>
-                      <div className='w-2 h-2 bg-[var(--accent-primary)] rounded-full animate-bounce' />
+                      <div className='w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--accent-primary)] rounded-full animate-bounce' />
                       <div
-                        className='w-2 h-2 bg-[var(--accent-primary)] rounded-full animate-bounce'
+                        className='w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--accent-primary)] rounded-full animate-bounce'
                         style={{ animationDelay: '0.1s' }}
                       />
                       <div
-                        className='w-2 h-2 bg-[var(--accent-primary)] rounded-full animate-bounce'
+                        className='w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--accent-primary)] rounded-full animate-bounce'
                         style={{ animationDelay: '0.2s' }}
                       />
                     </div>
@@ -222,7 +228,7 @@ const Chatbot = () => {
             </div>
 
             {/* Input */}
-            <div className='p-4 border-t' style={{ borderColor: 'var(--border-primary)' }}>
+            <div className='p-3 sm:p-4 border-t' style={{ borderColor: 'var(--border-primary)' }}>
               <div className='flex items-center space-x-2'>
                 <div className='flex-1'>
                   <textarea
@@ -230,7 +236,7 @@ const Chatbot = () => {
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder='Ask me about Palak'
-                    className='w-full p-3 rounded-xl items-center border resize-none focus:outline-none focus:ring-2 transition-all'
+                    className='w-full p-2.5 sm:p-3 rounded-xl items-center border resize-none focus:outline-none focus:ring-2 transition-all text-sm'
                     style={{
                       backgroundColor: 'var(--bg-secondary)',
                       borderColor: 'var(--border-primary)',
@@ -245,7 +251,7 @@ const Chatbot = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={sendMessage}
                   disabled={!inputValue.trim() || isLoading}
-                  className='p-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed h-12 flex items-center justify-center cursor-pointer'
+                  className='p-2.5 sm:p-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed h-10 sm:h-12 flex items-center justify-center cursor-pointer'
                   style={{
                     background:
                       inputValue.trim() && !isLoading
@@ -254,7 +260,7 @@ const Chatbot = () => {
                     color: inputValue.trim() && !isLoading ? 'white' : 'var(--text-secondary)',
                   }}
                 >
-                  <Send size={18} />
+                  <Send size={16} className='sm:w-[18px] sm:h-[18px]' />
                 </motion.button>
               </div>
             </div>
