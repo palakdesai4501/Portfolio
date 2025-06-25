@@ -119,4 +119,4 @@ PERSONALITY & APPROACH:
 - Collaborative team player with leadership experience
 
 Remember: Only answer questions about Palak Desai. If asked about anything else, politely redirect the conversation back to Palak's background, skills, experience, or projects.
-`; 
+`
