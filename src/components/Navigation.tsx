@@ -38,33 +38,29 @@ const Navigation = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'backdrop-blur-md shadow-lg' 
-          : ''
+        scrolled ? 'backdrop-blur-md shadow-lg' : ''
       }`}
       style={{
         backgroundColor: scrolled ? 'var(--bg-primary)' : 'transparent',
         borderBottom: scrolled ? '1px solid var(--border-primary)' : 'none',
-        opacity: scrolled ? 0.95 : 1
+        opacity: scrolled ? 0.95 : 1,
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex items-center justify-between h-16'>
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold cursor-pointer"
+            className='text-2xl font-bold cursor-pointer'
             style={{ color: 'var(--text-primary)' }}
             onClick={() => scrollToSection('#home')}
           >
-            <span className="gradient-text">
-              PD
-            </span>
+            <span className='gradient-text'>PD</span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex items-center space-x-8">
+          <div className='hidden md:flex items-center space-x-8'>
+            <div className='flex items-center space-x-8'>
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
@@ -74,28 +70,28 @@ const Navigation = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.href)}
-                  className="transition-all duration-200 font-medium px-4 py-2 rounded-lg cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
+                  className='transition-all duration-200 font-medium px-4 py-2 rounded-lg cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   {item.name}
                 </motion.button>
               ))}
             </div>
-            
+
             {/* Theme Toggle */}
             <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button and Theme Toggle */}
-          <div className="md:hidden flex items-center space-x-3">
+          <div className='md:hidden flex items-center space-x-3'>
             <ThemeToggle />
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg transition-all duration-200 cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
-              style={{ 
+              className='p-2 rounded-lg transition-all duration-200 cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
+              style={{
                 color: 'var(--text-secondary)',
-                backgroundColor: isOpen ? 'var(--bg-secondary)' : 'transparent'
+                backgroundColor: isOpen ? 'var(--bg-secondary)' : 'transparent',
               }}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -110,14 +106,14 @@ const Navigation = () => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden backdrop-blur-md border-t"
-          style={{ 
+          className='md:hidden backdrop-blur-md border-t'
+          style={{
             backgroundColor: 'var(--bg-primary)',
             borderColor: 'var(--border-primary)',
-            opacity: 0.95
+            opacity: 0.95,
           }}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className='px-2 pt-2 pb-3 space-y-1'>
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -125,7 +121,7 @@ const Navigation = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-3 py-2 rounded-md transition-all duration-200 font-medium cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]"
+                className='block w-full text-left px-3 py-2 rounded-md transition-all duration-200 font-medium cursor-pointer hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
                 style={{ color: 'var(--text-secondary)' }}
               >
                 {item.name}
@@ -138,4 +134,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation 
+export default Navigation

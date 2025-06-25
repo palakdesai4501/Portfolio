@@ -1,73 +1,73 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Theme Variables */
 :root {
   /* Dark Theme (Default) */
-  --bg-primary: #0D1117;          /* Deep Navy - Main background */
-  --bg-secondary: #161B22;        /* Dark Grayish Blue - Card backgrounds */
-  --bg-tertiary: #21262D;         /* Slightly lighter for hover states */
-  
-  --text-primary: #C9D1D9;        /* Soft White - Primary text */
-  --text-secondary: #8B949E;      /* Cool Gray - Secondary text */
-  --text-muted: #6E7681;          /* Even more muted text */
-  
-  --accent-primary: #58A6FF;      /* Electric Blue - Links, highlights */
-  --accent-hover: #1F6FEB;        /* Bright Blue - Hover states */
-  --accent-gradient-start: #58A6FF;
-  --accent-gradient-end: #1F6FEB;
-  
-  --border-primary: #30363D;      /* Subtle Gray - Borders */
-  --border-hover: #58A6FF;        /* Blue borders on hover */
-  
-  --success: #238636;             /* Green for success states */
-  --warning: #D29922;             /* Yellow for warnings */
-  --error: #F85149;               /* Red for errors */
+  --bg-primary: #0d1117; /* Deep Navy - Main background */
+  --bg-secondary: #161b22; /* Dark Grayish Blue - Card backgrounds */
+  --bg-tertiary: #21262d; /* Slightly lighter for hover states */
+
+  --text-primary: #c9d1d9; /* Soft White - Primary text */
+  --text-secondary: #8b949e; /* Cool Gray - Secondary text */
+  --text-muted: #6e7681; /* Even more muted text */
+
+  --accent-primary: #58a6ff; /* Electric Blue - Links, highlights */
+  --accent-hover: #1f6feb; /* Bright Blue - Hover states */
+  --accent-gradient-start: #58a6ff;
+  --accent-gradient-end: #1f6feb;
+
+  --border-primary: #30363d; /* Subtle Gray - Borders */
+  --border-hover: #58a6ff; /* Blue borders on hover */
+
+  --success: #238636; /* Green for success states */
+  --warning: #d29922; /* Yellow for warnings */
+  --error: #f85149; /* Red for errors */
 }
 
 /* Light Theme */
-[data-theme="light"] {
-  --bg-primary: #F5F7FA;          /* Very Light Gray - Main background */
-  --bg-secondary: #FFFFFF;        /* White - Card backgrounds */
-  --bg-tertiary: #F6F8FA;         /* Slightly darker for hover states */
-  
-  --text-primary: #24292E;        /* Dark Charcoal - Primary text */
-  --text-secondary: #57606A;      /* Slate Gray - Secondary text */
-  --text-muted: #656D76;          /* Even more muted text */
-  
-  --accent-primary: #1F6FEB;      /* Bright Blue - Links, highlights */
-  --accent-hover: #1158C7;        /* Deeper Blue - Hover states */
-  --accent-gradient-start: #1F6FEB;
-  --accent-gradient-end: #1158C7;
-  
-  --border-primary: #D0D7DE;      /* Light Gray - Borders */
-  --border-hover: #1F6FEB;        /* Blue borders on hover */
-  
-  --success: #28A745;             /* Green for success states */
-  --warning: #FFC107;             /* Yellow for warnings */
-  --error: #DC3545;               /* Red for errors */
+[data-theme='light'] {
+  --bg-primary: #f5f7fa; /* Very Light Gray - Main background */
+  --bg-secondary: #ffffff; /* White - Card backgrounds */
+  --bg-tertiary: #f6f8fa; /* Slightly darker for hover states */
+
+  --text-primary: #24292e; /* Dark Charcoal - Primary text */
+  --text-secondary: #57606a; /* Slate Gray - Secondary text */
+  --text-muted: #656d76; /* Even more muted text */
+
+  --accent-primary: #1f6feb; /* Bright Blue - Links, highlights */
+  --accent-hover: #1158c7; /* Deeper Blue - Hover states */
+  --accent-gradient-start: #1f6feb;
+  --accent-gradient-end: #1158c7;
+
+  --border-primary: #d0d7de; /* Light Gray - Borders */
+  --border-hover: #1f6feb; /* Blue borders on hover */
+
+  --success: #28a745; /* Green for success states */
+  --warning: #ffc107; /* Yellow for warnings */
+  --error: #dc3545; /* Red for errors */
 }
 
 /* Dark Theme Explicit */
-[data-theme="dark"] {
-  --bg-primary: #0D1117;          /* Deep Navy - Main background */
-  --bg-secondary: #161B22;        /* Dark Grayish Blue - Card backgrounds */
-  --bg-tertiary: #21262D;         /* Slightly lighter for hover states */
-  
-  --text-primary: #C9D1D9;        /* Soft White - Primary text */
-  --text-secondary: #8B949E;      /* Cool Gray - Secondary text */
-  --text-muted: #6E7681;          /* Even more muted text */
-  
-  --accent-primary: #58A6FF;      /* Electric Blue - Links, highlights */
-  --accent-hover: #1F6FEB;        /* Bright Blue - Hover states */
-  --accent-gradient-start: #58A6FF;
-  --accent-gradient-end: #1F6FEB;
-  
-  --border-primary: #30363D;      /* Subtle Gray - Borders */
-  --border-hover: #58A6FF;        /* Blue borders on hover */
-  
-  --success: #238636;             /* Green for success states */
-  --warning: #D29922;             /* Yellow for warnings */
-  --error: #F85149;               /* Red for errors */
+[data-theme='dark'] {
+  --bg-primary: #0d1117; /* Deep Navy - Main background */
+  --bg-secondary: #161b22; /* Dark Grayish Blue - Card backgrounds */
+  --bg-tertiary: #21262d; /* Slightly lighter for hover states */
+
+  --text-primary: #c9d1d9; /* Soft White - Primary text */
+  --text-secondary: #8b949e; /* Cool Gray - Secondary text */
+  --text-muted: #6e7681; /* Even more muted text */
+
+  --accent-primary: #58a6ff; /* Electric Blue - Links, highlights */
+  --accent-hover: #1f6feb; /* Bright Blue - Hover states */
+  --accent-gradient-start: #58a6ff;
+  --accent-gradient-end: #1f6feb;
+
+  --border-primary: #30363d; /* Subtle Gray - Borders */
+  --border-hover: #58a6ff; /* Blue borders on hover */
+
+  --success: #238636; /* Green for success states */
+  --warning: #d29922; /* Yellow for warnings */
+  --error: #f85149; /* Red for errors */
 }
 
 @theme inline {
@@ -80,10 +80,14 @@
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
   line-height: 1.6;
   scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Custom scrollbar with theme support */
@@ -130,9 +134,15 @@ html {
 
 /* Theme-aware gradient text animation */
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-gradient {
@@ -149,8 +159,12 @@ html {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Focus styles with theme support */
@@ -247,8 +261,13 @@ a:focus {
 
 /* Custom animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .animate-float {
@@ -256,10 +275,11 @@ a:focus {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(31, 111, 235, 0.2);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 30px rgba(31, 111, 235, 0.4);
   }
 }
@@ -288,18 +308,21 @@ a:focus {
 
 /* Theme transition for smooth switching */
 * {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Light theme specific adjustments */
-[data-theme="light"] .text-shadow {
+[data-theme='light'] .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="light"] .glow {
+[data-theme='light'] .glow {
   box-shadow: 0 0 20px rgba(31, 111, 235, 0.15);
 }
 
-[data-theme="light"] .glow-hover:hover {
+[data-theme='light'] .glow-hover:hover {
   box-shadow: 0 0 30px rgba(31, 111, 235, 0.25);
 }

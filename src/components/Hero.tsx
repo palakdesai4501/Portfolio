@@ -13,7 +13,7 @@ import { useTheme } from '../app/context/ThemeContext'
 function Stars({ theme, ...props }: { theme: string; [key: string]: any }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null)
-  
+
   // Create sphere with better error handling
   const sphere = useMemo(() => {
     const positions = new Float32Array(5000 * 3)
@@ -26,7 +26,7 @@ function Stars({ theme, ...props }: { theme: string; [key: string]: any }) {
         const radius = Math.random() * 1.5
         const theta = Math.random() * Math.PI * 2
         const phi = Math.acos(2 * Math.random() - 1)
-        
+
         positions[i] = radius * Math.sin(phi) * Math.cos(theta)
         positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta)
         positions[i + 2] = radius * Math.cos(phi)
@@ -59,11 +59,9 @@ function Stars({ theme, ...props }: { theme: string; [key: string]: any }) {
   )
 }
 
-
-
 const Hero = () => {
   const { theme } = useTheme()
-  
+
   const scrollToExperince = () => {
     if (typeof window !== 'undefined') {
       const element = document.querySelector('#experience')
@@ -82,13 +80,13 @@ const Hero = () => {
   }
 
   return (
-    <section 
-      id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    <section
+      id='home'
+      className='relative min-h-screen flex items-center justify-center overflow-hidden'
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* 3D Background */}
-      <div className="absolute inset-0">
+      <div className='absolute inset-0'>
         <Canvas camera={{ position: [0, 0, 1] }}>
           <Suspense fallback={null}>
             <Stars theme={theme} />
@@ -97,22 +95,22 @@ const Hero = () => {
       </div>
 
       {/* Gradient Overlay with theme support */}
-      <div 
-        className="absolute inset-0"
-        style={{ 
-          background: getGradientOverlay()
+      <div
+        className='absolute inset-0'
+        style={{
+          background: getGradientOverlay(),
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-28">
+      <div className='relative z-10 text-center px-4 max-w-5xl mx-auto mt-28'>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6"
+            className='text-5xl md:text-7xl lg:text-8xl font-bold mb-6'
             style={{ color: 'var(--text-primary)' }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -120,14 +118,14 @@ const Hero = () => {
           >
             Palak{' '}
             <motion.span
-              className="gradient-text"
-              animate={{ 
-                backgroundPosition: ['0%', '100%', '0%'] 
+              className='gradient-text'
+              animate={{
+                backgroundPosition: ['0%', '100%', '0%'],
               }}
-              transition={{ 
-                duration: 3, 
+              transition={{
+                duration: 3,
                 repeat: Infinity,
-                ease: "linear"
+                ease: 'linear',
               }}
             >
               Desai
@@ -135,7 +133,7 @@ const Hero = () => {
           </motion.h1>
 
           <motion.h2
-            className="text-xl md:text-2xl lg:text-3xl mb-8 font-light"
+            className='text-xl md:text-2xl lg:text-3xl mb-8 font-light'
             style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -145,28 +143,40 @@ const Hero = () => {
           </motion.h2>
 
           <motion.p
-            className="text-lg md:text-xl mb-12 max-w-3xl mx-auto leading-relaxed"
+            className='text-lg md:text-xl mb-12 max-w-3xl mx-auto leading-relaxed'
             style={{ color: 'var(--text-secondary)' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            Master&apos;s graduate in Applied Computing with AI specialization. 
-            Full-stack developer passionate about building scalable applications with modern technologies 
-            and integrating AI-driven solutions.
+            Master&apos;s graduate in Applied Computing with AI specialization. Full-stack developer
+            passionate about building scalable applications with modern technologies and integrating
+            AI-driven solutions.
           </motion.p>
 
           {/* Social Links */}
           <motion.div
-            className="flex justify-center space-x-6 mb-16"
+            className='flex justify-center space-x-6 mb-16'
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
           >
             {[
-              { icon: Github, href: 'https://github.com/palakdesai4501', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/palak-desai4501/', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:desai1j@uwindsor.ca', label: 'Email' },
+              {
+                icon: Github,
+                href: 'https://github.com/palakdesai4501',
+                label: 'GitHub',
+              },
+              {
+                icon: Linkedin,
+                href: 'https://www.linkedin.com/in/palak-desai4501/',
+                label: 'LinkedIn',
+              },
+              {
+                icon: Mail,
+                href: 'mailto:desai1j@uwindsor.ca',
+                label: 'Email',
+              },
             ].map((social, index) => (
               <motion.a
                 key={social.label}
@@ -175,11 +185,11 @@ const Hero = () => {
                 rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-4 rounded-full backdrop-blur-sm border transition-all duration-300 group github-card hover:glow"
-                style={{ 
+                className='p-4 rounded-full backdrop-blur-sm border transition-all duration-300 group github-card hover:glow'
+                style={{
                   backgroundColor: 'var(--bg-secondary)',
                   borderColor: 'var(--border-primary)',
-                  color: 'var(--text-primary)'
+                  color: 'var(--text-primary)',
                 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -193,8 +203,12 @@ const Hero = () => {
           {/* Scroll Indicator */}
           <motion.button
             onClick={scrollToExperince}
-            className="cursor-pointer transition-all duration-300 focus:outline-none focus:ring-0 hover:text-[var(--text-primary)] border-none bg-transparent"
-            style={{ color: 'var(--text-secondary)', outline: 'none', border: 'none' }}
+            className='cursor-pointer transition-all duration-300 focus:outline-none focus:ring-0 hover:text-[var(--text-primary)] border-none bg-transparent'
+            style={{
+              color: 'var(--text-secondary)',
+              outline: 'none',
+              border: 'none',
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
@@ -203,9 +217,9 @@ const Hero = () => {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="flex flex-col items-center space-y-2"
+              className='flex flex-col items-center space-y-2'
             >
-              <span className="text-sm font-medium">Scroll to explore</span>
+              <span className='text-sm font-medium'>Scroll to explore</span>
               <ArrowDown size={20} />
             </motion.div>
           </motion.button>
@@ -213,36 +227,56 @@ const Hero = () => {
       </div>
 
       {/* Floating Elements with theme support */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className='absolute inset-0 pointer-events-none'>
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full"
+            className='absolute w-2 h-2 rounded-full'
             style={{ backgroundColor: 'var(--accent-primary)', opacity: 0.6 }}
             initial={{
-              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1000,
-              y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1000,
+              x:
+                typeof window !== 'undefined'
+                  ? Math.random() * window.innerWidth
+                  : Math.random() * 1000,
+              y:
+                typeof window !== 'undefined'
+                  ? Math.random() * window.innerHeight
+                  : Math.random() * 1000,
             }}
             animate={{
-              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1000,
-              y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1000,
+              x:
+                typeof window !== 'undefined'
+                  ? Math.random() * window.innerWidth
+                  : Math.random() * 1000,
+              y:
+                typeof window !== 'undefined'
+                  ? Math.random() * window.innerHeight
+                  : Math.random() * 1000,
             }}
             transition={{
               duration: 20 + Math.random() * 10,
               repeat: Infinity,
-              ease: "linear"
+              ease: 'linear',
             }}
           />
         ))}
       </div>
 
       {/* Additional background decorative elements with theme support */}
-      <div className="absolute top-20 left-10 w-32 h-32 rounded-full opacity-10" 
-           style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))' }} />
-      <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full opacity-5" 
-           style={{ background: 'linear-gradient(135deg, var(--accent-hover), var(--accent-primary))' }} />
+      <div
+        className='absolute top-20 left-10 w-32 h-32 rounded-full opacity-10'
+        style={{
+          background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
+        }}
+      />
+      <div
+        className='absolute bottom-20 right-10 w-48 h-48 rounded-full opacity-5'
+        style={{
+          background: 'linear-gradient(135deg, var(--accent-hover), var(--accent-primary))',
+        }}
+      />
     </section>
   )
 }
 
-export default Hero 
+export default Hero

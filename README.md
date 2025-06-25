@@ -26,30 +26,35 @@ A modern, responsive portfolio website built with cutting-edge web technologies,
 ## 📋 Sections
 
 ### 1. Hero Section
+
 - Animated name with gradient text
 - 3D particle background using Three.js
 - Social media links
 - Smooth scroll indicator
 
 ### 2. About Section
+
 - Personal introduction
 - Skills showcase with icons
 - Technology expertise cards
 - Profile card with avatar placeholder
 
 ### 3. Experience Section
+
 - Timeline layout with 3 professional experiences
 - Company details, roles, and achievements
 - Technology tags for each position
 - Animated cards with hover effects
 
 ### 4. Projects Section
+
 - 6 featured projects with descriptions
 - GitHub and live demo links
 - Technology stack badges
 - Interactive hover effects and animations
 
 ### 5. Contact Section
+
 - Interactive contact form
 - 3D animated sphere element
 - Contact information display
@@ -67,23 +72,27 @@ A modern, responsive portfolio website built with cutting-edge web technologies,
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 18 or later
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -100,6 +109,7 @@ npm start
 ## 📱 Responsive Design
 
 The portfolio is fully responsive and optimized for:
+
 - **Desktop**: Full layout with all animations and 3D effects
 - **Tablet**: Adapted layout with touch-friendly interactions
 - **Mobile**: Optimized mobile layout with performance considerations
@@ -115,6 +125,7 @@ The portfolio is fully responsive and optimized for:
 ## 🔧 Customization
 
 ### Adding New Projects
+
 Edit the `projects` array in `src/components/Projects.tsx`:
 
 ```typescript
@@ -125,16 +136,18 @@ const projects = [
     github: 'https://github.com/username/repo',
     live: 'https://your-project-url.com',
     technologies: ['React', 'Next.js', 'TypeScript'],
-    featured: true
+    featured: true,
   },
   // ... more projects
 ]
 ```
 
 ### Updating Experience
+
 Modify the `experiences` array in `src/components/Experience.tsx` with your professional experience.
 
 ### Changing Contact Information
+
 Update the contact details in `src/components/Contact.tsx`:
 
 ```typescript
@@ -143,7 +156,7 @@ const contactInfo = [
     icon: Mail,
     label: 'Email',
     value: 'your.email@example.com',
-    href: 'mailto:your.email@example.com'
+    href: 'mailto:your.email@example.com',
   },
   // ... more contact info
 ]
