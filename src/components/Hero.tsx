@@ -240,7 +240,7 @@ const Hero = () => {
             const animateX = Math.random() * window.innerWidth
             const animateY = Math.random() * window.innerHeight
             const duration = 20 + Math.random() * 10
-            
+
             return (
               <motion.div
                 key={i}

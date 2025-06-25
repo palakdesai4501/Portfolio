@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './context/ThemeContext'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={inter.variable}>
-      <body className="font-inter" suppressHydrationWarning={true}>
+      <body className='font-inter' suppressHydrationWarning={true}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

@@ -29,11 +29,13 @@ A modern, responsive portfolio website built with cutting-edge web technologies,
 ## 🤖 AI Chatbot
 
 The chatbot knows everything about my professional background and can answer questions like:
+
 - "Tell me about Palak's experience"
 - "What technologies does Palak know?"
 - "What projects has Palak worked on?"
 
 **Features:**
+
 - Personalized responses only about my background
 - Conversation memory for follow-up questions
 - Rate limited (5 messages/hour) for cost protection

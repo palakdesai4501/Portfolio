@@ -18,8 +18,15 @@ import {
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
 // Skill Card Component
-const SkillCard = ({ category, theme }: { category: any; theme: string }) => (
-  <motion.div 
+interface SkillCategory {
+  category: string
+  percentage: number
+  color: string
+  skills: string[]
+}
+
+const SkillCard = ({ category }: { category: SkillCategory }) => (
+  <motion.div
     whileHover={{ y: -5, scale: 1.02 }}
     className='relative backdrop-blur-sm border rounded-xl p-4 w-56 shadow-lg transition-all duration-300'
     style={{
@@ -37,9 +44,9 @@ const SkillCard = ({ category, theme }: { category: any; theme: string }) => (
       </div>
       <div
         className='px-2 py-1 rounded-full text-xs font-bold'
-        style={{ 
+        style={{
           backgroundColor: `${category.color}15`,
-          color: category.color 
+          color: category.color,
         }}
       >
         {category.percentage}%
@@ -47,19 +54,13 @@ const SkillCard = ({ category, theme }: { category: any; theme: string }) => (
     </div>
 
     {/* Title */}
-    <h4
-      className='text-base font-bold mb-2'
-      style={{ color: 'var(--text-primary)' }}
-    >
+    <h4 className='text-base font-bold mb-2' style={{ color: 'var(--text-primary)' }}>
       {category.category}
     </h4>
 
     {/* Progress Bar */}
     <div className='mb-3'>
-      <div 
-        className='w-full rounded-full h-1.5'
-        style={{ backgroundColor: 'var(--bg-tertiary)' }}
-      >
+      <div className='w-full rounded-full h-1.5' style={{ backgroundColor: 'var(--bg-tertiary)' }}>
         <motion.div
           className='h-1.5 rounded-full'
           style={{ backgroundColor: category.color }}
@@ -144,11 +145,11 @@ const About = () => {
 
   // Radar chart data for skill categories
   const skillsData = {
-    labels: skillCategories.map(cat => cat.category),
+    labels: skillCategories.map((cat) => cat.category),
     datasets: [
       {
         label: 'Technical Proficiency',
-        data: skillCategories.map(cat => cat.percentage),
+        data: skillCategories.map((cat) => cat.percentage),
         backgroundColor:
           theme === 'light' ? 'rgba(31, 111, 235, 0.15)' : 'rgba(88, 166, 255, 0.15)',
         borderColor: theme === 'light' ? '#1F6FEB' : '#58A6FF',
@@ -474,7 +475,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute top-4 left-1/2 transform -translate-x-1/2'
               >
-                <SkillCard category={skillCategories[0]} theme={theme} />
+                <SkillCard category={skillCategories[0]} />
               </motion.div>
 
               {/* Top Right - Frameworks */}
@@ -485,7 +486,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute top-16 right-4'
               >
-                <SkillCard category={skillCategories[1]} theme={theme} />
+                <SkillCard category={skillCategories[1]} />
               </motion.div>
 
               {/* Right - Databases */}
@@ -496,7 +497,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute top-1/2 right-4 transform -translate-y-1/2'
               >
-                <SkillCard category={skillCategories[2]} theme={theme} />
+                <SkillCard category={skillCategories[2]} />
               </motion.div>
 
               {/* Bottom Right - Testing */}
@@ -507,7 +508,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute bottom-16 right-4'
               >
-                <SkillCard category={skillCategories[3]} theme={theme} />
+                <SkillCard category={skillCategories[3]} />
               </motion.div>
 
               {/* Bottom - DevOps & Cloud */}
@@ -518,7 +519,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute bottom-4 left-1/2 transform -translate-x-1/2'
               >
-                <SkillCard category={skillCategories[4]} theme={theme} />
+                <SkillCard category={skillCategories[4]} />
               </motion.div>
 
               {/* Left - AI Tools */}
@@ -529,7 +530,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute top-1/2 left-4 transform -translate-y-1/2'
               >
-                <SkillCard category={skillCategories[5]} theme={theme} />
+                <SkillCard category={skillCategories[5]} />
               </motion.div>
 
               {/* Bottom Left - Others */}
@@ -540,7 +541,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className='absolute bottom-16 left-4'
               >
-                <SkillCard category={skillCategories[6]} theme={theme} />
+                <SkillCard category={skillCategories[6]} />
               </motion.div>
             </div>
 
@@ -568,7 +569,7 @@ const About = () => {
                     viewport={{ once: true }}
                     className='flex justify-center'
                   >
-                    <SkillCard category={category} theme={theme} />
+                    <SkillCard category={category} />
                   </motion.div>
                 ))}
               </div>

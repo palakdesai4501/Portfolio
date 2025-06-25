@@ -16,7 +16,6 @@ const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      // eslint-disable-next-line react/no-unescaped-entities
       text: "Hi! I'm Palak's AI assistant 🤖 Ask me about her experience, skills, projects, or anything else you'd like to know about her!",
       isUser: false,
       timestamp: new Date(),
@@ -139,8 +138,7 @@ const Chatbot = () => {
                   <Bot size={18} className='text-white' />
                 </div>
                 <div>
-                  {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  <h3 className='font-semibold text-white'>Palak's AI Assistant</h3>
+                  <h3 className='font-semibold text-white'>Palak&apos;s AI Assistant</h3>
                   <p className='text-xs text-white/80'>Ask me about Palak!</p>
                 </div>
               </div>
