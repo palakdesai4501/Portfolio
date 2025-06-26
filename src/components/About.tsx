@@ -28,7 +28,7 @@ interface SkillCategory {
 const SkillCard = ({ category }: { category: SkillCategory }) => (
   <motion.div
     whileHover={{ y: -5, scale: 1.02 }}
-    className='relative backdrop-blur-sm border rounded-xl p-3 lg:p-4 w-56 h-auto lg:h-48 shadow-lg transition-all duration-300 flex flex-col'
+    className='relative backdrop-blur-sm border rounded-xl p-3 lg:p-4 w-56 h-auto lg:h-60 shadow-lg transition-all duration-300 flex flex-col'
     style={{
       backgroundColor: 'var(--bg-secondary)',
       borderColor: 'var(--border-primary)',
@@ -73,11 +73,11 @@ const SkillCard = ({ category }: { category: SkillCategory }) => (
     </div>
 
     {/* Skills List - Display ALL skills */}
-    <div className='flex flex-wrap gap-1 lg:gap-1.5 lg:flex-1 lg:content-start'>
+    <div className='flex flex-wrap gap-1 lg:gap-1.5 flex-1 content-start overflow-hidden'>
       {category.skills.map((skill: string) => (
         <span
           key={skill}
-          className='px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-md text-xs font-medium border'
+          className='px-1.5 py-0.5 rounded-md text-xs font-medium border'
           style={{
             backgroundColor: 'var(--bg-primary)',
             borderColor: 'var(--border-primary)',
