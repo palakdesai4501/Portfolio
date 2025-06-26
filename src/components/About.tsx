@@ -28,7 +28,7 @@ interface SkillCategory {
 const SkillCard = ({ category }: { category: SkillCategory }) => (
   <motion.div
     whileHover={{ y: -5, scale: 1.02 }}
-    className='relative backdrop-blur-sm border rounded-xl p-4 w-56 shadow-lg transition-all duration-300'
+    className='relative backdrop-blur-sm border rounded-xl p-3 lg:p-4 w-56 h-auto lg:h-48 shadow-lg transition-all duration-300 flex flex-col'
     style={{
       backgroundColor: 'var(--bg-secondary)',
       borderColor: 'var(--border-primary)',
@@ -73,11 +73,11 @@ const SkillCard = ({ category }: { category: SkillCategory }) => (
     </div>
 
     {/* Skills List - Display ALL skills */}
-    <div className='flex flex-wrap gap-1.5'>
+    <div className='flex flex-wrap gap-1 lg:gap-1.5 lg:flex-1 lg:content-start'>
       {category.skills.map((skill: string) => (
         <span
           key={skill}
-          className='px-2 py-1 rounded-md text-xs font-medium border'
+          className='px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-md text-xs font-medium border'
           style={{
             backgroundColor: 'var(--bg-primary)',
             borderColor: 'var(--border-primary)',
@@ -139,7 +139,7 @@ const About = () => {
       category: 'Others',
       percentage: 85,
       color: theme === 'light' ? '#1F6FEB' : '#58A6FF',
-      skills: ['Git', 'HTML5', 'CSS3', 'Tailwind CSS', 'Design Patterns', 'Agile'],
+      skills: ['Git', 'HTML5', 'CSS3', 'Tailwind CSS', 'Agile'],
     },
   ]
 
@@ -438,22 +438,25 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className='mb-20 mt-48'
+          className='mb-8 lg:mb-20 mt-16 lg:mt-48'
         >
-          <div className='text-center mb-16'>
+          <div className='text-center mb-8 lg:mb-16'>
             <h3
-              className='text-3xl md:text-4xl font-bold mb-6'
+              className='text-2xl lg:text-3xl md:text-4xl font-bold mb-4 lg:mb-6'
               style={{ color: 'var(--text-primary)' }}
             >
               Technical Expertise
             </h3>
-            <p className='text-lg max-w-2xl mx-auto' style={{ color: 'var(--text-secondary)' }}>
+            <p
+              className='text-base lg:text-lg max-w-2xl mx-auto'
+              style={{ color: 'var(--text-secondary)' }}
+            >
               Comprehensive overview of my technical skills across different technology areas
             </p>
           </div>
 
           {/* Skills Layout with Chart in Center */}
-          <div className='relative w-full min-h-[1000px] lg:h-[1100px] max-w-7xl mx-auto'>
+          <div className='relative w-full min-h-[400px] lg:min-h-[1000px] lg:h-[1100px] max-w-7xl mx-auto'>
             {/* Central Radar Chart - Desktop Only */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -553,25 +556,28 @@ const About = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
                 viewport={{ once: true }}
-                className='w-80 h-80 sm:w-96 sm:h-96 mb-8'
+                className='w-72 h-72 sm:w-80 sm:h-80 mb-4'
               >
                 <Radar data={skillsData} options={chartOptions} />
               </motion.div>
 
-              {/* Skill Cards Grid Below Chart */}
-              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto px-4'>
-                {skillCategories.map((category, index) => (
-                  <motion.div
-                    key={category.category}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                    viewport={{ once: true }}
-                    className='flex justify-center'
-                  >
-                    <SkillCard category={category} />
-                  </motion.div>
-                ))}
+              {/* Horizontal Scrollable Skill Cards */}
+              <div className='w-full overflow-x-auto hide-scrollbar'>
+                <div className='flex space-x-3 px-4 pb-2' style={{ width: 'max-content' }}>
+                  {skillCategories.map((category, index) => (
+                    <motion.div
+                      key={category.category}
+                      initial={{ opacity: 0, x: 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                      viewport={{ once: true }}
+                      className='flex-shrink-0'
+                      style={{ width: '224px' }}
+                    >
+                      <SkillCard category={category} />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

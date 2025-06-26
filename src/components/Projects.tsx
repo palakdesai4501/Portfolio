@@ -189,8 +189,8 @@ const Projects = () => {
           </motion.p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {/* Projects Grid - Desktop */}
+        <div className='hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -204,7 +204,7 @@ const Projects = () => {
               {/* Card Background Effect */}
               <div className='absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300' />
 
-              <div className='relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 github-card'>
+              <div className='relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 github-card h-[420px] flex flex-col'>
                 {/* Project Image Placeholder */}
                 <div className='relative h-48 overflow-hidden'>
                   <div
@@ -258,7 +258,7 @@ const Projects = () => {
                 </div>
 
                 {/* Project Content */}
-                <div className='p-6'>
+                <div className='p-6 flex flex-col flex-1'>
                   <h3
                     className='text-xl font-bold mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--accent-primary)] group-hover:to-[var(--accent-hover)] transition-colors duration-200'
                     style={{ color: 'var(--text-primary)' }}
@@ -267,14 +267,14 @@ const Projects = () => {
                   </h3>
 
                   <p
-                    className='mb-4 text-sm leading-relaxed line-clamp-3'
+                    className='mb-4 text-sm leading-relaxed flex-1'
                     style={{ color: 'var(--text-secondary)' }}
                   >
                     {project.description}
                   </p>
 
-                  {/* Technologies */}
-                  <div className='flex flex-wrap gap-2 mb-4'>
+                  {/* Technologies - Show ALL */}
+                  <div className='flex flex-wrap gap-2 mt-auto'>
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
@@ -293,6 +293,114 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Projects Horizontal Scroll - Mobile */}
+        <div className='md:hidden w-full overflow-x-auto hide-scrollbar'>
+          <div className='flex space-x-4 px-4 pb-2' style={{ width: 'max-content' }}>
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className='group relative flex-shrink-0'
+                style={{ width: '300px' }}
+              >
+                {/* Card Background Effect */}
+                <div className='absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300' />
+
+                <div className='relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 github-card h-80 flex flex-col'>
+                  {/* Project Image Placeholder */}
+                  <div className='relative h-40 overflow-hidden'>
+                    <div
+                      className='absolute inset-0'
+                      style={{
+                        background:
+                          'linear-gradient(135deg, rgba(31, 111, 235, 0.1), rgba(88, 166, 255, 0.1))',
+                      }}
+                    />
+                    <div
+                      className='w-full h-full flex items-center justify-center'
+                      style={{ backgroundColor: 'var(--bg-primary)' }}
+                    >
+                      <div className='text-center'>
+                        <div
+                          className='w-12 h-12 mx-auto mb-2 rounded-lg flex items-center justify-center'
+                          style={{
+                            background:
+                              'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
+                          }}
+                        >
+                          <span className='text-lg font-bold text-white'>
+                            {project.title.charAt(0)}
+                          </span>
+                        </div>
+                        <p className='text-xs' style={{ color: 'var(--text-secondary)' }}>
+                          Project Preview
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Hover Overlay */}
+                    <div className='absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
+                      <div className='flex space-x-4'>
+                        <motion.a
+                          href={project.github}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className='p-2 backdrop-blur-sm rounded-full transition-all duration-200 hover:bg-[var(--accent-primary)] hover:bg-opacity-20'
+                          style={{
+                            backgroundColor: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                          }}
+                        >
+                          <Github size={18} />
+                        </motion.a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Project Content */}
+                  <div className='p-4 flex flex-col flex-1'>
+                    <h3
+                      className='text-lg font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--accent-primary)] group-hover:to-[var(--accent-hover)] transition-colors duration-200'
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {project.title}
+                    </h3>
+
+                    <p
+                      className='mb-3 text-xs leading-relaxed flex-1'
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      {project.description}
+                    </p>
+
+                    {/* Technologies - Show ALL */}
+                    <div className='flex flex-wrap gap-1 mt-auto'>
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className='px-1.5 py-0.5 rounded text-xs border'
+                          style={{
+                            backgroundColor: 'var(--bg-primary)',
+                            borderColor: 'var(--border-primary)',
+                            color: 'var(--text-secondary)',
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* View More Button */}

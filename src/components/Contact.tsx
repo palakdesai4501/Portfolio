@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { useTheme } from '../app/context/ThemeContext'
 
 const Contact = () => {
@@ -16,12 +16,6 @@ const Contact = () => {
       label: 'Email',
       value: 'desai1j@uwindsor.ca',
       href: 'mailto:desai1j@uwindsor.ca',
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '4376690174',
-      href: 'tel:+14376690174',
     },
   ]
 
