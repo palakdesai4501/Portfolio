@@ -95,22 +95,67 @@ const Chatbot = () => {
   return (
     <>
       {/* Floating Chat Button */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
-        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-lg z-40 flex items-center justify-center transition-all duration-300 cursor-pointer ${
-          isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
-        style={{
-          background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
-          boxShadow: '0 8px 32px rgba(31, 111, 235, 0.3)',
-        }}
+      <div
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       >
-        <MessageCircle size={20} className='text-white sm:w-6 sm:h-6' />
-      </motion.button>
+        {/* Pulsing ring animation */}
+        <div className='absolute inset-0 w-14 h-14 sm:w-16 sm:h-16'>
+          <div className='absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] opacity-75 animate-ping' />
+          <div className='absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] opacity-50 animate-pulse' />
+        </div>
+
+        {/* Main button */}
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{
+            scale: 1,
+            rotate: [0, 5, -5, 0],
+          }}
+          transition={{
+            scale: { duration: 0.5 },
+            rotate: {
+              duration: 2,
+              repeat: Infinity,
+              repeatDelay: 3,
+              ease: 'easeInOut',
+            },
+          }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setIsOpen(true)}
+          className='relative w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer'
+          style={{
+            background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
+            boxShadow: '0 8px 32px rgba(31, 111, 235, 0.4)',
+          }}
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <MessageCircle size={20} className='text-white sm:w-6 sm:h-6' />
+          </motion.div>
+
+          {/* Notification dot */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: [0, 1, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatDelay: 1,
+              ease: 'easeInOut',
+            }}
+            className='absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full border-2 border-white'
+          />
+        </motion.button>
+      </div>
 
       {/* Chat Interface */}
       <AnimatePresence>
