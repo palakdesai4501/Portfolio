@@ -1,19 +1,41 @@
+/**
+ * Chatbot Component
+ *
+ * An interactive AI-powered chatbot that provides information about the portfolio owner.
+ * Features:
+ * - Animated floating button with pulsing effects
+ * - Full-screen chat interface on mobile, floating window on desktop
+ * - Real-time conversation with Google Gemini API
+ * - Message history and typing indicators
+ * - Theme-aware styling and responsive design
+ */
+
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react'
 
+/**
+ * Interface defining the structure of a chat message
+ */
 interface Message {
-  id: string
-  text: string
-  isUser: boolean
-  timestamp: Date
+  id: string // Unique identifier for the message
+  text: string // Message content
+  isUser: boolean // Whether the message is from the user (true) or bot (false)
+  timestamp: Date // When the message was created
 }
 
+/**
+ * Main Chatbot Component
+ *
+ * Manages the complete chatbot functionality including state, API calls, and UI
+ */
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  // Component state management
+  const [isOpen, setIsOpen] = useState(false) // Controls chat window visibility
   const [messages, setMessages] = useState<Message[]>([
+    // Stores conversation history
     {
       id: '1',
       text: "Hi! I'm Palak's AI assistant 🤖 Ask me about her experience, skills, projects, or anything else you'd like to know about her!",
@@ -21,21 +43,32 @@ const Chatbot = () => {
       timestamp: new Date(),
     },
   ])
-  const [inputValue, setInputValue] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [inputValue, setInputValue] = useState('') // Current user input
+  const [isLoading, setIsLoading] = useState(false) // API request loading state
+  const messagesEndRef = useRef<HTMLDivElement>(null) // Reference for auto-scrolling
 
+  /**
+   * Automatically scrolls to the bottom of the messages container
+   * Used to show the latest message when new ones are added
+   */
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  // Auto-scroll to bottom whenever new messages are added
   useEffect(() => {
     scrollToBottom()
   }, [messages])
 
+  /**
+   * Sends a user message to the AI and processes the response
+   * Handles API communication, error states, and message updates
+   */
   const sendMessage = async () => {
+    // Prevent sending empty messages or multiple simultaneous requests
     if (!inputValue.trim() || isLoading) return
 
+    // Create user message object with unique ID
     const userMessage: Message = {
       id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       text: inputValue,
@@ -43,11 +76,13 @@ const Chatbot = () => {
       timestamp: new Date(),
     }
 
+    // Add user message to conversation and clear input
     setMessages((prev) => [...prev, userMessage])
     setInputValue('')
     setIsLoading(true)
 
     try {
+      // Send request to API route with message and conversation history
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -62,6 +97,7 @@ const Chatbot = () => {
       const data = await response.json()
 
       if (response.ok) {
+        // Create and add successful bot response
         const botMessage: Message = {
           id: `bot-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           text: data.response,
@@ -73,6 +109,7 @@ const Chatbot = () => {
         throw new Error(data.error || 'Failed to get response')
       }
     } catch {
+      // Handle API errors with user-friendly message
       const errorMessage: Message = {
         id: `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         text: 'Sorry, I encountered an error. Please try again later.',
@@ -81,10 +118,15 @@ const Chatbot = () => {
       }
       setMessages((prev) => [...prev, errorMessage])
     } finally {
+      // Always reset loading state
       setIsLoading(false)
     }
   }
 
+  /**
+   * Handles keyboard shortcuts in the input field
+   * Enter key sends message, Shift+Enter adds new line
+   */
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
@@ -94,17 +136,17 @@ const Chatbot = () => {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Animated floating chat button with attention-grabbing effects */}
       <div
         className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       >
-        {/* Pulsing ring animation */}
+        {/* Multiple pulsing ring animations for visibility */}
         <div className='absolute inset-0 w-14 h-14 sm:w-16 sm:h-16'>
           <div className='absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] opacity-75 animate-ping' />
           <div className='absolute inset-0 rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] opacity-50 animate-pulse' />
         </div>
 
-        {/* Main button */}
+        {/* Main chat button with multiple animation effects */}
         <motion.button
           initial={{ scale: 0 }}
           animate={{
@@ -142,7 +184,7 @@ const Chatbot = () => {
             <MessageCircle size={20} className='text-white sm:w-6 sm:h-6' />
           </motion.div>
 
-          {/* Notification dot */}
+          {/* Animated notification dot to suggest interactivity */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: [0, 1, 0] }}
@@ -157,7 +199,7 @@ const Chatbot = () => {
         </motion.button>
       </div>
 
-      {/* Chat Interface */}
+      {/* Main chat interface - responsive modal window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -170,7 +212,7 @@ const Chatbot = () => {
               border: '1px solid var(--border-primary)',
             }}
           >
-            {/* Header */}
+            {/* Chat window header with branding and close button */}
             <div
               className='p-3 sm:p-4 flex items-center justify-between border-b'
               style={{
@@ -199,7 +241,7 @@ const Chatbot = () => {
               </motion.button>
             </div>
 
-            {/* Messages */}
+            {/* Messages container with auto-scroll */}
             <div className='flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4'>
               {messages.map((message) => (
                 <motion.div
@@ -237,6 +279,7 @@ const Chatbot = () => {
                 </motion.div>
               ))}
 
+              {/* Typing indicator animation while AI is responding */}
               {isLoading && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -272,7 +315,7 @@ const Chatbot = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
+            {/* Message input area with send button */}
             <div className='p-3 sm:p-4 border-t' style={{ borderColor: 'var(--border-primary)' }}>
               <div className='flex items-center space-x-2'>
                 <div className='flex-1'>

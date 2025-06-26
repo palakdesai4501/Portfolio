@@ -1,3 +1,14 @@
+/**
+ * About Component
+ *
+ * This component displays comprehensive information about the portfolio owner including:
+ * - Educational background with animated cards
+ * - Technical skills visualization with radar chart
+ * - Skill categories arranged in satellite layout around the chart
+ * - Responsive design with mobile horizontal scroll
+ * - Theme-aware styling and floating particle animations
+ */
+
 'use client'
 
 import { motion } from 'framer-motion'
@@ -14,17 +25,31 @@ import {
   Legend,
 } from 'chart.js'
 
-// Register Chart.js components
+// Register required Chart.js components for radar chart functionality
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
-// Skill Card Component
+/**
+ * Interface defining the structure of a skill category
+ * Used to organize technical skills into different domains
+ */
 interface SkillCategory {
-  category: string
-  percentage: number
-  color: string
-  skills: string[]
+  category: string // Name of the skill category (e.g., "Languages", "Frameworks")
+  percentage: number // Proficiency level as a percentage (0-100)
+  color: string // Theme color for visual representation
+  skills: string[] // Array of specific skills within this category
 }
 
+/**
+ * SkillCard Component
+ *
+ * Displays an individual skill category with:
+ * - Category icon and name
+ * - Proficiency percentage with animated progress bar
+ * - List of all specific skills/technologies
+ * - Hover animations and theme-aware styling
+ *
+ * @param category - The skill category data to display
+ */
 const SkillCard = ({ category }: { category: SkillCategory }) => (
   <motion.div
     whileHover={{ y: -5, scale: 1.02 }}
@@ -34,14 +59,16 @@ const SkillCard = ({ category }: { category: SkillCategory }) => (
       borderColor: 'var(--border-primary)',
     }}
   >
-    {/* Header */}
+    {/* Header: Category icon and percentage */}
     <div className='flex items-center justify-between mb-3'>
+      {/* Category icon with first letter */}
       <div
         className='w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md'
         style={{ backgroundColor: category.color }}
       >
         {category.category.charAt(0)}
       </div>
+      {/* Percentage badge */}
       <div
         className='px-2 py-1 rounded-full text-xs font-bold'
         style={{
@@ -53,12 +80,12 @@ const SkillCard = ({ category }: { category: SkillCategory }) => (
       </div>
     </div>
 
-    {/* Title */}
+    {/* Category title */}
     <h4 className='text-base font-bold mb-2' style={{ color: 'var(--text-primary)' }}>
       {category.category}
     </h4>
 
-    {/* Progress Bar */}
+    {/* Animated progress bar showing proficiency level */}
     <div className='mb-3'>
       <div className='w-full rounded-full h-1.5' style={{ backgroundColor: 'var(--bg-tertiary)' }}>
         <motion.div
@@ -72,7 +99,7 @@ const SkillCard = ({ category }: { category: SkillCategory }) => (
       </div>
     </div>
 
-    {/* Skills List - Display ALL skills */}
+    {/* Skills list - displays all technologies in this category */}
     <div className='flex flex-wrap gap-1 lg:gap-1.5 flex-1 content-start overflow-hidden'>
       {category.skills.map((skill: string) => (
         <span
@@ -91,13 +118,19 @@ const SkillCard = ({ category }: { category: SkillCategory }) => (
   </motion.div>
 )
 
+/**
+ * Main About Component
+ *
+ * Renders the complete About section with education and technical skills
+ * Features responsive design and theme-aware styling
+ */
 const About = () => {
   const { theme } = useTheme()
 
-  // Theme-aware particle colors
+  // Get theme-appropriate particle colors for floating animations
   const getParticleColor = () => (theme === 'light' ? '#1F6FEB' : '#58A6FF')
 
-  // Skill categories with individual skills
+  // Complete skill categories data with proficiency levels and technologies
   const skillCategories = [
     {
       category: 'Languages',
@@ -143,7 +176,7 @@ const About = () => {
     },
   ]
 
-  // Radar chart data for skill categories
+  // Configure radar chart data structure for Chart.js
   const skillsData = {
     labels: skillCategories.map((cat) => cat.category),
     datasets: [
@@ -165,6 +198,7 @@ const About = () => {
     ],
   }
 
+  // Comprehensive chart configuration with theme-aware styling and responsive design
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: true,
@@ -225,6 +259,7 @@ const About = () => {
     },
   } as const
 
+  // Education background data with detailed information
   const education = [
     {
       degree: 'Master of Applied Computing',
@@ -247,11 +282,11 @@ const About = () => {
       className='py-16 px-6 relative overflow-hidden'
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
-      {/* Background Elements */}
+      {/* Background layers for visual depth */}
       <div className='absolute inset-0' style={{ backgroundColor: 'var(--bg-primary)' }} />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5" />
 
-      {/* Enhanced floating particles */}
+      {/* Animated floating particles for visual interest */}
       <div className='absolute inset-0 pointer-events-none overflow-hidden'>
         {[...Array(3)].map((_, i) => (
           <motion.div
@@ -279,7 +314,7 @@ const About = () => {
       </div>
 
       <div className='max-w-7xl mx-auto relative z-10'>
-        {/* Section Header */}
+        {/* Main section header with animated title */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -299,7 +334,7 @@ const About = () => {
           </motion.h2>
         </motion.div>
 
-        {/* Education Section */}
+        {/* Education background section with animated cards */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -432,7 +467,7 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Technical Skills Section */}
+        {/* Technical skills section with radar chart and skill cards */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -455,9 +490,9 @@ const About = () => {
             </p>
           </div>
 
-          {/* Skills Layout with Chart in Center */}
+          {/* Complex skills layout: chart in center with cards positioned around it */}
           <div className='relative w-full min-h-[400px] lg:min-h-[1000px] lg:h-[1100px] max-w-7xl mx-auto'>
-            {/* Central Radar Chart - Desktop Only */}
+            {/* Central radar chart - only shown on desktop screens */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -468,9 +503,9 @@ const About = () => {
               <Radar data={skillsData} options={chartOptions} />
             </motion.div>
 
-            {/* Skill Cards Positioned Around Chart in All Directions (Desktop) */}
+            {/* Skill cards positioned as satellites around the central chart (desktop only) */}
             <div className='hidden lg:block absolute inset-0'>
-              {/* Top - Languages */}
+              {/* Top position - Languages category */}
               <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -481,7 +516,7 @@ const About = () => {
                 <SkillCard category={skillCategories[0]} />
               </motion.div>
 
-              {/* Top Left - AI Tools */}
+              {/* Top left position - AI Tools category */}
               <motion.div
                 initial={{ opacity: 0, x: -50, y: -50 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -492,7 +527,7 @@ const About = () => {
                 <SkillCard category={skillCategories[5]} />
               </motion.div>
 
-              {/* Top Right - Frameworks */}
+              {/* Top right position - Frameworks category */}
               <motion.div
                 initial={{ opacity: 0, x: 50, y: -50 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -503,7 +538,7 @@ const About = () => {
                 <SkillCard category={skillCategories[1]} />
               </motion.div>
 
-              {/* Left - Others */}
+              {/* Left position - Others category */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -514,7 +549,7 @@ const About = () => {
                 <SkillCard category={skillCategories[6]} />
               </motion.div>
 
-              {/* Right - Databases */}
+              {/* Right position - Databases category */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -525,7 +560,7 @@ const About = () => {
                 <SkillCard category={skillCategories[2]} />
               </motion.div>
 
-              {/* Bottom Left - Testing */}
+              {/* Bottom left position - Testing category */}
               <motion.div
                 initial={{ opacity: 0, x: -50, y: 50 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -536,7 +571,7 @@ const About = () => {
                 <SkillCard category={skillCategories[3]} />
               </motion.div>
 
-              {/* Bottom - DevOps & Cloud */}
+              {/* Bottom position - DevOps & Cloud category */}
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -548,9 +583,9 @@ const About = () => {
               </motion.div>
             </div>
 
-            {/* Mobile/Tablet Layout */}
+            {/* Mobile and tablet responsive layout */}
             <div className='lg:hidden flex flex-col items-center'>
-              {/* Chart First on Mobile */}
+              {/* Radar chart displayed first on mobile devices */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -561,7 +596,7 @@ const About = () => {
                 <Radar data={skillsData} options={chartOptions} />
               </motion.div>
 
-              {/* Horizontal Scrollable Skill Cards */}
+              {/* Horizontally scrollable skill cards for mobile */}
               <div className='w-full overflow-x-auto hide-scrollbar'>
                 <div className='flex space-x-3 px-4 pb-2' style={{ width: 'max-content' }}>
                   {skillCategories.map((category, index) => (
