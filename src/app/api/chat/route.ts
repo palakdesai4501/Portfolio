@@ -74,10 +74,19 @@ export async function POST(request: NextRequest) {
 
     const aiClient = getAIClient()
     if (!aiClient) {
+      console.error('AI client initialization failed')
       throw new Error('Failed to initialize AI client')
     }
     
-    const model = aiClient.getGenerativeModel({ model: 'gemini-1.5-flash' })
+    const model = aiClient.getGenerativeModel({ 
+      model: 'gemini-1.5-flash',
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.95,
+        maxOutputTokens: 1024,
+      },
+    })
 
     // Build conversation context
     let conversationContext = ''
