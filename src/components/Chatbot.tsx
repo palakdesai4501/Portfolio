@@ -60,17 +60,20 @@ const Chatbot = () => {
     scrollToBottom()
   }, [messages])
 
-  // Simple pre-warm on mount only
+  // Pre-warm only in production to avoid dev conflicts
   useEffect(() => {
     const warmUpAPI = async () => {
       try {
-        await fetch('/api/chat', { method: 'GET' })
+        // Only pre-warm in production to avoid development conflicts
+        if (window.location.hostname !== 'localhost') {
+          await fetch('/api/chat', { method: 'GET' })
+        }
       } catch {
         // Silently fail
       }
     }
     
-    const timer = setTimeout(warmUpAPI, 1000) // Delay to avoid conflicts
+    const timer = setTimeout(warmUpAPI, 2000) // Longer delay for stability
     return () => clearTimeout(timer)
   }, [])
 
@@ -94,9 +97,6 @@ const Chatbot = () => {
     setIsLoading(true)
 
     try {
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
-
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -106,10 +106,7 @@ const Chatbot = () => {
           message: currentInput,
           conversationHistory: messages,
         }),
-        signal: controller.signal,
       })
-
-      clearTimeout(timeoutId)
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
@@ -131,10 +128,10 @@ const Chatbot = () => {
       let errorText = 'Sorry, I encountered an error. Please try again.'
       
       if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          errorText = 'Request timed out. Please try again.'
-        } else if (error.message.includes('fetch')) {
+        if (error.message.includes('fetch') || error.message.includes('Failed to fetch')) {
           errorText = 'Connection failed. Please check your internet and try again.'
+        } else if (error.message.includes('500')) {
+          errorText = 'Server error. The chatbot might be starting up, please try again.'
         }
       }
 

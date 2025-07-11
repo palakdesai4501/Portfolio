@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
         temperature: 0.7,
         topK: 40,
         topP: 0.95,
-        maxOutputTokens: 1024,
+        maxOutputTokens: 512, // Reduce token limit for faster responses
       },
     })
 
