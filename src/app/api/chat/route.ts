@@ -41,6 +41,10 @@ function checkRateLimit(key: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.GEMINI_API_KEY) {
+      return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
+    }
+
     // Check rate limit
     const rateLimitKey = getRateLimitKey(request)
     if (!checkRateLimit(rateLimitKey)) {
@@ -54,10 +58,6 @@ export async function POST(request: NextRequest) {
 
     if (!message) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 })
-    }
-
-    if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
     }
 
     // Limit conversation history to save tokens
