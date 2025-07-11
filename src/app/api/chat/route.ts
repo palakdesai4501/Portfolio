@@ -8,7 +8,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
 
 const RATE_LIMIT = {
-  MAX_REQUESTS: 5, // 5 messages per IP per hour
+  MAX_REQUESTS: process.env.NODE_ENV === 'production' ? 15 : 5, // More requests in production
   WINDOW_MS: 60 * 60 * 1000, // 1 hour
 }
 
