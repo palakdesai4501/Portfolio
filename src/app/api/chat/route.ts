@@ -41,7 +41,16 @@ function checkRateLimit(key: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    // Debug: Check environment in production
+    console.log('Environment check:', {
+      hasApiKey: !!process.env.GEMINI_API_KEY,
+      keyLength: process.env.GEMINI_API_KEY?.length || 0,
+      nodeEnv: process.env.NODE_ENV,
+      platform: 'vercel'
+    })
+    
     if (!process.env.GEMINI_API_KEY) {
+      console.error('Missing API key in environment')
       return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
     }
 
