@@ -109,7 +109,16 @@ const Chatbot = () => {
       })
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+        let errorMessage = `HTTP ${response.status}: ${response.statusText}`
+        try {
+          const errorData = await response.json()
+          if (errorData.error) {
+            errorMessage += ` - ${errorData.error}`
+          }
+        } catch {
+          // If we can't parse the error response, use the default message
+        }
+        throw new Error(errorMessage)
       }
 
       const data = await response.json()
@@ -132,6 +141,10 @@ const Chatbot = () => {
           errorText = 'Connection failed. Please check your internet and try again.'
         } else if (error.message.includes('500')) {
           errorText = 'Server error. The chatbot might be starting up, please try again.'
+        } else if (error.message.includes('quota') || error.message.includes('429')) {
+          errorText = '🤖 Daily quota reached! The chatbot has hit its 50 requests/day limit. It will reset tomorrow. Thanks for testing!'
+        } else if (error.message.includes('Daily API quota exceeded')) {
+          errorText = error.message.split(' - ')[1] || errorText
         }
       }
 

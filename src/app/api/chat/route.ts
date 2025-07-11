@@ -136,9 +136,27 @@ Answer:`
     return NextResponse.json({ response: text.trim() })
   } catch (error) {
     console.error('Chatbot API Error:', error)
+    
+    let errorMessage = 'Failed to process your message. Please try again.'
+    let statusCode = 500
+    
+    // Handle specific Google API errors
+    if (error instanceof Error) {
+      if (error.message.includes('quota') || error.message.includes('Too Many Requests')) {
+        errorMessage = 'Daily API quota exceeded (50 requests/day limit reached). The chatbot will reset tomorrow. Thank you for testing!'
+        statusCode = 429
+      } else if (error.message.includes('API key')) {
+        errorMessage = 'API configuration error. Please contact support.'
+        statusCode = 500
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Request timed out. Please try again.'
+        statusCode = 504
+      }
+    }
+    
     return NextResponse.json(
-      { error: 'Failed to process your message. Please try again.' },
-      { status: 500 }
+      { error: errorMessage },
+      { status: statusCode }
     )
   }
 }
