@@ -16,7 +16,7 @@ function getAIClient() {
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
 
 const RATE_LIMIT = {
-  MAX_REQUESTS: process.env.NODE_ENV === 'production' ? 15 : 5, // More requests in production
+  MAX_REQUESTS: 20, // Increase limit to reduce conflicts
   WINDOW_MS: 60 * 60 * 1000, // 1 hour
 }
 
@@ -129,7 +129,11 @@ Answer:`
     const response = await result.response
     const text = response.text()
 
-    return NextResponse.json({ response: text })
+    if (!text || text.trim().length === 0) {
+      throw new Error('Empty response from AI model')
+    }
+
+    return NextResponse.json({ response: text.trim() })
   } catch (error) {
     console.error('Chatbot API Error:', error)
     return NextResponse.json(

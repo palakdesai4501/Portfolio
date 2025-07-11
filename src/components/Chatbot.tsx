@@ -60,34 +60,27 @@ const Chatbot = () => {
     scrollToBottom()
   }, [messages])
 
-  // Pre-warm the API route when component mounts and keep it warm
+  // Simple pre-warm on mount only
   useEffect(() => {
     const warmUpAPI = async () => {
       try {
         await fetch('/api/chat', { method: 'GET' })
       } catch {
-        // Silently fail - this is just for warming up
+        // Silently fail
       }
     }
     
-    // Initial warm-up
-    warmUpAPI()
-    
-    // Keep warm with periodic pings (every 5 minutes)
-    const keepWarmInterval = setInterval(warmUpAPI, 5 * 60 * 1000)
-    
-    return () => clearInterval(keepWarmInterval)
+    const timer = setTimeout(warmUpAPI, 1000) // Delay to avoid conflicts
+    return () => clearTimeout(timer)
   }, [])
 
-  /**
+    /**
    * Sends a user message to the AI and processes the response
-   * Handles API communication, error states, and message updates with retries
+   * Simple, reliable implementation
    */
-  const sendMessageWithRetry = async (retryCount = 0) => {
-    // Prevent sending empty messages or multiple simultaneous requests
+  const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return
 
-    // Create user message object with unique ID
     const userMessage: Message = {
       id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       text: inputValue,
@@ -95,75 +88,67 @@ const Chatbot = () => {
       timestamp: new Date(),
     }
 
-    // Add user message to conversation and clear input (only on first attempt)
-    if (retryCount === 0) {
-      setMessages((prev) => [...prev, userMessage])
-      setInputValue('')
-      setIsLoading(true)
-    }
+    const currentInput = inputValue
+    setMessages((prev) => [...prev, userMessage])
+    setInputValue('')
+    setIsLoading(true)
 
     try {
-      // If this is a retry, try to warm up the function first
-      if (retryCount > 0) {
-        await fetch('/api/chat', { method: 'GET' })
-        // Small delay to allow warm-up
-        await new Promise(resolve => setTimeout(resolve, 1000))
-      }
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
 
-      // Send request to API route with message and conversation history
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: inputValue,
+          message: currentInput,
           conversationHistory: messages,
         }),
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
 
       const data = await response.json()
 
-      if (response.ok) {
-        // Create and add successful bot response
-        const botMessage: Message = {
-          id: `bot-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-          text: data.response,
-          isUser: false,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, botMessage])
-      } else {
-        throw new Error(data.error || 'Failed to get response')
+      const botMessage: Message = {
+        id: `bot-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        text: data.response || 'Sorry, I received an empty response.',
+        isUser: false,
+        timestamp: new Date(),
       }
+      setMessages((prev) => [...prev, botMessage])
+
     } catch (error) {
-      // Retry logic for cold start issues
-      if (retryCount < 2 && (error instanceof Error && 
-          (error.message.includes('timeout') || 
-           error.message.includes('500') || 
-           error.message.includes('fetch')))) {
-        console.log(`Retrying request (attempt ${retryCount + 1})...`)
-                 return sendMessageWithRetry(retryCount + 1)
-      }
+      console.error('Chat error:', error)
       
-      // Handle API errors with user-friendly message
+      let errorText = 'Sorry, I encountered an error. Please try again.'
+      
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          errorText = 'Request timed out. Please try again.'
+        } else if (error.message.includes('fetch')) {
+          errorText = 'Connection failed. Please check your internet and try again.'
+        }
+      }
+
       const errorMessage: Message = {
         id: `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-        text: retryCount > 0 
-          ? 'I\'m having trouble connecting. The chatbot might be starting up. Please try again in a moment.'
-          : 'Sorry, I encountered an error. Please try again.',
+        text: errorText,
         isUser: false,
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
     } finally {
-      // Always reset loading state
       setIsLoading(false)
     }
   }
-
-  // Simple wrapper for button clicks
-  const sendMessage = () => sendMessageWithRetry()
 
   /**
    * Handles keyboard shortcuts in the input field
