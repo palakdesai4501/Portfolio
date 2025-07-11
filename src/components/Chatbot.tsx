@@ -60,6 +60,18 @@ const Chatbot = () => {
     scrollToBottom()
   }, [messages])
 
+  // Pre-warm the API route when component mounts
+  useEffect(() => {
+    const warmUpAPI = async () => {
+      try {
+        await fetch('/api/chat', { method: 'GET' })
+      } catch {
+        // Silently fail - this is just for warming up
+      }
+    }
+    warmUpAPI()
+  }, [])
+
   /**
    * Sends a user message to the AI and processes the response
    * Handles API communication, error states, and message updates

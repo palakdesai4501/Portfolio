@@ -2,7 +2,15 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 import { NextRequest, NextResponse } from 'next/server'
 import { personalKnowledgeBase } from '../../../data/personalKnowledge'
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+// Initialize AI client only when needed to avoid cold start issues
+let genAI: GoogleGenerativeAI | null = null
+
+function getAIClient() {
+  if (!genAI && process.env.GEMINI_API_KEY) {
+    genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+  }
+  return genAI
+}
 
 // Simple in-memory rate limiting (for production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
@@ -41,14 +49,6 @@ function checkRateLimit(key: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
-    // Debug: Check environment in production
-    console.log('Environment check:', {
-      hasApiKey: !!process.env.GEMINI_API_KEY,
-      keyLength: process.env.GEMINI_API_KEY?.length || 0,
-      nodeEnv: process.env.NODE_ENV,
-      platform: 'vercel'
-    })
-    
     if (!process.env.GEMINI_API_KEY) {
       console.error('Missing API key in environment')
       return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
@@ -72,7 +72,12 @@ export async function POST(request: NextRequest) {
     // Limit conversation history to save tokens
     const limitedHistory = conversationHistory ? conversationHistory.slice(-6) : []
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+    const aiClient = getAIClient()
+    if (!aiClient) {
+      throw new Error('Failed to initialize AI client')
+    }
+    
+    const model = aiClient.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
     // Build conversation context
     let conversationContext = ''
@@ -120,6 +125,28 @@ Answer:`
     console.error('Chatbot API Error:', error)
     return NextResponse.json(
       { error: 'Failed to process your message. Please try again.' },
+      { status: 500 }
+    )
+  }
+}
+
+// Add GET method for health checks and pre-warming
+export async function GET() {
+  try {
+    // This keeps the function warm and verifies setup
+    const hasApiKey = !!process.env.GEMINI_API_KEY
+    const aiClient = getAIClient()
+    
+    return NextResponse.json({
+      status: 'ready',
+      hasApiKey,
+      aiClientInitialized: !!aiClient,
+      timestamp: new Date().toISOString()
+    })
+  } catch (error) {
+    console.error('Health check error:', error)
+    return NextResponse.json(
+      { status: 'error', error: String(error) },
       { status: 500 }
     )
   }
