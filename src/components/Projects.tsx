@@ -11,6 +11,14 @@ const Projects = () => {
   const getParticleColor = () => (theme === 'light' ? '#1F6FEB' : '#58A6FF')
   const projects = [
     {
+      title: 'DevHub',
+      description:
+        'A MERN social networking platform for developers with JWT & Google One Tap auth, real-time notifications, rich text editor, and trending content discovery.',
+      image: '/api/placeholder/400/300', // replace with your actual app screenshot path
+      github: 'https://github.com/palakdesai4501/DevHub',
+      technologies: ['React 18', 'Node.js', 'Express.js', 'MongoDB Atlas', 'Socket.IO'],
+    },
+    {
       title: 'GoTravel France',
       description:
         'A mobile travel companion app offering AI-driven recommendations, interactive scavenger hunts, and real-time itinerary planning for tourists exploring France.',
@@ -49,14 +57,6 @@ const Projects = () => {
       image: '/api/placeholder/400/300',
       github: 'https://github.com/palakdesai4501/AI-Based-Chatbot',
       technologies: ['FastAPI', 'Python', 'Chroma DB', 'Neo4j', 'Vertex AI', 'OpenAI'],
-    },
-    {
-      title: 'ViewTube',
-      description:
-        'A responsive YouTube clone with real-time video search, playback, and channel browsing using the Rapid API and React.js.',
-      image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai4501/ViewTube',
-      technologies: ['React.js', 'Rapid API', 'Axios', 'Vite'],
     },
   ]
 

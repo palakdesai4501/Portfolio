@@ -72,12 +72,12 @@ const Chatbot = () => {
         // Silently fail
       }
     }
-    
+
     const timer = setTimeout(warmUpAPI, 2000) // Longer delay for stability
     return () => clearTimeout(timer)
   }, [])
 
-    /**
+  /**
    * Sends a user message to the AI and processes the response
    * Simple, reliable implementation
    */
@@ -130,19 +130,19 @@ const Chatbot = () => {
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
-
     } catch (error) {
       console.error('Chat error:', error)
-      
+
       let errorText = 'Sorry, I encountered an error. Please try again.'
-      
+
       if (error instanceof Error) {
         if (error.message.includes('fetch') || error.message.includes('Failed to fetch')) {
           errorText = 'Connection failed. Please check your internet and try again.'
         } else if (error.message.includes('500')) {
           errorText = 'Server error. The chatbot might be starting up, please try again.'
         } else if (error.message.includes('quota') || error.message.includes('429')) {
-          errorText = '🤖 Daily quota reached! The chatbot has hit its 50 requests/day limit. It will reset tomorrow. Thanks for testing!'
+          errorText =
+            '🤖 Daily quota reached! The chatbot has hit its 50 requests/day limit. It will reset tomorrow. Thanks for testing!'
         } else if (error.message.includes('Daily API quota exceeded')) {
           errorText = error.message.split(' - ')[1] || errorText
         }

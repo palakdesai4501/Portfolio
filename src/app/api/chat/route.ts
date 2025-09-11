@@ -77,8 +77,8 @@ export async function POST(request: NextRequest) {
       console.error('AI client initialization failed')
       throw new Error('Failed to initialize AI client')
     }
-    
-    const model = aiClient.getGenerativeModel({ 
+
+    const model = aiClient.getGenerativeModel({
       model: 'gemini-1.5-flash',
       generationConfig: {
         temperature: 0.7,
@@ -136,14 +136,15 @@ Answer:`
     return NextResponse.json({ response: text.trim() })
   } catch (error) {
     console.error('Chatbot API Error:', error)
-    
+
     let errorMessage = 'Failed to process your message. Please try again.'
     let statusCode = 500
-    
+
     // Handle specific Google API errors
     if (error instanceof Error) {
       if (error.message.includes('quota') || error.message.includes('Too Many Requests')) {
-        errorMessage = 'Daily API quota exceeded (50 requests/day limit reached). The chatbot will reset tomorrow. Thank you for testing!'
+        errorMessage =
+          'Daily API quota exceeded (50 requests/day limit reached). The chatbot will reset tomorrow. Thank you for testing!'
         statusCode = 429
       } else if (error.message.includes('API key')) {
         errorMessage = 'API configuration error. Please contact support.'
@@ -153,11 +154,8 @@ Answer:`
         statusCode = 504
       }
     }
-    
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: statusCode }
-    )
+
+    return NextResponse.json({ error: errorMessage }, { status: statusCode })
   }
 }
 
@@ -167,18 +165,15 @@ export async function GET() {
     // This keeps the function warm and verifies setup
     const hasApiKey = !!process.env.GEMINI_API_KEY
     const aiClient = getAIClient()
-    
+
     return NextResponse.json({
       status: 'ready',
       hasApiKey,
       aiClientInitialized: !!aiClient,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     })
   } catch (error) {
     console.error('Health check error:', error)
-    return NextResponse.json(
-      { status: 'error', error: String(error) },
-      { status: 500 }
-    )
+    return NextResponse.json({ status: 'error', error: String(error) }, { status: 500 })
   }
 }
