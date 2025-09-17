@@ -25,14 +25,14 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>('light')
+  const [theme, setThemeState] = useState<Theme>('dark')
   const [mounted, setMounted] = useState(false)
 
   // Set mounted to true after component mounts (client-side only)
   useEffect(() => {
     setMounted(true)
     // Set the initial theme attribute
-    document.documentElement.setAttribute('data-theme', 'light')
+    document.documentElement.setAttribute('data-theme', 'dark')
   }, [])
 
   // Update document when theme changes
