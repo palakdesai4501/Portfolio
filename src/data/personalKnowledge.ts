@@ -68,41 +68,53 @@ Databases & Tools:
 - Git/CI-CD/Agile/Design Patterns: 70%
 
 PROJECTS:
-1. GoTravel France
-   - A mobile travel companion app offering AI-driven recommendations
-   - Features: Interactive scavenger hunts, real-time itinerary planning for tourists exploring France
-   - Technologies: React Native, Node.js, Express.js, MongoDB, Expo
-   - GitHub: https://github.com/palakdesai4501/travel-france
+1. Cartly
+   - An AI-powered e-commerce agent that provides personalized product recommendations
+   - Features: Conversational interactions, image search, semantic understanding using RAG architecture and vector embeddings
+   - Technologies: Python, BAML, Flask, Pinecone, Hugging Face, React, TypeScript
+   - GitHub: https://github.com/palakdesai4501/AI-Agent-For-ECommerce
 
-2. Phone Intellect
-   - A microservices-based platform to compare real-time mobile plans
-   - Features: Automated scraping from major telecom providers, optimized data processing
-   - Technologies: Java, Spring Boot, React, Selenium
-   - GitHub: https://github.com/palakdesai4501/MobilePlanPriceAnalysis
+2. DevHub
+   - A MERN social networking platform for developers
+   - Features: JWT & Google One Tap auth, real-time notifications, and trending content discovery
+   - Technologies: React 18, Node.js, Express.js, MongoDB Atlas, Socket.IO
+   - GitHub: https://github.com/palakdesai4501/DevHub
 
-3. OptiPrice
-   - A web application that helps vendors set optimal product prices
-   - Features: Machine learning models, sentiment analysis of customer reviews
-   - Technologies: Angular, Python, Flask, MongoDB, Scikit-learn
-   - GitHub: https://github.com/palakdesai4501/optiPrice
+3. Document Query Agent
+   - AI-powered PDF document analysis using RAG (Retrieval-Augmented Generation)
+   - Features: Upload PDFs and ask questions about their content
+   - Technologies: Python, Streamlit, FAISS, Ollama, PyPDF2, SentenceTransformers
+   - GitHub: https://github.com/palakdesai4501/Document-Query-Agent
 
-4. EcoWave
-   - A sustainable e-commerce platform with environmental impact tracking
-   - Features: Real-time environmental impact tracking, secure Stripe-powered transactions
-   - Technologies: Python, Django, JavaScript, SQLite, Chart.js
-   - GitHub: https://github.com/palakdesai4501/EcoWave_Project
-
-5. Nestlé Chatbot
+4. Nestlé Chatbot
    - An AI-powered chatbot combining vector search and graph databases
    - Features: Smart, contextual recipe recommendations from the Nestlé website
    - Technologies: FastAPI, Python, Chroma DB, Neo4j, Vertex AI, OpenAI
    - GitHub: https://github.com/palakdesai4501/AI-Based-Chatbot
 
-6. ViewTube
-   - A responsive YouTube clone with real-time video features
-   - Features: Video search, playback, and channel browsing using Rapid API
-   - Technologies: React.js, Rapid API, Axios, Vite
-   - GitHub: https://github.com/palakdesai4501/ViewTube
+5. GoTravel France
+   - A mobile travel companion app offering AI-driven recommendations
+   - Features: Interactive scavenger hunts, itinerary planning for tourists exploring France
+   - Technologies: React Native, Node.js, Express.js, MongoDB, Expo
+   - GitHub: https://github.com/palakdesai4501/travel-france
+
+6. Phone Intellect
+   - A microservices-based platform to compare real-time mobile plans
+   - Features: Automated scraping from major telecom providers, optimized data processing
+   - Technologies: Java, Spring Boot, React, Selenium
+   - GitHub: https://github.com/palakdesai4501/MobilePlanPriceAnalysis
+
+7. OptiPrice
+   - A web application that helps vendors set optimal product prices
+   - Features: Machine learning models, sentiment analysis of customer reviews
+   - Technologies: Angular, Python, Flask, MongoDB, Scikit-learn
+   - GitHub: https://github.com/palakdesai4501/optiPrice
+
+8. EcoWave
+   - A sustainable e-commerce platform with environmental impact tracking
+   - Features: Real-time environmental impact tracking, secure Stripe-powered transactions
+   - Technologies: Python, Django, JavaScript, SQLite, Chart.js
+   - GitHub: https://github.com/palakdesai4501/EcoWave_Project
 
 CAREER INTERESTS:
 - Full-stack development with modern technologies

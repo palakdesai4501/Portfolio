@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Github } from 'lucide-react'
+import Image from 'next/image'
 import { useTheme } from '../app/context/ThemeContext'
 
 const Projects = () => {
@@ -11,18 +12,42 @@ const Projects = () => {
   const getParticleColor = () => (theme === 'light' ? '#1F6FEB' : '#58A6FF')
   const projects = [
     {
+      title: 'Cartly',
+      description:
+        'Cartly is an AI agent for e-commerce that uses RAG and vector embeddings to recommend products through chat and image search.',
+      image: '/assets/Cartly.png',
+      github: 'https://github.com/palakdesai4501/AI-Agent-For-ECommerce',
+      technologies: ['Python', 'BAML', 'Flask', 'Pinecone', 'Hugging Face', 'React', 'TypeScript'],
+    },
+    {
       title: 'DevHub',
       description:
-        'A MERN social networking platform for developers with JWT & Google One Tap auth, real-time notifications, rich text editor, and trending content discovery.',
-      image: '/api/placeholder/400/300', // replace with your actual app screenshot path
+        'A MERN social networking platform for developers with JWT & Google One Tap auth, real-time notifications, and trending content discovery.',
+      image: '/assets/devhub.png',
       github: 'https://github.com/palakdesai4501/DevHub',
       technologies: ['React 18', 'Node.js', 'Express.js', 'MongoDB Atlas', 'Socket.IO'],
     },
     {
+      title: 'Document Query Agent',
+      description:
+        'AI-powered PDF document analysis using RAG (Retrieval-Augmented Generation). Upload PDFs and ask questions about their content.',
+      image: '/assets/DocQueryAgent.png',
+      github: 'https://github.com/palakdesai4501/Document-Query-Agent',
+      technologies: ['Python', 'Streamlit', 'FAISS', 'Ollama', 'PyPDF2', 'SentenceTransformers'],
+    },
+    {
+      title: 'Nestlé Chatbot',
+      description:
+        'An AI-powered chatbot combining vector search and graph databases to provide smart, contextual recipe recommendations from the Nestlé website.',
+      image: '/assets/nestlechatbot.png',
+      github: 'https://github.com/palakdesai4501/AI-Based-Chatbot',
+      technologies: ['FastAPI', 'Python', 'Chroma DB', 'Neo4j', 'Vertex AI', 'OpenAI'],
+    },
+    {
       title: 'GoTravel France',
       description:
-        'A mobile travel companion app offering AI-driven recommendations, interactive scavenger hunts, and real-time itinerary planning for tourists exploring France.',
-      image: '/api/placeholder/400/300',
+        'A mobile travel companion app offering AI-driven recommendations, interactive scavenger hunts, and itinerary planning for tourists exploring France.',
+      image: '/assets/GoTravelFrance.jpeg',
       github: 'https://github.com/palakdesai4501/travel-france',
       technologies: ['React Native', 'Node.js', 'Express.js', 'MongoDB', 'Expo'],
     },
@@ -30,7 +55,7 @@ const Projects = () => {
       title: 'Phone Intellect',
       description:
         'A microservices-based platform to compare real-time mobile plans from major telecom providers using automated scraping and optimized data processing.',
-      image: '/api/placeholder/400/300',
+      image: '/assets/PhoneIntellect.png',
       github: 'https://github.com/palakdesai4501/MobilePlanPriceAnalysis',
       technologies: ['Java', 'Spring Boot', 'React', 'Selenium'],
     },
@@ -38,7 +63,7 @@ const Projects = () => {
       title: 'OptiPrice',
       description:
         'A web application that helps vendors set optimal product prices using machine learning models and sentiment analysis of customer reviews.',
-      image: '/api/placeholder/400/300',
+      image: '/assets/OptiPrice.jpg',
       github: 'https://github.com/palakdesai4501/optiPrice',
       technologies: ['Angular', 'Python', 'Flask', 'MongoDB', 'Scikit-learn'],
     },
@@ -46,17 +71,9 @@ const Projects = () => {
       title: 'EcoWave',
       description:
         'A sustainable e-commerce platform with real-time environmental impact tracking and secure Stripe-powered transactions.',
-      image: '/api/placeholder/400/300',
+      image: '/api/placeholder/400/300', // EcoWave image not available
       github: 'https://github.com/palakdesai4501/EcoWave_Project',
       technologies: ['Python', 'Django', 'JavaScript', 'SQLite', 'Chart.js'],
-    },
-    {
-      title: 'Nestlé Chatbot',
-      description:
-        'An AI-powered chatbot combining vector search and graph databases to provide smart, contextual recipe recommendations from the Nestlé website.',
-      image: '/api/placeholder/400/300',
-      github: 'https://github.com/palakdesai4501/AI-Based-Chatbot',
-      technologies: ['FastAPI', 'Python', 'Chroma DB', 'Neo4j', 'Vertex AI', 'OpenAI'],
     },
   ]
 
@@ -205,35 +222,49 @@ const Projects = () => {
               <div className='absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300' />
 
               <div className='relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 github-card h-[420px] flex flex-col'>
-                {/* Project Image Placeholder */}
-                <div className='relative h-48 overflow-hidden'>
-                  <div
-                    className='absolute inset-0'
-                    style={{
-                      background:
-                        'linear-gradient(135deg, rgba(31, 111, 235, 0.1), rgba(88, 166, 255, 0.1))',
-                    }}
-                  />
+                {/* Project Image */}
+                <div className='relative h-48 overflow-hidden' style={{ height: '192px' }}>
+                  {project.image === '/api/placeholder/400/300' ? (
+                    // Placeholder for missing images
+                    <div
+                      className='absolute inset-0'
+                      style={{
+                        background:
+                          'linear-gradient(135deg, rgba(31, 111, 235, 0.1), rgba(88, 166, 255, 0.1))',
+                      }}
+                    />
+                  ) : null}
                   <div
                     className='w-full h-full flex items-center justify-center'
                     style={{ backgroundColor: 'var(--bg-primary)' }}
                   >
-                    <div className='text-center'>
-                      <div
-                        className='w-16 h-16 mx-auto mb-2 rounded-lg flex items-center justify-center'
-                        style={{
-                          background:
-                            'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
-                        }}
-                      >
-                        <span className='text-2xl font-bold text-white'>
-                          {project.title.charAt(0)}
-                        </span>
+                    {project.image === '/api/placeholder/400/300' ? (
+                      <div className='text-center w-full h-full flex flex-col items-center justify-center'>
+                        <div
+                          className='w-16 h-16 mx-auto mb-2 rounded-lg flex items-center justify-center'
+                          style={{
+                            background:
+                              'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
+                          }}
+                        >
+                          <span className='text-2xl font-bold text-white'>
+                            {project.title.charAt(0)}
+                          </span>
+                        </div>
+                        <p className='text-sm' style={{ color: 'var(--text-secondary)' }}>
+                          Project Preview
+                        </p>
                       </div>
-                      <p className='text-sm' style={{ color: 'var(--text-secondary)' }}>
-                        Project Preview
-                      </p>
-                    </div>
+                    ) : (
+                      <Image
+                        src={project.image}
+                        alt={`${project.title} project screenshot`}
+                        width={400}
+                        height={192}
+                        className='w-full h-full object-cover object-center'
+                        style={{ minHeight: '192px', maxHeight: '192px' }}
+                      />
+                    )}
                   </div>
 
                   {/* Hover Overlay */}
@@ -312,35 +343,49 @@ const Projects = () => {
                 <div className='absolute -inset-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-hover)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300' />
 
                 <div className='relative backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 github-card h-80 flex flex-col'>
-                  {/* Project Image Placeholder */}
-                  <div className='relative h-40 overflow-hidden'>
-                    <div
-                      className='absolute inset-0'
-                      style={{
-                        background:
-                          'linear-gradient(135deg, rgba(31, 111, 235, 0.1), rgba(88, 166, 255, 0.1))',
-                      }}
-                    />
+                  {/* Project Image */}
+                  <div className='relative h-40 overflow-hidden' style={{ height: '160px' }}>
+                    {project.image === '/api/placeholder/400/300' ? (
+                      // Placeholder for missing images
+                      <div
+                        className='absolute inset-0'
+                        style={{
+                          background:
+                            'linear-gradient(135deg, rgba(31, 111, 235, 0.1), rgba(88, 166, 255, 0.1))',
+                        }}
+                      />
+                    ) : null}
                     <div
                       className='w-full h-full flex items-center justify-center'
                       style={{ backgroundColor: 'var(--bg-primary)' }}
                     >
-                      <div className='text-center'>
-                        <div
-                          className='w-12 h-12 mx-auto mb-2 rounded-lg flex items-center justify-center'
-                          style={{
-                            background:
-                              'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
-                          }}
-                        >
-                          <span className='text-lg font-bold text-white'>
-                            {project.title.charAt(0)}
-                          </span>
+                      {project.image === '/api/placeholder/400/300' ? (
+                        <div className='text-center w-full h-full flex flex-col items-center justify-center'>
+                          <div
+                            className='w-12 h-12 mx-auto mb-2 rounded-lg flex items-center justify-center'
+                            style={{
+                              background:
+                                'linear-gradient(135deg, var(--accent-primary), var(--accent-hover))',
+                            }}
+                          >
+                            <span className='text-lg font-bold text-white'>
+                              {project.title.charAt(0)}
+                            </span>
+                          </div>
+                          <p className='text-xs' style={{ color: 'var(--text-secondary)' }}>
+                            Project Preview
+                          </p>
                         </div>
-                        <p className='text-xs' style={{ color: 'var(--text-secondary)' }}>
-                          Project Preview
-                        </p>
-                      </div>
+                      ) : (
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} project screenshot`}
+                          width={300}
+                          height={160}
+                          className='w-full h-full object-cover object-center'
+                          style={{ minHeight: '160px', maxHeight: '160px' }}
+                        />
+                      )}
                     </div>
 
                     {/* Hover Overlay */}
