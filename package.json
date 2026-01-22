@@ -21,7 +21,7 @@
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.522.0",
     "maath": "^0.10.8",
-    "next": "15.3.4",
+    "next": "^15.5.9",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
