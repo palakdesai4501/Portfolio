@@ -21,14 +21,17 @@
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.522.0",
     "maath": "^0.10.8",
-    "next": "^15.5.15",
+    "next": "15.5.28",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
     "three": "^0.177.0"
   },
   "overrides": {
-    "postcss": "^8.5.28"
+    "postcss": "^8.5.28",
+    "@typescript-eslint/typescript-estree": {
+      "brace-expansion": "~2.1.7"
+    }
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
