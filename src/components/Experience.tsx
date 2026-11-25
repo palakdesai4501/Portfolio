@@ -12,11 +12,11 @@ const Experience = () => {
   const experiences = [
     {
       company: 'SKADI Cyber Defense Corporation',
-      role: 'AI Engineer',
+      role: 'AI Developer',
       duration: 'Jan 2026 – Present',
       location: 'Bracebridge, Canada',
       description:
-        'Sole AI engineer on an autonomous security alert triage platform that closes 99.6% of alerts without human intervention. Build and improve the LLM agent behind it, including tool calling and context construction with retrieval, memory, and ontology lookup, with low-confidence cases routed to a human analyst approval queue. Built a regression suite from real production failures to evaluate prompt and context changes, and work directly with SOC analysts and customer domain experts on feedback.',
+        'Sole AI developer on an autonomous security alert triage platform that closes 99.6% of alerts without human intervention. Build and improve the LLM agent behind it, including tool calling and context construction with retrieval, memory, and ontology lookup, with low-confidence cases routed to a human analyst approval queue. Built a regression suite from real production failures to evaluate prompt and context changes, and work directly with SOC analysts and customer domain experts on feedback.',
       technologies: [
         'LLM Agents',
         'Tool Calling',
