@@ -265,7 +265,7 @@ const About = () => {
       degree: 'Master of Applied Computing',
       specialization: 'Artificial Intelligence Stream',
       university: 'University of Windsor',
-      period: 'Jan 2024 - Apr 2025',
+      period: 'Jan 2024 - Jun 2025',
       location: 'Windsor, Canada',
     },
     {

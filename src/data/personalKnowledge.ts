@@ -5,14 +5,14 @@ PERSONAL INFORMATION:
 - Name: Palak Desai
 - Current Status: AI Developer at SKADI Cyber Defense Corporation (since Jan 2026); Master's graduate in Applied Computing with AI specialization
 - Location: Ontario, Canada (previously Windsor, Canada and Gujarat, India)
-- Email: desai1j@uwindsor.ca
+- Email: palakd2804@gmail.com
 - GitHub: https://github.com/palakdesai4501
 - LinkedIn: https://www.linkedin.com/in/palak-desai4501/
 
 EDUCATION:
 1. Master of Applied Computing - Artificial Intelligence Stream
    - University: University of Windsor
-   - Period: Jan 2024 - Apr 2025
+   - Period: Jan 2024 - Jun 2025
    - Location: Windsor, Canada
    
 2. Bachelor of Computer Science and Engineering
@@ -31,21 +31,25 @@ PROFESSIONAL EXPERIENCE:
 
 2. Software Developer Co-op at Opreto Corporation (Jan 2025 – Apr 2025)
    - Location: Windsor, Canada
-   - Worked on AI-driven desktop applications and optimized React.js components
-   - Led development of innovative solutions using cutting-edge technologies
-   - Technologies: Electron.js, React.js, TypeScript, NestJS, TanStack Query, OpenAI API, Deepgram, Jest, AWS, Pulumi
+   - Delivered an AI-powered meeting assistant using Python, React, and FastAPI that improved transcription accuracy by 30% using Deepgram and OpenAI
+   - Automated AWS infrastructure with Pulumi (Cognito, ECS, S3, CloudFront, Route53, MongoDB Atlas), cutting setup time from days to under 1 hour with one-click deployments
+   - Built CI/CD with GitHub Actions plus Jest and Playwright E2E tests, raising test coverage to 90%+ for backend and frontend services
+   - Technologies: Python, React.js, FastAPI, Deepgram, OpenAI API, AWS, Pulumi, MongoDB Atlas, GitHub Actions, Jest, Playwright
 
 3. Software Developer at Adaptable Services (Dec 2022 – Dec 2023)
    - Location: Gujarat, India
-   - Full-stack development role focused on converting designs to responsive components
-   - Implemented CI/CD practices and containerization for improved deployment processes
-   - Technologies: React.js, Tailwind CSS, Node.js, Express.js, MongoDB, Docker, GitHub Actions, CI/CD, Figma
+   - Converted Figma designs into responsive, pixel-perfect React.js components, reducing cross-device UI bugs by 40%
+   - Optimized a Node.js/Express backend with GraphQL, reducing API response times by 30%
+   - Implemented the Context API for streamlined state management, reducing prop drilling
+   - Contributed to CI/CD pipelines with GitHub Actions and Docker, halving release time while working in Agile sprints
+   - Technologies: React.js, Node.js, Express.js, GraphQL, Context API, Docker, GitHub Actions, Figma
 
 4. Full Stack Developer Intern at Digital Strikers (Jan 2022 – Oct 2022)
    - Location: Gujarat, India
-   - Focused on admin portal redesign and REST API development
-   - Gained experience in Angular, Java Spring Boot, and database optimization
-   - Technologies: Angular, Java, Spring Boot, Microsoft SQL Server, REST APIs, Microservices, Reactive Forms
+   - Designed an e-commerce platform with React.js and PostgreSQL supporting 500+ products with cart and checkout
+   - Developed RESTful APIs with Python and FastAPI, improving data communication between front end and back end
+   - Implemented lazy loading, code splitting, and caching, improving load performance by 2.8 seconds
+   - Technologies: React.js, PostgreSQL, Python, FastAPI, REST APIs
 
 TECHNICAL SKILLS (with proficiency levels):
 Programming Languages:

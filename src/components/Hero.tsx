@@ -179,7 +179,7 @@ const Hero = () => {
               },
               {
                 icon: Mail,
-                href: 'mailto:desai1j@uwindsor.ca',
+                href: 'mailto:palakd2804@gmail.com',
                 label: 'Email',
               },
             ].map((social, index) => (

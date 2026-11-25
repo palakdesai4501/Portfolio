@@ -14,8 +14,8 @@ const Contact = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'desai1j@uwindsor.ca',
-      href: 'mailto:desai1j@uwindsor.ca',
+      value: 'palakd2804@gmail.com',
+      href: 'mailto:palakd2804@gmail.com',
     },
   ]
 
