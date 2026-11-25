@@ -16,15 +16,16 @@ const Experience = () => {
       duration: 'Jan 2026 – Present',
       location: 'Bracebridge, Canada',
       description:
-        'Sole AI developer on an autonomous security alert triage platform that closes 99.6% of alerts without human intervention. Build and improve the LLM agent behind it, including tool calling and context construction with retrieval, memory, and ontology lookup, with low-confidence cases routed to a human analyst approval queue. Built a regression suite from real production failures to evaluate prompt and context changes, and work directly with SOC analysts and customer domain experts on feedback.',
+        'Built the LLM reasoning core of an autonomous SOC that fuses ML scores, OSINT, and a self-learning ontology into a single close or escalate verdict per alert, sustaining ~99.6% autonomous closure with zero false negatives on critical threats. Cut LLM token spend ~50% with layered cost gates and a 90%-confidence ontology short-circuit, hardened model actions with schema-validated outputs, PII redaction, and critical-infrastructure refusal gates (shipped in shadow mode first), and closed the eval loop with calibration monitoring that auto-recalibrates when reliability drifts.',
       technologies: [
         'LLM Agents',
-        'Tool Calling',
-        'RAG',
-        'Prompt Engineering',
+        'LLM APIs',
+        'Ontology',
+        'OSINT',
+        'Presidio',
+        'Structured Outputs',
+        'Model Calibration (ECE)',
         'LLM Evaluation',
-        'Python',
-        'MongoDB',
       ],
     },
     {

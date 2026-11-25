@@ -23,11 +23,11 @@ EDUCATION:
 PROFESSIONAL EXPERIENCE:
 1. AI Developer at SKADI Cyber Defense Corporation (Jan 2026 – Present)
    - Location: Bracebridge, Canada
-   - Sole AI developer on an autonomous security alert triage platform with a 99.6% autonomous alert closure rate
-   - Builds and improves the LLM agent: tool calling and context construction (retrieval, memory, ontology lookup), with low-confidence cases routed to a human analyst approval queue
-   - Built a regression suite from real production failures to evaluate prompt and context changes
-   - Works directly with SOC analysts and customer domain experts on feedback
-   - Technologies: LLM Agents, Tool Calling, RAG, Prompt Engineering, LLM Evaluation, Python, MongoDB
+   - Built the LLM reasoning core of an autonomous SOC that fuses ML scores, OSINT, and a self-learning ontology into one CLOSE/ESCALATE alert verdict, sustaining ~99.6% autonomous closure with zero false negatives on critical threats
+   - Cut LLM token spend ~50% with layered cost gates and a 90%-confidence ontology short-circuit that resolves routine alerts before they reach the model
+   - Hardened autonomous model actions with schema-validated outputs, Presidio PII redaction, and critical-infrastructure refusal gates, shipped in shadow mode before going live
+   - Closed the eval loop with prediction logging and Expected Calibration Error monitoring that auto-recalibrates when reliability drifts past 15% over a 30-day window
+   - Technologies: LLM Agents, LLM APIs, Ontology, OSINT, Presidio, Structured Outputs, Model Calibration (ECE), LLM Evaluation
 
 2. Software Developer Co-op at Opreto Corporation (Jan 2025 – Apr 2025)
    - Location: Windsor, Canada
