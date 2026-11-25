@@ -11,23 +11,42 @@ const Experience = () => {
   const getParticleColor = () => (theme === 'light' ? '#1F6FEB' : '#58A6FF')
   const experiences = [
     {
+      company: 'SKADI Cyber Defense Corporation',
+      role: 'AI Developer',
+      duration: 'Jan 2026 – Present',
+      location: 'Bracebridge, Canada',
+      description:
+        'Built the LLM reasoning core of an autonomous SOC that fuses ML scores, OSINT, and a self-learning ontology into a single close or escalate verdict per alert, sustaining ~99.6% autonomous closure with zero false negatives on critical threats. Cut LLM token spend ~50% with layered cost gates and a 90%-confidence ontology short-circuit, hardened model actions with schema-validated outputs, PII redaction, and critical-infrastructure refusal gates (shipped in shadow mode first), and closed the eval loop with calibration monitoring that auto-recalibrates when reliability drifts.',
+      technologies: [
+        'LLM Agents',
+        'LLM APIs',
+        'Ontology',
+        'OSINT',
+        'Presidio',
+        'Structured Outputs',
+        'Model Calibration (ECE)',
+        'LLM Evaluation',
+      ],
+    },
+    {
       company: 'Opreto Corporation',
       role: 'Software Developer Co-op',
       duration: 'Jan 2025 – Apr 2025',
       location: 'Windsor, Canada',
       description:
-        'Worked on AI-driven desktop applications and optimized React.js components. Led development of innovative solutions using cutting-edge technologies and modern development practices.',
+        'Delivered an AI-powered meeting assistant with Python, React, and FastAPI that improved transcription accuracy by 30% using Deepgram and OpenAI. Automated AWS infrastructure with Pulumi across Cognito, ECS, S3, CloudFront, Route53, and MongoDB Atlas, cutting setup time from days to under an hour with one-click deployments. Built CI/CD with GitHub Actions plus Jest and Playwright E2E tests, raising test coverage to 90%+ across backend and frontend services.',
       technologies: [
-        'Electron.js',
+        'Python',
         'React.js',
-        'TypeScript',
-        'NestJS',
-        'TanStack Query',
-        'OpenAI API',
+        'FastAPI',
         'Deepgram',
-        'Jest',
+        'OpenAI API',
         'AWS',
         'Pulumi',
+        'MongoDB Atlas',
+        'GitHub Actions',
+        'Jest',
+        'Playwright',
       ],
     },
     {
@@ -36,16 +55,15 @@ const Experience = () => {
       duration: 'Dec 2022 – Dec 2023',
       location: 'Gujarat, India',
       description:
-        'Full-stack development role focused on converting designs to responsive components and backend optimization. Implemented CI/CD practices and containerization for improved deployment processes.',
+        'Converted Figma designs into responsive, pixel-perfect React.js components, reducing cross-device UI bugs by 40%. Optimized a Node.js/Express backend with GraphQL, reducing API response times by 30%, and used the Context API to streamline state management. Contributed to CI/CD pipelines with GitHub Actions and Docker, halving release time while shipping features in Agile sprints.',
       technologies: [
         'React.js',
-        'Tailwind CSS',
         'Node.js',
         'Express.js',
-        'MongoDB',
+        'GraphQL',
+        'Context API',
         'Docker',
         'GitHub Actions',
-        'CI/CD',
         'Figma',
       ],
     },
@@ -55,16 +73,8 @@ const Experience = () => {
       duration: 'Jan 2022 – Oct 2022',
       location: 'Gujarat, India',
       description:
-        'Intern position focusing on admin portal redesign and REST API development. Gained experience in Angular, Java Spring Boot, and database optimization while working on microservice architectures.',
-      technologies: [
-        'Angular',
-        'Java',
-        'Spring Boot',
-        'Microsoft SQL Server',
-        'REST APIs',
-        'Microservices',
-        'Reactive Forms',
-      ],
+        'Designed an e-commerce platform with React.js and PostgreSQL supporting 500+ products with cart and checkout. Developed RESTful APIs with Python and FastAPI to improve data flow between front end and back end, and used lazy loading, code splitting, and caching to improve load performance by 2.8 seconds.',
+      technologies: ['React.js', 'PostgreSQL', 'Python', 'FastAPI', 'REST APIs', 'Caching'],
     },
   ]
 
